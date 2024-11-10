@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
       <main>
       <div>
-          <h1 class="titulo">Creacion de Clientes</h1>
+          <h1 class="titulo">Creacion de Cliente</h1>
       </div>
       
       <br />
