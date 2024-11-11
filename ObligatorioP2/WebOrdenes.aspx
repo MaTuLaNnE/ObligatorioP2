@@ -23,10 +23,13 @@
             <%-- Hacer un dropdown --%>
             <asp:DropDownList ID="ddlTipoServicio" runat="server">
                 <asp:ListItem ID="mostradoPrimero" runat="server" Enabled="true" Text="Seleccione un Servicio" Value=""></asp:ListItem>
+                <asp:ListItem Value="General">General</asp:ListItem>
                 <asp:ListItem Value="Montaje">Montaje</asp:ListItem>
                 <asp:ListItem Value="Sistemas">Sistemas</asp:ListItem>
                 <asp:ListItem Value="Reparacion">Reparacion</asp:ListItem>
             </asp:DropDownList>
+
+            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="ddlTipoServicio" ForeColor="Red" Text="EL tipo de servicio es requerido"></asp:RequiredFieldValidator>
         </div>
         <div>
             <asp:Label ID="lblDesc" runat="server" Text="Descripción del problema: "></asp:Label>
@@ -41,23 +44,24 @@
             <asp:Label ID="lblEstado" runat="server" Text="Estado de la Orden: "></asp:Label>
             <asp:DropDownList ID="DDEstado" runat="server">
                 <asp:ListItem ID="mostradoPrimero2" runat="server" Enabled="true" Text="Seleccione un Estado" Value=""></asp:ListItem>
-                <asp:ListItem Value="Pendiente">Pendiente</asp:ListItem>
-                <asp:ListItem Value="Progeso">Progreso</asp:ListItem>
-                <asp:ListItem Value="Completado">Completado</asp:ListItem>
+                <asp:ListItem Value="PENDIENTE">Pendiente</asp:ListItem>
+                <asp:ListItem Value="EN PROGRESO">En Progreso</asp:ListItem>
+                <asp:ListItem Value="COMPLETADO">Completado</asp:ListItem>
             </asp:DropDownList>
         </div>
-        <div>
-            <asp:BulletedList ID="ListaComentarios" runat="server" OnClick="BulletedList1_Click"></asp:BulletedList>
-        </div>
         <asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
-<br />
+        <br />
+
+        <asp:Button ID="btnCrearOrden" runat="server" Text="Crear Orden" Width="151px" OnClick="CmdCrearOrden" />
+        <br />
+        <br />
 
         <asp:GridView ID="TablaOrdenes" runat="server" AutoGenerateColumns="False" OnRowDeleting="TeBorroALaMierda" OnRowCommand="TablaOrdenes_RowCommand">
             <Columns>
                 <asp:BoundField DataField="NombreCliente" HeaderText="Cliente" SortExpression="NombreCliente" />
                 <asp:BoundField DataField="NombreTecnico" HeaderText="Tecnico" SortExpression="NombreTecnico" />
                 <asp:BoundField DataField="TipoDeServicio" HeaderText="Tipo de Servicio" SortExpression="Direccion" />
-                <asp:BoundField DataField="Estado" HeaderText="Progreso" SortExpression="Progreso" />
+                <asp:BoundField DataField="EstadoEnString" HeaderText="Progreso" SortExpression="Progreso" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:Button ID="btnEditar" runat="server" CommandName="Editar" CommandArgument="<%# Container.DataItemIndex %>" Text="Editar" CausesValidation="false" />
@@ -66,6 +70,9 @@
                 <asp:CommandField ButtonType="Button" ShowDeleteButton="true" DeleteText="Eliminar" />
             </Columns>
         </asp:GridView>
-
+        <div>
+            <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" />
+        </div>
+        <asp:Label ID="lblCreadoCorrectamente" runat="server" Visible="false" ForeColor="Green"></asp:Label>
     </main>
 </asp:Content>
