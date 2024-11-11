@@ -85,8 +85,8 @@ namespace ObligatorioP2
             if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
             {
                 BaseDeDatos.ListaOrdenes.RemoveAt(index);
-                lblError.Visible = true;
-                lblError.Text = "Orden eliminada correctamente";
+                lblCreadoCorrectamente.Visible = true;
+                lblCreadoCorrectamente.Text = "Orden eliminada correctamente";
                 BtnActualizar.Visible = false;
             }
             else
@@ -142,6 +142,7 @@ namespace ObligatorioP2
 
                 lblError.Visible = true;
                 lblError.Text = "Orden actualizada correctamente";
+                lblCreadoCorrectamente.Visible = false;
 
                 // Actualizar la tabla
                 CargarOrdenesEnTabla();

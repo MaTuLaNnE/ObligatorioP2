@@ -172,8 +172,8 @@ namespace ObligatorioP2
 
                 LimpiarCampos();
 
-                lblError.Visible = true;
-                lblError.Text = "Cliente actualizado correctamente";
+                lblCreadoCorrectamente.Visible = true;
+                lblCreadoCorrectamente.Text = "Cliente actualizado correctamente";
 
 
                 rfvNombre.Enabled = true;
