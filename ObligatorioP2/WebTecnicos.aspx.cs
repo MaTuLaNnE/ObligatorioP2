@@ -18,15 +18,30 @@ namespace ObligatorioP2
                 {
                     BaseDeDatos.PrecargarBD();
                 }
-                TablaTecnico1.DataSource = BaseDeDatos.ListaTecnico;
-                TablaTecnico1.DataBind();
+                CargarClientesEnTabla();
             }
+        }
+
+        private void LimpiarCampos()
+        {
+            txtNombre.Text = "";
+            txtApellido.Text = "";
+            txtCI.Text = "";
+            ddlTipoServicio.ClearSelection();
+            ddlTipoServicio.AutoPostBack = true;
+        }
+
+        private void CargarClientesEnTabla()
+        {
+            TablaTecnico1.DataSource = BaseDeDatos.ListaTecnico;
+            TablaTecnico1.DataBind();
         }
 
         protected void CmdCrear(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(ddlTipoServicio.Text))
             {
+                lblError.ForeColor = System.Drawing.Color.Red;
                 lblError.Visible = true;
                 lblError.Text = "Debe seleccionar una Especialidad";
             }
@@ -35,6 +50,14 @@ namespace ObligatorioP2
                 var a = txtNombre.Text;
                 var b = txtApellido.Text;
                 var c = txtCI.Text;
+                if (!CorroborarCI(c))
+                {
+
+                    lblError.Text = "Debes agregar un documento valido";
+                    lblError.ForeColor= System.Drawing.Color.Red;
+                    lblError.Visible = true;
+                    return;
+                }
                 var d = ddlTipoServicio.Text;
 
 
@@ -45,18 +68,16 @@ namespace ObligatorioP2
                 miTecnico.CI = c;
                 miTecnico.Especialidad = d;
                 lblError.Visible = true;
+                lblError.ForeColor = System.Drawing.Color.Green;
                 lblError.Text = "Tecnico creado correctamente";
 
                 BaseDeDatos.ListaTecnico.Add(miTecnico);
 
-                TablaTecnico1.DataSource = BaseDeDatos.ListaTecnico;
-                TablaTecnico1.DataBind();
+                LimpiarCampos();
 
-                txtNombre.Text = "";
-                txtApellido.Text = "";
-                txtCI.Text = "";
-                ddlTipoServicio.ClearSelection();
-                ddlTipoServicio.AutoPostBack = true;
+                CargarClientesEnTabla();
+
+
             }
 
         }
@@ -71,19 +92,20 @@ namespace ObligatorioP2
             {
                 BaseDeDatos.ListaTecnico.RemoveAt(index);
                 lblError.Visible = true;
+                lblError.ForeColor = System.Drawing.Color.Green;
                 lblError.Text = "Tecnico eliminado correctamente";
                 BtnActualizar.Visible = false;
             }
             else
             {
                 lblError.Visible = true;
+                lblError.ForeColor = System.Drawing.Color.Red;
                 lblError.Text = "OUT del rango.";
                 return;
             }
 
             TablaTecnico1.EditIndex = -1;
-            TablaTecnico1.DataSource = BaseDeDatos.ListaTecnico;
-            TablaTecnico1.DataBind();
+            CargarClientesEnTabla();
         }
 
         protected void TablaTecnico1_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -95,6 +117,7 @@ namespace ObligatorioP2
 
                 BtnActualizar.Visible = true;
                 lblError.Visible = false;
+                btnCrearTecnico.Visible = false;
 
                 if (index >= 0 && index < BaseDeDatos.ListaTecnico.Count)
                 {
@@ -125,6 +148,14 @@ namespace ObligatorioP2
             {
                 int index = (int)Session["TecnicoIndex"];
 
+                if (!CorroborarCI(txtCI.Text))
+                {
+                    lblError.Text = "Debes agregar un documento valido";
+                    lblError.ForeColor = System.Drawing.Color.Red;
+                    lblError.Visible = true;
+                    return;
+                }
+
                 Tecnico tecnico = BaseDeDatos.ListaTecnico[index];
 
                 tecnico.Nombre = txtNombre.Text;
@@ -132,12 +163,9 @@ namespace ObligatorioP2
                 tecnico.CI = txtCI.Text;
                 tecnico.Especialidad = ddlTipoServicio.SelectedValue;
 
-                // Limpia 
-                txtNombre.Text = "";
-                txtApellido.Text = "";
-                txtCI.Text = "";
-                ddlTipoServicio.ClearSelection();
+                LimpiarCampos();
                 lblError.Visible = true;
+                lblError.ForeColor = System.Drawing.Color.Green;
                 lblError.Text = "Tecnico actualizado correctamente";
 
 
@@ -146,19 +174,45 @@ namespace ObligatorioP2
                 rfcCI.Enabled = true;
 
 
-                TablaTecnico1.DataSource = BaseDeDatos.ListaTecnico;
-                TablaTecnico1.DataBind();
+                CargarClientesEnTabla();
                 Session.Remove("TecnicoIndex");
                 BtnActualizar.Visible = false;
             }
             else
             {
                 lblError.Visible = true;
+                lblError.ForeColor = System.Drawing.Color.Red;
                 lblError.Text = "Debe seleccionar una Especialidad";
                 return;
             }
 
+        }
 
+        public bool CorroborarCI(string ci)
+        {
+            // Verificar que la cédula tenga exactamente 8 caracteres y que todos sean dígitos
+            if (string.IsNullOrEmpty(ci) || ci.Length != 8 || !ci.All(char.IsDigit))
+            {
+                return false;
+            }
+
+            // Valores para la validación
+            int[] valores = { 2, 9, 8, 7, 6, 3, 4 };
+            int suma = 0;
+
+            // Sumar el resultado de multiplicar los 8 primeros dígitos por los valores correspondientes
+            for (int i = 0; i < valores.Length; i++)
+            {
+                int valor = int.Parse(ci[i].ToString());
+                suma += valor * valores[i];
+            }
+
+            // Calcular el dígito verificador
+            int residuo = suma % 10;
+            int digitoVerificadorCalculado = (residuo == 0) ? 0 : 10 - residuo;
+            int digitoActual = int.Parse(ci[7].ToString());
+
+            return digitoVerificadorCalculado == digitoActual; // Comparar el dígito calculado con el ingresado
         }
 
     }

@@ -46,7 +46,7 @@
                     <asp:Button ID="btnEditar" runat="server" CommandName="Editar" CommandArgument="<%# Container.DataItemIndex %>" Text="Editar" CausesValidation="false" CssClass="btn-secondary" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:CommandField ButtonType="Button" ShowDeleteButton="true" DeleteText="Eliminar" />
+            <asp:CommandField ButtonType="Button" ControlStyle-CssClass="btn-danger" ShowDeleteButton="true" DeleteText="Eliminar" />
         </Columns>
     </asp:GridView>
     <div class="form-group">
@@ -54,7 +54,7 @@
 
     </div>
     <div class="form-group">
-        <asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
+        <asp:Label ID="lblError" runat="server" Visible="false"></asp:Label>
     </div>
 
 
@@ -68,15 +68,20 @@
 
         .form-group {
             margin-bottom: 15px;
+            margin-top: 15px;
             display: flex;
             align-items: center;
         }
 
         .label-custom {
             width: 100px;
-            text-align: right;
+            text-align: left;
             margin-right: 10px;
             font-weight: bold;
+        }
+
+        #MainContent_lblCIerror{
+            justify-content:left;
         }
 
         .input-custom,
@@ -99,7 +104,7 @@
         }
 
         .btn-secondary {
-            background-color: #6c757d;
+            background-color: #007bff;
         }
 
         .btn-danger {

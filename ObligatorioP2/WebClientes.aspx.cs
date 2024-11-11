@@ -99,8 +99,8 @@ namespace ObligatorioP2
             if (index >= 0 && index < BaseDeDatos.ListaClientes.Count)
             {
                 BaseDeDatos.ListaClientes.RemoveAt(index);
-                lblError.Visible = true;
-                lblError.Text = "Cliente eliminado correctamente";
+                lblCreadoCorrectamente.Visible = true;
+                lblCreadoCorrectamente.Text = "Cliente eliminado correctamente";
                 BtnActualizar.Visible = false;
             }
             else
@@ -213,5 +213,6 @@ namespace ObligatorioP2
             return digitoVerificadorCalculado == digitoActual; // Comparar el dígito calculado con el ingresado
         }
 
+       
     }
 }
