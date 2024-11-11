@@ -1,5 +1,6 @@
 ﻿using ObligatorioP2.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -34,6 +35,8 @@ namespace ObligatorioP2
             }
         }
 
+        public static List<int> HistorialOrdenes = new List<int>();
+
         private void CargarOrdenesEnTabla()
         {
             // Asegúrate de que las columnas de la GridView están configuradas correctamente
@@ -52,17 +55,27 @@ namespace ObligatorioP2
             }
             else
             {
-                var a = DDClientes.Text;
-                var b = DDTecnicos.Text;
-                var c = ddlTipoServicio.Text;
-                var d = DDEstado.Text;
+                var a = CrearNroOrden();
+                var b = DDClientes.SelectedValue;
+                var c = DDTecnicos.SelectedValue;
+                var d = ddlTipoServicio.Text;
+                var ea = txtDesc.Text;
+                var f = DateTime.Now;
+                var g = DDEstado.SelectedValue;
+                var comentario = txtComentario.Text;
+                var listaComents = GenerarLista(comentario);
 
-                Orden miOrden = new Orden(a, b, c, d);
 
-                miOrden.NombreCliente = a;
-                miOrden.NombreTecnico = b;
-                miOrden.TipoDeServicio = c;
-                miOrden.Estado = d;
+                Orden miOrden = new Orden(a, b, c, d,ea,f,g,listaComents);
+
+                miOrden.NroOrden = a;
+                miOrden.NombreCliente = b;
+                miOrden.NombreTecnico = c;
+                miOrden.TipoDeServicio = d;
+                miOrden.DescripcionProblema = ea;
+                miOrden.FechaCreacion = f;
+                miOrden.Estado = g;
+                miOrden.ListaComentarios = listaComents;
                 lblCreadoCorrectamente.Visible = true;
                 lblCreadoCorrectamente.Text = "Orden creada correctamente";
 
@@ -77,6 +90,26 @@ namespace ObligatorioP2
             }
         }
 
+        public int CrearNroOrden()
+        {
+
+            int NroOrden = 0;
+
+            for (int i = 0; i <= BaseDeDatos.ListaOrdenes.Count; i++)
+            {
+                HistorialOrdenes.Add(i);
+
+                while (HistorialOrdenes.Contains(i))
+                {
+                    i++;
+                }
+
+               NroOrden = i;
+            }
+
+            return NroOrden;
+        }
+
         private void LimpiarCampos()
         {
             DDClientes.SelectedIndex = -1;
@@ -87,7 +120,7 @@ namespace ObligatorioP2
 
         protected void TeBorroALaMierda(object sender, GridViewDeleteEventArgs e)
         {
-            //int index = e.RowIndex;
+            int index = e.RowIndex;
 
             if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
             {
@@ -114,8 +147,8 @@ namespace ObligatorioP2
 
                 int index = Convert.ToInt32(e.CommandArgument);
 
-            //    BtnActualizar.Visible = true;
-            //    lblError.Visible = false;
+                BtnActualizar.Visible = true;
+                lblError.Visible = false;
 
                 if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
                 {
@@ -125,7 +158,7 @@ namespace ObligatorioP2
                     DDClientes.Text = orden.NombreCliente;
                     DDTecnicos.Text = orden.NombreTecnico;
                     ddlTipoServicio.Text = orden.TipoDeServicio;
-                    DDEstado.Text = orden.Estado;
+                    DDEstado.SelectedValue = orden.Estado;
 
                     //rfvNombre.Enabled = false;
                     //rfvApellido.Enabled = false;
@@ -147,14 +180,14 @@ namespace ObligatorioP2
 
                 Orden orden = BaseDeDatos.ListaOrdenes[index];
 
-                orden.NombreCliente = txtNombreCliente.Text;
-                orden.NombreTecnico = txtTecnico.Text;
-                orden.TipoDeServicio = txtTipoDeServicio.Text;
-                orden.Estado = txtEstado.Text;
+                orden.NombreCliente = DDClientes.Text;
+                orden.NombreTecnico = DDTecnicos.Text;
+                orden.TipoDeServicio = ddlTipoServicio.Text;
+                orden.Estado = DDEstado.Text;
 
 
-            //    lblError.Visible = true;
-            //    lblError.Text = "Orden actualizada correctamente";
+                //    lblError.Visible = true;
+                //    lblError.Text = "Orden actualizada correctamente";
 
                 lblError.Visible = true;
                 lblError.Text = "Orden actualizada correctamente";
@@ -166,11 +199,33 @@ namespace ObligatorioP2
 
                 CargarOrdenesEnTabla();
 
+            }
+
         }
 
-        protected void BulletedList1_Click(object sender, BulletedListEventArgs e)
+
+        public List<string> GenerarLista(params string[] comentarios)
         {
-
+            List<string> lista = new List<string>();
+            foreach (string comentario in comentarios)
+            {
+                lista.Add(comentario);
+            }
+            return lista;
         }
+
+        public void PasarComentarios(List<string> listaOrigen, List<string> listaDestino)
+        {
+            foreach (string item in listaOrigen)
+            {
+                listaDestino.Add(item);
+            }
+        }
+
+
+
+
+
     }
+
 }

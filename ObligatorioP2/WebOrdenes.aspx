@@ -31,8 +31,8 @@
             <asp:Label ID="lblDesc" runat="server" Text="Descripción del problema: " CssClass="label-custom"></asp:Label>
         </div>
         <div class="form-group">
-            <asp:TextBox ID="TextArea1" runat="server" TextMode="MultiLine" Columns="20" Rows="2" Width="300px" CssClass="input-custom"></asp:TextBox>
-            <asp:RequiredFieldValidator runat="server" ID="rfvDesc" ControlToValidate="TextArea1" ForeColor="Red" Text="La descripción es requerida"></asp:RequiredFieldValidator>
+            <asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine" Columns="20" Rows="2" Width="300px" CssClass="input-custom"></asp:TextBox>
+            <asp:RequiredFieldValidator runat="server" ID="rfvDesc" ControlToValidate="txtDesc" ForeColor="Red" Text="La descripción es requerida"></asp:RequiredFieldValidator>
         </div>
 
         <div class="form-group">
@@ -44,21 +44,24 @@
                 <asp:ListItem Value="COMPLETADO">Completado</asp:ListItem>
             </asp:DropDownList>
         </div>
+
+
         <asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
         <br />
 
         <div class="form-group">
             <asp:Button ID="btnCrearOrden" runat="server" Text="Crear Orden" CssClass="btn-primary" Width="151px" OnClick="CmdCrearOrden" />
         </div>
-        <br />
-        <br />
-
+        <div class="form-group">
+            <asp:Label ID="lblComentario" runat="server" Text="Agregar Comnetario:"></asp:Label>
+            <asp:TextBox ID="txtComentario" runat="server"></asp:TextBox>
+        </div>
         <asp:GridView ID="TablaOrdenes" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="TeBorroALaMierda" OnRowCommand="TablaOrdenes_RowCommand">
             <Columns>
                 <asp:BoundField DataField="NombreCliente" HeaderText="Cliente" SortExpression="NombreCliente" />
                 <asp:BoundField DataField="NombreTecnico" HeaderText="Tecnico" SortExpression="NombreTecnico" />
                 <asp:BoundField DataField="TipoDeServicio" HeaderText="Tipo de Servicio" SortExpression="Direccion" />
-                <asp:BoundField DataField="EstadoEnString" HeaderText="Progreso" SortExpression="Progreso" />
+                <asp:BoundField DataField="Estado" HeaderText="Progreso" SortExpression="Progreso" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:Button ID="btnEditar" runat="server" CommandName="Editar" CommandArgument="<%# Container.DataItemIndex %>" Text="Editar" CausesValidation="false" CssClass="btn-secondary" />
@@ -67,6 +70,12 @@
                 <asp:CommandField ButtonType="Button" ShowDeleteButton="true" DeleteText="Eliminar" />
             </Columns>
         </asp:GridView>
+
+        <div class="form-group">
+
+            <asp:BulletedList ID="BLComentarios" runat="server">
+            </asp:BulletedList>
+        </div>
 
         <div class="form-group">
             <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
@@ -134,15 +143,15 @@
             text-align: left;
         }
 
-        .table-custom th,
-        .table-custom td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
+            .table-custom th,
+            .table-custom td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
 
-        .table-custom th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
+            .table-custom th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
     </style>
 </asp:Content>

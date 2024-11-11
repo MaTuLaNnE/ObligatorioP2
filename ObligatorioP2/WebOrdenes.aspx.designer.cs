@@ -105,13 +105,13 @@ namespace ObligatorioP2
         protected global::System.Web.UI.WebControls.Label lblDesc;
 
         /// <summary>
-        /// Control TextArea1.
+        /// Control txtDesc.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextArea1;
+        protected global::System.Web.UI.WebControls.TextBox txtDesc;
 
         /// <summary>
         /// Control rfvDesc.
@@ -168,6 +168,24 @@ namespace ObligatorioP2
         protected global::System.Web.UI.WebControls.Button btnCrearOrden;
 
         /// <summary>
+        /// Control lblComentario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblComentario;
+
+        /// <summary>
+        /// Control txtComentario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComentario;
+
+        /// <summary>
         /// Control TablaOrdenes.
         /// </summary>
         /// <remarks>
@@ -175,6 +193,15 @@ namespace ObligatorioP2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView TablaOrdenes;
+
+        /// <summary>
+        /// Control BLComentarios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.BulletedList BLComentarios;
 
         /// <summary>
         /// Control BtnActualizar.
