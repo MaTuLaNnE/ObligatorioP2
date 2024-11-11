@@ -8,33 +8,49 @@ namespace ObligatorioP2.Models
     public class Orden
     {
         public int NroOrden { get; set; }
-        public Cliente Cliente { get; set; }
-        public Tecnico Tecnico { get; set; }
+        public string NombreCliente { get; set; }
+        public string NombreTecnico { get; set; }
         public DateTime Fecha { get; set; }
         public string DescripcionProblema { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public Estado Estado { get; set; }
+        public Estado Estado { get; set; } //Podemos intentar sacar al estado de ser un ENUM para no complicarla tanto
+        public string EstadoEnString { get; set; } //?????? (Se usa en la tabla de orden)
+        public string TipoDeServicio { get; set; }
         public string ComentariosTecnico { get; set; }
 
         public List<string> ListaComentarios = new List<string>();
 
         public static List<int> HistorialOrdenes = new List<int>();
 
-        public Orden(int nroOrden, Cliente cliente, Tecnico tecnico, DateTime fecha, string descripcionProblema, DateTime fechaCreacion, Estado estado, List<string> listacomentarios)
+
+
+        public Orden(int nroOrden, string cliente, string tecnico,string tipoDeServicio, DateTime fecha, string descripcionProblema, DateTime fechaCreacion, string estado, List<string> listacomentarios) // OJO Q CAMBIE CLIENTE Y TECNICO POR STRING
         {
             this.NroOrden = nroOrden;
-            this.Cliente = cliente;
-            this.Tecnico = tecnico;
+            this.NombreCliente = cliente;
+            this.NombreTecnico = tecnico;
+            this.TipoDeServicio = tipoDeServicio;
             this.Fecha = fecha;
             this.DescripcionProblema = descripcionProblema;
             this.FechaCreacion = fechaCreacion;
-            this.Estado = estado;
+            this.EstadoEnString = estado;
             //this.ComentariosTecnico = comentariosTecnico;
             this.ListaComentarios = listacomentarios;
 
         }
 
-        public int getNroOrden()
+        public Orden(int nroOrden, string cliente , string tecnico, string tipoDeServicio, DateTime fecha, string estadoEnString) //Usado en la tabla ordenes
+        {
+            
+            NroOrden = nroOrden;
+            NombreCliente = cliente;
+            NombreTecnico = tecnico;
+            TipoDeServicio = tipoDeServicio;
+            Fecha = fecha;
+            EstadoEnString = estadoEnString;
+        }
+
+        public int CrearNroOrden()
         {
 
             for (int i = 0; i <= BaseDeDatos.ListaOrdenes.Count; i++)
@@ -52,29 +68,34 @@ namespace ObligatorioP2.Models
             return NroOrden;
         }
 
+        public int getNroOrden()
+        {
+            return NroOrden;
+        }
+
         public void setNroOrden(int nroOrden)
         {
             this.NroOrden = nroOrden;
         }
 
-        public Cliente getCliente()
+        public string getCliente()
         {
-            return Cliente;
+            return NombreCliente;
         }
 
-        public void setCliente(Cliente cliente)
+        public void setCliente(string cliente)
         {
-            this.Cliente = cliente;
+            this.NombreCliente = cliente;
         }
 
-        public Tecnico getTecnico()
+        public string getTecnico()
         {
-            return Tecnico;
+            return NombreTecnico;
         }
 
-        public void setTecnico(Tecnico tecnico)
+        public void setTecnico(string tecnico)
         {
-            this.Tecnico = tecnico;
+            this.NombreTecnico = tecnico;
         }
 
         public string getDescripcionProblema()
@@ -90,7 +111,7 @@ namespace ObligatorioP2.Models
         public DateTime getFechaCreacion()
         {
             DateTime fechaCreacion = DateTime.Now;
-            
+
             return fechaCreacion;
         }
 
@@ -107,6 +128,16 @@ namespace ObligatorioP2.Models
         public void setEstado(Estado estado)
         {
             this.Estado = estado;
+        }
+
+        public string getTipoServicio()
+        {
+            return TipoDeServicio;
+        }
+
+        public void setTipoServicio(string tipoDeServicio)
+        {
+            this.TipoDeServicio = tipoDeServicio;
         }
 
         public string getComentariosTecnico()

@@ -15,6 +15,15 @@ namespace ObligatorioP2
     {
 
         /// <summary>
+        /// Control titulo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl titulo;
+
+        /// <summary>
         /// Control lblNombreCliente.
         /// </summary>
         /// <remarks>
@@ -78,6 +87,15 @@ namespace ObligatorioP2
         protected global::System.Web.UI.WebControls.ListItem mostradoPrimero;
 
         /// <summary>
+        /// Control RequiredFieldValidator1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+
+        /// <summary>
         /// Control lblDesc.
         /// </summary>
         /// <remarks>
@@ -132,15 +150,6 @@ namespace ObligatorioP2
         protected global::System.Web.UI.WebControls.ListItem mostradoPrimero2;
 
         /// <summary>
-        /// Control ListaComentarios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.BulletedList ListaComentarios;
-
-        /// <summary>
         /// Control lblError.
         /// </summary>
         /// <remarks>
@@ -150,6 +159,15 @@ namespace ObligatorioP2
         protected global::System.Web.UI.WebControls.Label lblError;
 
         /// <summary>
+        /// Control btnCrearOrden.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCrearOrden;
+
+        /// <summary>
         /// Control TablaOrdenes.
         /// </summary>
         /// <remarks>
@@ -157,5 +175,23 @@ namespace ObligatorioP2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView TablaOrdenes;
+
+        /// <summary>
+        /// Control BtnActualizar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnActualizar;
+
+        /// <summary>
+        /// Control lblCreadoCorrectamente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCreadoCorrectamente;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using ObligatorioP2.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,160 +13,158 @@ namespace ObligatorioP2
         {
             if (!IsPostBack)
             {
-                if (BaseDeDatos.ListaTecnico.Count == 0 && BaseDeDatos.ListaTecnico.Count == 0)
+                // Corregir la condición de cargar datos
+                if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
                 {
                     BaseDeDatos.PrecargarBD();
-
-
-                    //ListaComentarios.DataSource = Ordenes
-                    //ListaComentarios.DataBind();
                 }
 
+                // Enlazar los DropDownLists
                 DDClientes.DataSource = BaseDeDatos.ListaClientes;
                 DDClientes.DataTextField = "Nombre";
+                DDClientes.DataValueField = "Nombre"; // Asumí que "Nombre" es la clave, puedes cambiarlo si es diferente
                 DDClientes.DataBind();
 
                 DDTecnicos.DataSource = BaseDeDatos.ListaTecnico;
                 DDTecnicos.DataTextField = "Nombre";
+                DDTecnicos.DataValueField = "Nombre"; // Similar al anterior
                 DDTecnicos.DataBind();
 
+                CargarOrdenesEnTabla();
             }
         }
 
         private void CargarOrdenesEnTabla()
         {
-            //    TablaOrdenes.DataSource = BaseDeDatos.ListaOrdenes;
-            //    TablaOrdenes.DataBind();
+            // Asegúrate de que las columnas de la GridView están configuradas correctamente
+            TablaOrdenes.DataSource = BaseDeDatos.ListaOrdenes;
+            TablaOrdenes.DataBind();
         }
 
-        private void CmdCrear(object sender, EventArgs e)
+        protected void CmdCrearOrden(object sender, EventArgs e)
         {
-            //if (string.IsNullOrEmpty(DDClientes.Text) || string.IsNullOrEmpty(DDTecnicos.Text))
-            //{
+            if (string.IsNullOrEmpty(DDClientes.Text) || string.IsNullOrEmpty(DDTecnicos.Text))
+            {
 
-            //    lblError.Text = "Debes agregar un Cliente y/o Tecnico";
-            //    lblError.Visible = true;
+                lblError.Text = "Debes agregar un Cliente y/o Tecnico";
+                lblError.Visible = true;
 
-            //}
-            //else
-            //{
-            //    var a = DDClientes.Text;
-            //    var b = DDTecnicos.Text;
-            //    var c = ddlTipoServicio.Text;
-            //    var d = DDEstado.Text;
+            }
+            else
+            {
+                var a = DDClientes.Text;
+                var b = DDTecnicos.Text;
+                var c = ddlTipoServicio.Text;
+                var d = DDEstado.Text;
 
-            //    Orden miOrden = new Orden(a, b, c, d);
+                Orden miOrden = new Orden(a, b, c, d);
 
-            //    miOrden.NombreCliente = a;
-            //    miOrden.NombreTecnico = b;
-            //    miOrden.TipoDeServicio = c;
-            //    miOrden.Estado = d;
-            //    lblCreadoCorrectamente.Visible = true;
-            //    lblCreadoCorrectamente.Text = "Orden creada correctamente";
+                miOrden.NombreCliente = a;
+                miOrden.NombreTecnico = b;
+                miOrden.TipoDeServicio = c;
+                miOrden.Estado = d;
+                lblCreadoCorrectamente.Visible = true;
+                lblCreadoCorrectamente.Text = "Orden creada correctamente";
 
-            //    BaseDeDatos.ListaOrdenes.Add(miOrden);
+                BaseDeDatos.ListaOrdenes.Add(miOrden);
 
 
 
-            //    CargarOrdenesEnTabla();
+                CargarOrdenesEnTabla();
 
-            //    LimpiarCampos();
-            //    lblError.Visible = false;
-            //}
+                LimpiarCampos();
+                lblError.Visible = false;
+            }
         }
 
         private void LimpiarCampos()
         {
-            DDClientes.Text = "";
-            DDTecnicos.Text = "";
-            ddlTipoServicio.Text = "";
-            DDEstado.Text = "";
-
+            DDClientes.SelectedIndex = -1;
+            DDTecnicos.SelectedIndex = -1;
+            ddlTipoServicio.SelectedIndex = -1;
+            DDEstado.SelectedIndex = -1;
         }
-
 
         protected void TeBorroALaMierda(object sender, GridViewDeleteEventArgs e)
         {
             //int index = e.RowIndex;
 
-            //if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
-            //{
-            //    BaseDeDatos.ListaOrdenes.RemoveAt(index);
-            //    lblError.Visible = true;
-            //    lblError.Text = "Orden eliminada correctamente";
-            //    BtnActualizar.Visible = false;
-            //}
-            //else
-            //{
-            //    lblError.Text = "OUT del rango.";
-            //    return;
-            //}
+            if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
+            {
+                BaseDeDatos.ListaOrdenes.RemoveAt(index);
+                lblError.Visible = true;
+                lblError.Text = "Orden eliminada correctamente";
+                BtnActualizar.Visible = false;
+            }
+            else
+            {
+                lblError.Text = "OUT del rango.";
+                return;
+            }
 
-            //TablaOrdenes.EditIndex = -1;
-            //CargarOrdenesEnTabla();
+            TablaOrdenes.EditIndex = -1;
+            CargarOrdenesEnTabla();
 
         }
 
         protected void TablaOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            //if (e.CommandName == "Editar")
-            //{
+            if (e.CommandName == "Editar")
+            {
 
-            //    int index = Convert.ToInt32(e.CommandArgument);
+                int index = Convert.ToInt32(e.CommandArgument);
 
             //    BtnActualizar.Visible = true;
             //    lblError.Visible = false;
 
-            //    if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
-            //    {
+                if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
+                {
 
-            //        Orden orden = BaseDeDatos.ListaOrdenes[index];
+                    Orden orden = BaseDeDatos.ListaOrdenes[index];
 
-            //        DDClientes.Text = orden.NombreCliente;
-            //        DDTecnicos.Text = orden.NombreTecnico;
-            //        ddlTipoServicio.Text = orden.TipoDeServicio;
-            //        DDEstado.Text = orden.Estado;
+                    DDClientes.Text = orden.NombreCliente;
+                    DDTecnicos.Text = orden.NombreTecnico;
+                    ddlTipoServicio.Text = orden.TipoDeServicio;
+                    DDEstado.Text = orden.Estado;
 
-            //        //rfvNombre.Enabled = false;
-            //        //rfvApellido.Enabled = false;
-            //        //rfcCI.Enabled = false;
+                    //rfvNombre.Enabled = false;
+                    //rfvApellido.Enabled = false;
+                    //rfcCI.Enabled = false;
 
-            //        // Guarda el índice del técnico en una variable de sesión para usarlo al actualizar
-            //        Session["OrdenIndex"] = index;
-            //    }
-            //}
+                    // Guarda el índice del técnico en una variable de sesión para usarlo al actualizar
+                    Session["OrdenIndex"] = index;
+                }
+            }
         }
 
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
             // Asegúrate de que existe un índice almacenado en sesión
-            //if (Session["OrdenIndex"] != null)
-            //{
-            //    int index = (int)Session["OrdenIndex"];
+            if (Session["OrdenIndex"] != null)
+            {
+                int index = (int)Session["OrdenIndex"];
 
 
-            //    Orden orden = BaseDeDatos.ListaOrdenes[index];
+                Orden orden = BaseDeDatos.ListaOrdenes[index];
 
-            //    orden.NombreCliente = txtNombreCliente.Text;
-            //    orden.NombreTecnico = txtTecnico.Text;
-            //    orden.TipoDeServicio = txtTipoDeServicio.Text;
-            //    orden.Estado = txtEstado.Text;
+                orden.NombreCliente = txtNombreCliente.Text;
+                orden.NombreTecnico = txtTecnico.Text;
+                orden.TipoDeServicio = txtTipoDeServicio.Text;
+                orden.Estado = txtEstado.Text;
 
-
-            //    LimpiarCampos();
 
             //    lblError.Visible = true;
             //    lblError.Text = "Orden actualizada correctamente";
 
+                lblError.Visible = true;
+                lblError.Text = "Orden actualizada correctamente";
 
-            //    //rfvNombre.Enabled = true;
-            //    //rfvApellido.Enabled = true;
-            //    //rfcCI.Enabled = true;
 
-            //    CargarOrdenesEnTabla();
+                //rfvNombre.Enabled = true;
+                //rfvApellido.Enabled = true;
+                //rfcCI.Enabled = true;
 
-            //    Session.Remove("OrdenIndex");
-            //    BtnActualizar.Visible = false;
+                CargarOrdenesEnTabla();
 
         }
 
