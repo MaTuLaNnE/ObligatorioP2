@@ -18,6 +18,8 @@ namespace ObligatorioP2.Models
 
         public List<string> ListaComentarios = new List<string>();
 
+        public static List<int> HistorialOrdenes = new List<int>();
+
         public Orden(int nroOrden, Cliente cliente, Tecnico tecnico, DateTime fecha, string descripcionProblema, DateTime fechaCreacion, Estado estado, List<string> listacomentarios)
         {
             this.NroOrden = nroOrden;
@@ -35,8 +37,15 @@ namespace ObligatorioP2.Models
         public int getNroOrden()
         {
 
-            for (int i = 0; i < Convert.ToInt32(BaseDeDatos.ListaOrdenes.Count); i++)
+            for (int i = 0; i <= BaseDeDatos.ListaOrdenes.Count; i++)
             {
+                HistorialOrdenes.Add(i);
+
+                while (HistorialOrdenes.Contains(i))
+                {
+                    i++;
+                }
+
                 NroOrden = i;
             }
 
@@ -80,7 +89,9 @@ namespace ObligatorioP2.Models
 
         public DateTime getFechaCreacion()
         {
-            return FechaCreacion;
+            DateTime fechaCreacion = DateTime.Now;
+            
+            return fechaCreacion;
         }
 
         public void setFechaCreacion(DateTime fechaCreacion)
