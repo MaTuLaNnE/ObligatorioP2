@@ -99,6 +99,7 @@ namespace ObligatorioP2
                 if (index >= 0 && index < BaseDeDatos.ListaTecnico.Count)
                 {
 
+
                     Tecnico tecnico = BaseDeDatos.ListaTecnico[index];
 
                     txtNombre.Text = tecnico.Nombre;

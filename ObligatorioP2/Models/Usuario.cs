@@ -50,35 +50,6 @@ namespace ObligatorioP2.Models
             this.CI = ci;
         }
 
-        public bool CorroborarCI(string ci)
-        {
-
-            int[] valores = { 2, 9, 8, 7, 6, 5, 4, 3 };
-            int suma = 0;
-            int[] CILista = new int[8];
-            bool digitoCorrecto = false;
-
-            int digitoActual = int.Parse(ci[8].ToString());
-
-            for (int i = 0; i < 8; i++)
-            {
-                CILista[i] = int.Parse(ci[i].ToString());
-
-                suma += (CILista[i] * valores[i]);
-            }
-
-            int residuo = suma % 10;
-            int digitoVerificador = 10 - residuo;
-
-            if (digitoVerificador == digitoActual)
-            {
-                digitoCorrecto = true;
-
-            }
-            else { digitoCorrecto = false; }
-
-            return digitoCorrecto;
-
-        }
+   
     }
 }
