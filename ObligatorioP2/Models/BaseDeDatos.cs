@@ -10,7 +10,6 @@ namespace ObligatorioP2.Models
         public static List<Cliente> ListaClientes = new List<Cliente>();
         public static List<Tecnico> ListaTecnico = new List<Tecnico>();
         public static List<Orden> ListaOrdenes = new List<Orden>();
-        public static List<string> Lista = new List<string>();
 
 
 
@@ -47,8 +46,8 @@ namespace ObligatorioP2.Models
             list2.Add(hghg);
 
 
-            Orden Orden1 = new Orden(1, Cli1.Nombre, Tec2.Nombre, "Sistemas","Este es el problema", DateTime.Now, "EN PROGRESO", list1);
-            Orden Orden2 = new Orden(2, Cli1.Nombre, Tec1.Nombre, "Montaje", "Este es el problema nuevo", DateTime.Now, "COMPLETADO", list2);
+            Orden Orden1 = new Orden(1, Cli1.Nombre, Tec2.Nombre, "Sistemas","Este es el problema", DateTime.Now.Date, "EN PROGRESO", list1);
+            Orden Orden2 = new Orden(2, Cli1.Nombre, Tec1.Nombre, "Montaje", "Este es el problema nuevo", DateTime.Now.Date, "COMPLETADO", list2);
 
             ListaOrdenes.Add(Orden1);
             ListaOrdenes.Add(Orden2);

@@ -38,9 +38,9 @@
             <asp:RequiredFieldValidator runat="server" ID="rfvDesc" ControlToValidate="txtDesc" ForeColor="Red" Text="La descripción es requerida"></asp:RequiredFieldValidator>
         </div>
 
-        <div class="form-group">
-            <asp:Label ID="lblEstado" runat="server" Text="Estado de la Orden: " CssClass="label-custom"></asp:Label>
-            <asp:DropDownList ID="DDEstado" runat="server" CssClass="dropdown-custom">
+        <div class="form-group" >
+            <asp:Label ID="lblEstado" runat="server" Text="Estado de la Orden: " CssClass="label-custom" Visible="false"></asp:Label>
+            <asp:DropDownList ID="DDEstado" runat="server" Visible="false" CssClass="dropdown-custom">
                 <asp:ListItem ID="mostradoPrimero2" runat="server" Enabled="true" Text="Seleccione un Estado" Value=""></asp:ListItem>
                 <asp:ListItem Value="PENDIENTE">Pendiente</asp:ListItem>
                 <asp:ListItem Value="EN PROGRESO">En Progreso</asp:ListItem>
@@ -83,13 +83,13 @@
         </asp:GridView>
 
         <div class="form-group">
-            <asp:Label ID="ListComents" Visible="false" runat="server">Lista de Comentarios</asp:Label>
+            <asp:Label ID="ListComents" CssClass="label-custom" Visible="false" runat="server">Lista de Comentarios</asp:Label>
 
         </div>
         <div class="form-group">
             <asp:BulletedList ID="BLComentarios" runat="server">
             </asp:BulletedList>
-
+             <asp:Label ID="Nocoments" CssClass="label-custom" Visible="false" runat="server">No se agregaron comentarios.</asp:Label>
         </div>
 
         <div class="form-group">
@@ -98,7 +98,7 @@
         <div class="form-group">
             <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
         </div>
-        <asp:Label ID="lblCreadoCorrectamente" runat="server" Visible="false" ForeColor="Green"></asp:Label>
+        <asp:Label ID="lblCreadoCorrectamente"  runat="server" Visible="false" ForeColor="Green"></asp:Label>
     </main>
 
     <style>
