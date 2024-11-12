@@ -33,17 +33,16 @@ namespace ObligatorioP2.Models
 
 
             string kk = "jshdjshd";
-            string aaa = "jhdgfjdhg";
+            string aaa = "Hola";
             string hghg = "me cao en toS";
+
 
             List<string> list1 = new List<string>();
             List<string> list2 = new List<string>();
 
             list1.Add(kk);
-            list1.Add(aaa);
-            list1.Add(hghg);
 
-            list2.Add(kk);
+
             list2.Add(aaa);
             list2.Add(hghg);
 

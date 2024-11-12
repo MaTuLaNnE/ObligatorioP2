@@ -10,11 +10,14 @@
     <main>
         <div class="form-group">
             <asp:Label ID="lblNombreCliente" runat="server" Text="Nombre del Cliente: " CssClass="label-custom"></asp:Label>
-            <asp:DropDownList ID="DDClientes" runat="server" CssClass="dropdown-custom"></asp:DropDownList>
+            <asp:DropDownList ID="DDClientes" runat="server" CssClass="dropdown-custom">
+                 <asp:ListItem ID="ListItem1" runat="server" Enabled="true" Text="Seleccione un Cliente" Value="-1"></asp:ListItem>
+            </asp:DropDownList>
         </div>
         <div class="form-group">
             <asp:Label ID="lblNombreTecnico" runat="server" Text="Nombre del Tecnico: " CssClass="label-custom"></asp:Label>
-            <asp:DropDownList ID="DDTecnicos" runat="server" CssClass="dropdown-custom"></asp:DropDownList>
+            <asp:DropDownList ID="DDTecnicos" runat="server" CssClass="dropdown-custom">
+            </asp:DropDownList>
         </div>
         <div class="form-group">
             <asp:Label ID="lblTipoServicio" runat="server" Text="Servicio Deseado: " CssClass="label-custom"></asp:Label>
@@ -45,6 +48,10 @@
             </asp:DropDownList>
         </div>
 
+        <div class="form-group">
+            <asp:Label ID="lblComentario" runat="server" CssClass="label-custom" Text="Agregar Comentario:"></asp:Label>
+            <asp:TextBox ID="txtComentario" CssClass="input-custom" runat="server"></asp:TextBox>
+        </div>
 
         <asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
         <br />
@@ -52,10 +59,7 @@
         <div class="form-group">
             <asp:Button ID="btnCrearOrden" runat="server" Text="Crear Orden" CssClass="btn-primary" Width="151px" OnClick="CmdCrearOrden" />
         </div>
-        <div class="form-group">
-            <asp:Label ID="lblComentario" runat="server" Text="Agregar Comnetario:"></asp:Label>
-            <asp:TextBox ID="txtComentario" runat="server"></asp:TextBox>
-        </div>
+
         <asp:GridView ID="TablaOrdenes" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="TeBorroALaMierda" OnRowCommand="TablaOrdenes_RowCommand">
             <Columns>
                 <asp:BoundField DataField="NombreCliente" HeaderText="Cliente" SortExpression="NombreCliente" />
@@ -68,15 +72,29 @@
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:CommandField ButtonType="Button" ShowDeleteButton="true" DeleteText="Eliminar" />
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:Button ID="btnMostrarComments" runat="server" CommandName="MostrarComments" CommandArgument="<%# Container.DataItemIndex %>" Text="Mostrar Comentarios" CausesValidation="false" CssClass="btn-secondary" />
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
         </asp:GridView>
 
         <div class="form-group">
+            <asp:Label ID="ListComents" Visible="false" runat="server">Lista de Comentarios</asp:Label>
 
+        </div>
+        <div class="form-group">
             <asp:BulletedList ID="BLComentarios" runat="server">
             </asp:BulletedList>
+
         </div>
 
+
+
+        <div class="form-group">
+            <asp:Button ID="btnAgregarComments" runat="server" Text="Agregar Comentario" CssClass="btn-secondary" Visible="false" OnClick="btnAgregarComments_Click" />
+        </div>
         <div class="form-group">
             <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
         </div>

@@ -26,17 +26,20 @@ namespace ObligatorioP2
                 DDClientes.DataValueField = "Nombre"; // Asumí que "Nombre" es la clave, puedes cambiarlo si es diferente
                 DDClientes.DataBind();
 
+                DDTecnicos.Items.Insert(0, new ListItem("-- Select --", ""));
                 DDTecnicos.DataSource = BaseDeDatos.ListaTecnico;
                 DDTecnicos.DataTextField = "Nombre";
                 DDTecnicos.DataValueField = "Nombre"; // Similar al anterior
                 DDTecnicos.DataBind();
+
+
 
                 CargarOrdenesEnTabla();
             }
         }
 
         public static List<int> HistorialOrdenes = new List<int>();
-
+        public List<string> listaComents = new List<string>();
         private void CargarOrdenesEnTabla()
         {
             // Asegúrate de que las columnas de la GridView están configuradas correctamente
@@ -63,10 +66,10 @@ namespace ObligatorioP2
                 var f = DateTime.Now;
                 var g = DDEstado.SelectedValue;
                 var comentario = txtComentario.Text;
-                var listaComents = GenerarLista(comentario);
+                listaComents = GenerarLista(comentario);
 
 
-                Orden miOrden = new Orden(a, b, c, d,ea,f,g,listaComents);
+                Orden miOrden = new Orden(a, b, c, d, ea, f, g, listaComents);
 
                 miOrden.NroOrden = a;
                 miOrden.NombreCliente = b;
@@ -104,7 +107,7 @@ namespace ObligatorioP2
                     i++;
                 }
 
-               NroOrden = i;
+                NroOrden = i;
             }
 
             return NroOrden;
@@ -112,10 +115,11 @@ namespace ObligatorioP2
 
         private void LimpiarCampos()
         {
-            DDClientes.SelectedIndex = -1;
-            DDTecnicos.SelectedIndex = -1;
-            ddlTipoServicio.SelectedIndex = -1;
-            DDEstado.SelectedIndex = -1;
+            DDTecnicos.SelectedValue = "";
+            ddlTipoServicio.ClearSelection(); 
+            DDEstado.ClearSelection();
+            txtComentario.Text = string.Empty;
+            txtDesc.Text = string.Empty;
         }
 
         protected void TeBorroALaMierda(object sender, GridViewDeleteEventArgs e)
@@ -168,6 +172,24 @@ namespace ObligatorioP2
                     Session["OrdenIndex"] = index;
                 }
             }
+            if (e.CommandName == "MostrarComments")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                btnAgregarComments.Visible = true;
+                ListComents.Visible = true;
+
+                if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
+                {
+
+                    Orden orden = BaseDeDatos.ListaOrdenes[index];
+
+                    BLComentarios.DataSource = orden.ListaComentarios;
+                    BLComentarios.DataBind();
+
+
+                }
+            }
         }
 
         protected void BtnActualizar_Click(object sender, EventArgs e)
@@ -214,18 +236,10 @@ namespace ObligatorioP2
             return lista;
         }
 
-        public void PasarComentarios(List<string> listaOrigen, List<string> listaDestino)
+        protected void btnAgregarComments_Click(object sender, EventArgs e)
         {
-            foreach (string item in listaOrigen)
-            {
-                listaDestino.Add(item);
-            }
+
         }
-
-
-
-
-
     }
 
 }
