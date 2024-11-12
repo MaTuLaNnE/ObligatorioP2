@@ -27,7 +27,7 @@ namespace ObligatorioP2
                 DDClientes.DataValueField = "Nombre"; // Asumí que "Nombre" es la clave, puedes cambiarlo si es diferente
                 DDClientes.DataBind();
 
-                DDTecnicos.Items.Insert(0, new ListItem("-- Select --", ""));
+
                 DDTecnicos.DataSource = BaseDeDatos.ListaTecnico;
                 DDTecnicos.DataTextField = "Nombre";
                 DDTecnicos.DataValueField = "Nombre"; // Similar al anterior
@@ -40,6 +40,7 @@ namespace ObligatorioP2
         }
 
         public static List<int> HistorialOrdenes = new List<int>();
+
         public List<string> listaComents = new List<string>();
         private void CargarOrdenesEnTabla()
         {
@@ -101,14 +102,17 @@ namespace ObligatorioP2
 
             for (int i = 0; i <= BaseDeDatos.ListaOrdenes.Count; i++)
             {
-                HistorialOrdenes.Add(i);
-
-                while (HistorialOrdenes.Contains(i))
+                if (!HistorialOrdenes.Contains(i))
                 {
-                    i++;
+                    HistorialOrdenes.Add(i);
+                    NroOrden = i+1;
+                }
+                else
+                {
+                    HistorialOrdenes.Add(i);
                 }
 
-                NroOrden = i;
+
             }
 
             return NroOrden;
@@ -151,6 +155,8 @@ namespace ObligatorioP2
 
                 int index = Convert.ToInt32(e.CommandArgument);
 
+                lblEstado.Visible = true;
+                DDEstado.Visible = true;
                 BtnActualizar.Visible = true;
                 lblError.Visible = false;
 
@@ -163,10 +169,11 @@ namespace ObligatorioP2
                     DDTecnicos.Text = orden.NombreTecnico;
                     ddlTipoServicio.Text = orden.TipoDeServicio;
                     DDEstado.SelectedValue = orden.Estado;
+                    txtDesc.Text = orden.DescripcionProblema;
 
-                    //rfvNombre.Enabled = false;
-                    //rfvApellido.Enabled = false;
-                    //rfcCI.Enabled = false;
+                    RequiredFieldValidator1.Enabled = false;
+                    rfvDesc.Enabled = false;
+                    
 
                     // Guarda el índice del técnico en una variable de sesión para usarlo al actualizar
                     Session["OrdenIndex"] = index;
@@ -217,10 +224,8 @@ namespace ObligatorioP2
                 lblError.Visible = true;
                 lblError.Text = "Orden actualizada correctamente";
 
-
-                //rfvNombre.Enabled = true;
-                //rfvApellido.Enabled = true;
-                //rfcCI.Enabled = true;
+                RequiredFieldValidator1.Enabled = true;
+                rfvDesc.Enabled = true;
 
                 CargarOrdenesEnTabla();
 
