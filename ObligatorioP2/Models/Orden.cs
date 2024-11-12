@@ -149,5 +149,9 @@ namespace ObligatorioP2.Models
         {
             this.ComentariosTecnico = comentariosTecnico;
         }
+
+        public void ColocarComentarioEnLista(string comentario) // EDITANDO |||| NO TERMINADO
+        {
+            ListaComentarios.Add(comentario);        }
     }
 }
