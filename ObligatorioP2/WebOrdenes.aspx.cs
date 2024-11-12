@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -63,8 +64,8 @@ namespace ObligatorioP2
                 var c = DDTecnicos.SelectedValue;
                 var d = ddlTipoServicio.Text;
                 var ea = txtDesc.Text;
-                var f = DateTime.Now;
-                var g = DDEstado.SelectedValue;
+                var f = DateTime.Now.Date;
+                var g = DDEstado.SelectedValue = "PENDIENTE";
                 var comentario = txtComentario.Text;
                 listaComents = GenerarLista(comentario);
 
@@ -115,7 +116,6 @@ namespace ObligatorioP2
 
         private void LimpiarCampos()
         {
-            DDTecnicos.SelectedValue = "";
             ddlTipoServicio.ClearSelection(); 
             DDEstado.ClearSelection();
             txtComentario.Text = string.Empty;
@@ -156,7 +156,7 @@ namespace ObligatorioP2
 
                 if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
                 {
-
+                    
                     Orden orden = BaseDeDatos.ListaOrdenes[index];
 
                     DDClientes.Text = orden.NombreCliente;
@@ -184,10 +184,13 @@ namespace ObligatorioP2
 
                     Orden orden = BaseDeDatos.ListaOrdenes[index];
 
+                    RequiredFieldValidator1.Enabled = false;
+                    rfvDesc.Enabled = false;
+
                     BLComentarios.DataSource = orden.ListaComentarios;
                     BLComentarios.DataBind();
 
-
+                    Session["OrdenIndex"] = index;
                 }
             }
         }
@@ -239,6 +242,25 @@ namespace ObligatorioP2
         protected void btnAgregarComments_Click(object sender, EventArgs e)
         {
 
+            if (Session["OrdenIndex"] != null)
+            {
+                int index = (int)Session["OrdenIndex"];
+
+                Orden orden = BaseDeDatos.ListaOrdenes[index];
+
+                string comentario = txtComentario.Text;
+
+                orden.ListaComentarios.Add(comentario);
+
+                lblError.Visible = true;
+                lblError.Text = "Comentario agregado correctamente";
+
+                RequiredFieldValidator1.Enabled = false;
+                rfvDesc.Enabled = false;
+
+                BLComentarios.DataSource = orden.ListaComentarios;
+                BLComentarios.DataBind();
+            }
         }
     }
 

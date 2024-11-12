@@ -10,7 +10,6 @@ namespace ObligatorioP2.Models
         public int NroOrden { get; set; }
         public string NombreCliente { get; set; }
         public string NombreTecnico { get; set; }
-        public DateTime Fecha { get; set; }
         public string DescripcionProblema { get; set; }
         public DateTime FechaCreacion { get; set; }
         public string Estado { get; set; } //Podemos intentar sacar al estado de ser un ENUM para no complicarla tanto
