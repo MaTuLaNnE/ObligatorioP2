@@ -33,23 +33,22 @@ namespace ObligatorioP2.Models
 
 
             string kk = "jshdjshd";
-            string aaa = "jhdgfjdhg";
+            string aaa = "Hola";
             string hghg = "me cao en toS";
+
 
             List<string> list1 = new List<string>();
             List<string> list2 = new List<string>();
 
             list1.Add(kk);
-            list1.Add(aaa);
-            list1.Add(hghg);
 
-            list2.Add(kk);
+
             list2.Add(aaa);
             list2.Add(hghg);
 
 
-            Orden Orden1 = new Orden(1, Cli1.Nombre, Tec2.Nombre, "Sistemas", DateTime.Now, "Este es el problema", DateTime.Now, "EN PROGRESO", list1);
-            Orden Orden2 = new Orden(2, Cli1.Nombre, Tec1.Nombre, "Montaje", DateTime.Now, "Este es el problema nuevo", DateTime.Now, "COMPLETADO", list2);
+            Orden Orden1 = new Orden(1, Cli1.Nombre, Tec2.Nombre, "Sistemas","Este es el problema", DateTime.Now, "EN PROGRESO", list1);
+            Orden Orden2 = new Orden(2, Cli1.Nombre, Tec1.Nombre, "Montaje", "Este es el problema nuevo", DateTime.Now, "COMPLETADO", list2);
 
             ListaOrdenes.Add(Orden1);
             ListaOrdenes.Add(Orden2);

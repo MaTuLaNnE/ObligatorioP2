@@ -10,63 +10,44 @@ namespace ObligatorioP2.Models
         public int NroOrden { get; set; }
         public string NombreCliente { get; set; }
         public string NombreTecnico { get; set; }
-        public DateTime Fecha { get; set; }
         public string DescripcionProblema { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public Estado Estado { get; set; } //Podemos intentar sacar al estado de ser un ENUM para no complicarla tanto
-        public string EstadoEnString { get; set; } //?????? (Se usa en la tabla de orden)
+        public string Estado { get; set; } //Podemos intentar sacar al estado de ser un ENUM para no complicarla tanto
         public string TipoDeServicio { get; set; }
         public string ComentariosTecnico { get; set; }
 
         public List<string> ListaComentarios = new List<string>();
 
-        public static List<int> HistorialOrdenes = new List<int>();
+        //public static List<int> HistorialOrdenes = new List<int>();
 
 
 
-        public Orden(int nroOrden, string cliente, string tecnico,string tipoDeServicio, DateTime fecha, string descripcionProblema, DateTime fechaCreacion, string estado, List<string> listacomentarios) // OJO Q CAMBIE CLIENTE Y TECNICO POR STRING
+        public Orden(int nroOrden, string cliente, string tecnico,string tipoDeServicio, string descripcionProblema, DateTime fechaCreacion, string estado, List<string> listacomentarios) // OJO Q CAMBIE CLIENTE Y TECNICO POR STRING
         {
             this.NroOrden = nroOrden;
             this.NombreCliente = cliente;
             this.NombreTecnico = tecnico;
             this.TipoDeServicio = tipoDeServicio;
-            this.Fecha = fecha;
             this.DescripcionProblema = descripcionProblema;
             this.FechaCreacion = fechaCreacion;
-            this.EstadoEnString = estado;
+            this.Estado = estado;
             //this.ComentariosTecnico = comentariosTecnico;
             this.ListaComentarios = listacomentarios;
 
         }
 
-        public Orden(int nroOrden, string cliente , string tecnico, string tipoDeServicio, DateTime fecha, string estadoEnString) //Usado en la tabla ordenes
-        {
+        //public Orden(int nroOrden, string cliente , string tecnico, string tipoDeServicio, DateTime fecha, string estadoEnString) //Usado en la tabla ordenes
+        //{
             
-            NroOrden = nroOrden;
-            NombreCliente = cliente;
-            NombreTecnico = tecnico;
-            TipoDeServicio = tipoDeServicio;
-            Fecha = fecha;
-            EstadoEnString = estadoEnString;
-        }
+        //    NroOrden = nroOrden;
+        //    NombreCliente = cliente;
+        //    NombreTecnico = tecnico;
+        //    TipoDeServicio = tipoDeServicio;
+        //    Fecha = fecha;
+        //    EstadoEnString = estadoEnString;
+        //}
 
-        public int CrearNroOrden()
-        {
-
-            for (int i = 0; i <= BaseDeDatos.ListaOrdenes.Count; i++)
-            {
-                HistorialOrdenes.Add(i);
-
-                while (HistorialOrdenes.Contains(i))
-                {
-                    i++;
-                }
-
-                NroOrden = i;
-            }
-
-            return NroOrden;
-        }
+ 
 
         public int getNroOrden()
         {
@@ -110,9 +91,8 @@ namespace ObligatorioP2.Models
 
         public DateTime getFechaCreacion()
         {
-            DateTime fechaCreacion = DateTime.Now;
 
-            return fechaCreacion;
+            return FechaCreacion;
         }
 
         public void setFechaCreacion(DateTime fechaCreacion)
@@ -120,12 +100,12 @@ namespace ObligatorioP2.Models
             this.FechaCreacion = fechaCreacion;
         }
 
-        public Estado getEstado()
+        public string getEstado()
         {
             return Estado;
         }
 
-        public void setEstado(Estado estado)
+        public void setEstado(string estado)
         {
             this.Estado = estado;
         }

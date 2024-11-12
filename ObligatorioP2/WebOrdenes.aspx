@@ -10,11 +10,14 @@
     <main>
         <div class="form-group">
             <asp:Label ID="lblNombreCliente" runat="server" Text="Nombre del Cliente: " CssClass="label-custom"></asp:Label>
-            <asp:DropDownList ID="DDClientes" runat="server" CssClass="dropdown-custom"></asp:DropDownList>
+            <asp:DropDownList ID="DDClientes" runat="server" CssClass="dropdown-custom">
+                <asp:ListItem ID="ListItem1" runat="server" Enabled="true" Text="Seleccione un Cliente" Value="-1"></asp:ListItem>
+            </asp:DropDownList>
         </div>
         <div class="form-group">
             <asp:Label ID="lblNombreTecnico" runat="server" Text="Nombre del Tecnico: " CssClass="label-custom"></asp:Label>
-            <asp:DropDownList ID="DDTecnicos" runat="server" CssClass="dropdown-custom"></asp:DropDownList>
+            <asp:DropDownList ID="DDTecnicos" runat="server" CssClass="dropdown-custom">
+            </asp:DropDownList>
         </div>
         <div class="form-group">
             <asp:Label ID="lblTipoServicio" runat="server" Text="Servicio Deseado: " CssClass="label-custom"></asp:Label>
@@ -31,8 +34,8 @@
             <asp:Label ID="lblDesc" runat="server" Text="Descripción del problema: " CssClass="label-custom"></asp:Label>
         </div>
         <div class="form-group">
-            <asp:TextBox ID="TextArea1" runat="server" TextMode="MultiLine" Columns="20" Rows="2" Width="300px" CssClass="input-custom"></asp:TextBox>
-            <asp:RequiredFieldValidator runat="server" ID="rfvDesc" ControlToValidate="TextArea1" ForeColor="Red" Text="La descripción es requerida"></asp:RequiredFieldValidator>
+            <asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine" Columns="20" Rows="2" Width="300px" CssClass="input-custom"></asp:TextBox>
+            <asp:RequiredFieldValidator runat="server" ID="rfvDesc" ControlToValidate="txtDesc" ForeColor="Red" Text="La descripción es requerida"></asp:RequiredFieldValidator>
         </div>
 
         <div class="form-group">
@@ -44,30 +47,54 @@
                 <asp:ListItem Value="COMPLETADO">Completado</asp:ListItem>
             </asp:DropDownList>
         </div>
+
+        <div class="form-group">
+            <asp:Label ID="lblComentario" runat="server" CssClass="label-custom" Text="Agregar Comentario:"></asp:Label>
+            <asp:TextBox ID="txtComentario" CssClass="input-custom" runat="server"></asp:TextBox>
+        </div>
+
         <asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
         <br />
 
         <div class="form-group">
             <asp:Button ID="btnCrearOrden" runat="server" Text="Crear Orden" CssClass="btn-primary" Width="151px" OnClick="CmdCrearOrden" />
         </div>
-        <br />
-        <br />
 
         <asp:GridView ID="TablaOrdenes" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="TeBorroALaMierda" OnRowCommand="TablaOrdenes_RowCommand">
             <Columns>
+                <asp:BoundField DataField="NroOrden" HeaderText="Número de Orden" SortExpression="NroOrden" />
                 <asp:BoundField DataField="NombreCliente" HeaderText="Cliente" SortExpression="NombreCliente" />
                 <asp:BoundField DataField="NombreTecnico" HeaderText="Tecnico" SortExpression="NombreTecnico" />
                 <asp:BoundField DataField="TipoDeServicio" HeaderText="Tipo de Servicio" SortExpression="Direccion" />
-                <asp:BoundField DataField="EstadoEnString" HeaderText="Progreso" SortExpression="Progreso" />
+                <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha de la Orden" SortExpression="FechaCreacion" />
+                <asp:BoundField DataField="Estado" HeaderText="Progreso" SortExpression="Progreso" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:Button ID="btnEditar" runat="server" CommandName="Editar" CommandArgument="<%# Container.DataItemIndex %>" Text="Editar" CausesValidation="false" CssClass="btn-secondary" />
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:CommandField ButtonType="Button" ShowDeleteButton="true" DeleteText="Eliminar" />
+                <asp:CommandField ButtonType="Button" ControlStyle-CssClass="btn-danger" ShowDeleteButton="true" DeleteText="Eliminar" />
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:Button ID="btnMostrarComments" runat="server" CommandName="MostrarComments" CommandArgument="<%# Container.DataItemIndex %>" Text="Mostrar Comentarios" CausesValidation="false" CssClass="btn-secondary" />
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
         </asp:GridView>
 
+        <div class="form-group">
+            <asp:Label ID="ListComents" Visible="false" runat="server">Lista de Comentarios</asp:Label>
+
+        </div>
+        <div class="form-group">
+            <asp:BulletedList ID="BLComentarios" runat="server">
+            </asp:BulletedList>
+
+        </div>
+
+        <div class="form-group">
+            <asp:Button ID="btnAgregarComments" runat="server" Text="Agregar Comentario" CssClass="btn-secondary" Visible="false" OnClick="btnAgregarComments_Click" />
+        </div>
         <div class="form-group">
             <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
         </div>
@@ -134,15 +161,15 @@
             text-align: left;
         }
 
-        .table-custom th,
-        .table-custom td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
+            .table-custom th,
+            .table-custom td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
 
-        .table-custom th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
+            .table-custom th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
     </style>
 </asp:Content>
