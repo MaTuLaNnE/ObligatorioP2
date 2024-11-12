@@ -18,9 +18,6 @@ namespace ObligatorioP2
                 {
                     BaseDeDatos.PrecargarBD();
                 }
-
-               
-
             }
         }
     }

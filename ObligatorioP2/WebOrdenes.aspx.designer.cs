@@ -186,6 +186,15 @@ namespace ObligatorioP2
         protected global::System.Web.UI.WebControls.Label lblError;
 
         /// <summary>
+        /// Control lblConfirmacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblConfirmacion;
+
+        /// <summary>
         /// Control btnCrearOrden.
         /// </summary>
         /// <remarks>
@@ -193,6 +202,15 @@ namespace ObligatorioP2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCrearOrden;
+
+        /// <summary>
+        /// Control lblCreadoCorrectamente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCreadoCorrectamente;
 
         /// <summary>
         /// Control TablaOrdenes.
@@ -247,14 +265,5 @@ namespace ObligatorioP2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnActualizar;
-
-        /// <summary>
-        /// Control lblCreadoCorrectamente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCreadoCorrectamente;
     }
 }

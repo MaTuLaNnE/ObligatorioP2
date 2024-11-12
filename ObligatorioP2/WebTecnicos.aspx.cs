@@ -58,6 +58,7 @@ namespace ObligatorioP2
                     lblError.Visible = true;
                     return;
                 }
+                
                 var d = ddlTipoServicio.Text;
 
 
@@ -116,8 +117,8 @@ namespace ObligatorioP2
                 int index = Convert.ToInt32(e.CommandArgument);
 
                 BtnActualizar.Visible = true;
-                lblError.Visible = false;
                 btnCrearTecnico.Visible = false;
+                lblError.Visible = false;
 
                 if (index >= 0 && index < BaseDeDatos.ListaTecnico.Count)
                 {
@@ -167,6 +168,7 @@ namespace ObligatorioP2
                 lblError.Visible = true;
                 lblError.ForeColor = System.Drawing.Color.Green;
                 lblError.Text = "Tecnico actualizado correctamente";
+                btnCrearTecnico.Visible = true;
 
 
                 rfvNombre.Enabled = true;

@@ -168,6 +168,15 @@ namespace ObligatorioP2
         protected global::System.Web.UI.WebControls.Button btnCrearUsuario;
 
         /// <summary>
+        /// Control lblCreadoCorrectamente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCreadoCorrectamente;
+
+        /// <summary>
         /// Control TablaClientes1.
         /// </summary>
         /// <remarks>
@@ -184,14 +193,5 @@ namespace ObligatorioP2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnActualizar;
-
-        /// <summary>
-        /// Control lblCreadoCorrectamente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCreadoCorrectamente;
     }
 }

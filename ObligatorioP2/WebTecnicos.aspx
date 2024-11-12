@@ -35,6 +35,10 @@
         <asp:Button ID="btnCrearTecnico" runat="server" Text="Crear Técnico" CssClass="btn-primary" OnClick="CmdCrear" />
     </div>
 
+    <div class="form-group">
+        <asp:Label ID="lblError" runat="server" Visible="false"></asp:Label>
+    </div>
+
     <asp:GridView ID="TablaTecnico1" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="TeBorroALaMierda" OnRowCommand="TablaTecnico1_RowCommand">
         <Columns>
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
@@ -53,9 +57,7 @@
         <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
 
     </div>
-    <div class="form-group">
-        <asp:Label ID="lblError" runat="server" Visible="false"></asp:Label>
-    </div>
+
 
 
     <style>
@@ -80,8 +82,8 @@
             font-weight: bold;
         }
 
-        #MainContent_lblCIerror{
-            justify-content:left;
+        #MainContent_lblCIerror {
+            justify-content: left;
         }
 
         .input-custom,
