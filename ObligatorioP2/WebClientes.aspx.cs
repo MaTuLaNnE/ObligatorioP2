@@ -123,6 +123,8 @@ namespace ObligatorioP2
 
                 BtnActualizar.Visible = true;
                 lblError.Visible = false;
+                btnCrearUsuario.Visible = false;
+                lblCreadoCorrectamente.Visible = false;
 
                 if (index >= 0 && index < BaseDeDatos.ListaClientes.Count)
                 {
@@ -174,6 +176,8 @@ namespace ObligatorioP2
 
                 lblCreadoCorrectamente.Visible = true;
                 lblCreadoCorrectamente.Text = "Cliente actualizado correctamente";
+                btnCrearUsuario.Visible = true;
+                lblError.Visible = false;
 
 
                 rfvNombre.Enabled = true;
