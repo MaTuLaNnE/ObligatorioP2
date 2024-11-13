@@ -31,6 +31,11 @@ namespace ObligatorioP2
             ddlTipoServicio.AutoPostBack = true;
         }
 
+        private void EsconderLabels()
+        {
+            lblError.Visible = false;
+        }
+
         private void CargarClientesEnTabla()
         {
             TablaTecnico1.DataSource = BaseDeDatos.ListaTecnico;
@@ -105,8 +110,12 @@ namespace ObligatorioP2
                 return;
             }
 
+            btnCrearTecnico.Visible = true;
+
             TablaTecnico1.EditIndex = -1;
             CargarClientesEnTabla();
+            LimpiarCampos();
+
         }
 
         protected void TablaTecnico1_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -116,15 +125,40 @@ namespace ObligatorioP2
 
                 int index = Convert.ToInt32(e.CommandArgument);
 
+                for (int i = 0; i < BaseDeDatos.ListaTecnico.Count; i++)
+                {
+                    GridViewRow ala = TablaTecnico1.Rows[i];
+
+                    Button btnMostrarEditAbiertos = (Button)ala.FindControl("btnEditar");
+                    Button btnMostrarCancelAbiertos = (Button)ala.FindControl("btnCancel");
+
+                    btnMostrarEditAbiertos.Visible = true;
+                    btnMostrarCancelAbiertos.Visible = false;
+
+                }
+
                 BtnActualizar.Visible = true;
                 btnCrearTecnico.Visible = false;
-                lblError.Visible = false;
+                
+
+                lblError.Visible = true;
+                lblError.Text = "Editando...";
+                
+
+
+                GridViewRow row = TablaTecnico1.Rows[index];
+
+                Button btnMostrarEdit = (Button)row.FindControl("btnEditar");
+                Button btnMostrarCancel = (Button)row.FindControl("btnCancel");
 
                 if (index >= 0 && index < BaseDeDatos.ListaTecnico.Count)
                 {
 
 
                     Tecnico tecnico = BaseDeDatos.ListaTecnico[index];
+
+                    btnMostrarEdit.Visible = false;
+                    btnMostrarCancel.Visible = true;
 
                     txtNombre.Text = tecnico.Nombre;
                     txtApellido.Text = tecnico.Apellido;
@@ -139,6 +173,31 @@ namespace ObligatorioP2
                     // Guarda el índice del técnico en una variable de sesión para usarlo al actualizar
                     Session["TecnicoIndex"] = index;
                 }
+            }
+
+            if (e.CommandName == "CancelEdit")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                GridViewRow row = TablaTecnico1.Rows[index];
+
+                Button btnMostrarEdit = (Button)row.FindControl("btnEditar");
+                Button btnMostrarCancel = (Button)row.FindControl("btnCancel");
+
+                btnMostrarEdit.Visible = true;
+                btnMostrarCancel.Visible = false;
+
+                lblError.Visible = false;
+
+                rfvNombre.Enabled = true;
+                rfvApellido.Enabled = true;
+                rfcCI.Enabled = true;
+
+                BtnActualizar.Visible = false;
+                btnCrearTecnico.Visible = true;
+
+                LimpiarCampos();
+
             }
         }
 

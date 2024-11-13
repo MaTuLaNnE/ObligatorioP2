@@ -31,6 +31,12 @@ namespace ObligatorioP2
             TablaClientes1.DataBind();
         }
 
+        private void EsconderLabels()
+        {
+            lblCreadoCorrectamente.Visible = false;
+            lblError.Visible = false;
+        }
+
         protected void CmdCrear(object sender, EventArgs e)
         {
 
@@ -98,16 +104,20 @@ namespace ObligatorioP2
 
             if (index >= 0 && index < BaseDeDatos.ListaClientes.Count)
             {
+                EsconderLabels();
                 BaseDeDatos.ListaClientes.RemoveAt(index);
                 lblCreadoCorrectamente.Visible = true;
                 lblCreadoCorrectamente.Text = "Cliente eliminado correctamente";
                 BtnActualizar.Visible = false;
+                LimpiarCampos();
             }
             else
             {
                 lblError.Text = "OUT del rango.";
                 return;
             }
+
+            btnCrearUsuario.Visible = true;
 
             TablaClientes1.EditIndex = -1;
             CargarClientesEnTabla();
@@ -121,15 +131,38 @@ namespace ObligatorioP2
 
                 int index = Convert.ToInt32(e.CommandArgument);
 
+                for (int i = 0; i < BaseDeDatos.ListaClientes.Count; i++)
+                {
+                    GridViewRow ala = TablaClientes1.Rows[i];
+
+                    Button btnMostrarEditAbiertos = (Button)ala.FindControl("btnEditar");
+                    Button btnMostrarCancelAbiertos = (Button)ala.FindControl("btnCancel");
+
+                    btnMostrarEditAbiertos.Visible = true;
+                    btnMostrarCancelAbiertos.Visible = false;
+
+                }
+
                 BtnActualizar.Visible = true;
-                lblError.Visible = false;
+
                 btnCrearUsuario.Visible = false;
                 lblCreadoCorrectamente.Visible = false;
+
+                lblError.Visible = true;
+                lblError.Text = "Editando...";
+
+                GridViewRow row = TablaClientes1.Rows[index];
+
+                Button btnMostrarEdit = (Button)row.FindControl("btnEditar");
+                Button btnMostrarCancel = (Button)row.FindControl("btnCancel");
 
                 if (index >= 0 && index < BaseDeDatos.ListaClientes.Count)
                 {
 
                     Cliente cliente = BaseDeDatos.ListaClientes[index];
+
+                    btnMostrarEdit.Visible = false;
+                    btnMostrarCancel.Visible = true;
 
                     txtNombre.Text = cliente.Nombre;
                     txtApellido.Text = cliente.Apellido;
@@ -146,6 +179,30 @@ namespace ObligatorioP2
                     // Guarda el índice del técnico en una variable de sesión para usarlo al actualizar
                     Session["ClienteIndex"] = index;
                 }
+            }
+            if (e.CommandName == "CancelEdit")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                GridViewRow row = TablaClientes1.Rows[index];
+
+                Button btnMostrarEdit = (Button)row.FindControl("btnEditar");
+                Button btnMostrarCancel = (Button)row.FindControl("btnCancel");
+
+                btnMostrarEdit.Visible = true;
+                btnMostrarCancel.Visible = false;
+
+                lblError.Visible = false;
+
+                rfvNombre.Enabled = true;
+                rfvApellido.Enabled = true;
+                rfcCI.Enabled = true;
+
+                BtnActualizar.Visible = false;
+                btnCrearUsuario.Visible = true;
+
+                LimpiarCampos();
+
             }
         }
 

@@ -4,7 +4,7 @@
     <h1 id="titulo" runat="server" class="titulo">Creación y Modificación de Ordenes</h1>
     <div>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title></title>
+       
     </div>
 
     <main>
@@ -59,6 +59,8 @@
 
         <div class="form-group">
             <asp:Button ID="btnCrearOrden" runat="server" Text="Crear Orden" CssClass="btn-primary" Width="151px" OnClick="CmdCrearOrden" />
+            <asp:Button ID="btnAgregarComments" runat="server" Text="Agregar Comentario" CssClass="btn-secondary" Visible="false" OnClick="btnAgregarComments_Click" />
+            <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
         </div>
         <div class="form-group">
             <asp:Label ID="lblCreadoCorrectamente" runat="server" Visible="false" ForeColor="Green"></asp:Label>
@@ -75,12 +77,14 @@
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:Button ID="btnEditar" runat="server" CommandName="Editar" CommandArgument="<%# Container.DataItemIndex %>" Text="Editar" CausesValidation="false" CssClass="btn-secondary" />
+                        <asp:Button ID="btnCancel" runat="server" CommandName="CancelEdit" Visible="false" CommandArgument="<%# Container.DataItemIndex %>" Text="Cancelar" CausesValidation="false" CssClass="btn-danger" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:CommandField ButtonType="Button" ControlStyle-CssClass="btn-danger" ShowDeleteButton="true" DeleteText="Eliminar" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:Button ID="btnMostrarComments" runat="server" CommandName="MostrarComments" CommandArgument="<%# Container.DataItemIndex %>" Text="Mostrar Comentarios" CausesValidation="false" CssClass="btn-secondary" />
+                        <asp:Button ID="btnOcultarComments" runat="server" Visible="false" CommandName="OcultarComments" CommandArgument="<%# Container.DataItemIndex %>" Text="Ocultar Comentarios" CausesValidation="false" CssClass="btn-secondary" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -96,12 +100,6 @@
             <asp:Label ID="Nocoments" CssClass="label-custom" Visible="false" runat="server">No se agregaron comentarios.</asp:Label>
         </div>
 
-        <div class="form-group">
-            <asp:Button ID="btnAgregarComments" runat="server" Text="Agregar Comentario" CssClass="btn-secondary" Visible="false" OnClick="btnAgregarComments_Click" />
-        </div>
-        <div class="form-group">
-            <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
-        </div>
     </main>
 
     <style>
@@ -161,7 +159,8 @@
             width: 100%;
             margin-top: 20px;
             border-collapse: collapse;
-            text-align: left;
+            text-align: center;
+            border: solid black;
         }
 
             .table-custom th,

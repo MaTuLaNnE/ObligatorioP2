@@ -204,6 +204,24 @@ namespace ObligatorioP2
         protected global::System.Web.UI.WebControls.Button btnCrearOrden;
 
         /// <summary>
+        /// Control btnAgregarComments.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarComments;
+
+        /// <summary>
+        /// Control BtnActualizar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnActualizar;
+
+        /// <summary>
         /// Control lblCreadoCorrectamente.
         /// </summary>
         /// <remarks>
@@ -247,23 +265,5 @@ namespace ObligatorioP2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Nocoments;
-
-        /// <summary>
-        /// Control btnAgregarComments.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarComments;
-
-        /// <summary>
-        /// Control BtnActualizar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnActualizar;
     }
 }

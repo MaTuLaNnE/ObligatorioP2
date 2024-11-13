@@ -58,6 +58,9 @@ namespace ObligatorioP2
 
         protected void CmdCrearOrden(object sender, EventArgs e)
         {
+
+            EsconderLabels();
+
             if (string.IsNullOrEmpty(DDClientes.Text) || string.IsNullOrEmpty(DDTecnicos.Text))
             {
 
@@ -89,7 +92,7 @@ namespace ObligatorioP2
                 miOrden.FechaCreacion = f;
                 miOrden.Estado = g;
                 miOrden.ListaComentarios = listaComents;
-                lblConfirmacion.Visible = false;
+             
                 lblCreadoCorrectamente.Visible = true;
                 lblCreadoCorrectamente.Text = "Orden creada correctamente";
 
@@ -100,7 +103,7 @@ namespace ObligatorioP2
                 CargarOrdenesEnTabla();
 
                 LimpiarCampos();
-                lblError.Visible = false;
+                
             }
         }
 
@@ -187,9 +190,18 @@ namespace ObligatorioP2
             txtDesc.Text = string.Empty;
         }
 
+        private void EsconderLabels()
+        {
+            lblCreadoCorrectamente.Visible = false;
+            lblConfirmacion.Visible = false;
+            lblError.Visible = false;
+        }
+
         protected void TeBorroALaMierda(object sender, GridViewDeleteEventArgs e)
         {
             int index = e.RowIndex;
+
+            EsconderLabels();
 
             if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
             {
@@ -197,13 +209,17 @@ namespace ObligatorioP2
                 lblCreadoCorrectamente.Visible = true;
                 lblCreadoCorrectamente.Text = "Orden eliminada correctamente";
                 BtnActualizar.Visible = false;
-                lblConfirmacion.Visible = false;
+                lblEstado.Visible = false;
+                DDEstado.Visible = false;
+                LimpiarCampos();
             }
             else
             {
                 lblError.Text = "OUT del rango.";
                 return;
             }
+
+            btnCrearOrden.Visible = true;
 
             TablaOrdenes.EditIndex = -1;
             CargarOrdenesEnTabla();
@@ -212,24 +228,49 @@ namespace ObligatorioP2
 
         protected void TablaOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            EsconderLabels();
+
+            
             if (e.CommandName == "Editar")
             {
 
                 int index = Convert.ToInt32(e.CommandArgument);
+
+                for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count ; i++)
+                {
+                    GridViewRow ala = TablaOrdenes.Rows[i];
+
+                    Button btnMostrarEditAbiertos = (Button)ala.FindControl("btnEditar");
+                    Button btnMostrarCancelAbiertos = (Button)ala.FindControl("btnCancel");
+
+                    btnMostrarEditAbiertos.Visible = true;
+                    btnMostrarCancelAbiertos.Visible = false;
+
+                }
 
                 lblEstado.Visible = true;
                 DDEstado.Visible = true;
                 BtnActualizar.Visible = true;
                 btnCrearOrden.Visible = false;
                 lblConfirmacion.Visible = false;
+                btnAgregarComments.Visible = false;
+
 
                 lblError.Visible = true;
                 lblError.Text = "Editando...";
+
+                GridViewRow row = TablaOrdenes.Rows[index];
+
+                Button btnMostrarEdit = (Button)row.FindControl("btnEditar");
+                Button btnMostrarCancel = (Button)row.FindControl("btnCancel");
 
                 if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
                 {
 
                     Orden orden = BaseDeDatos.ListaOrdenes[index];
+
+                    btnMostrarEdit.Visible = false;
+                    btnMostrarCancel.Visible = true;
 
                     DDClientes.Text = orden.NombreCliente;
                     DDTecnicos.Text = orden.NombreTecnico;
@@ -245,13 +286,51 @@ namespace ObligatorioP2
                     Session["OrdenIndex"] = index;
                 }
             }
+            if (e.CommandName == "CancelEdit")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                GridViewRow row = TablaOrdenes.Rows[index];
+
+                Button btnMostrarEdit = (Button)row.FindControl("btnEditar");
+                Button btnMostrarCancel = (Button)row.FindControl("btnCancel");
+
+                btnMostrarEdit.Visible = true;
+                btnMostrarCancel.Visible = false;
+
+                lblEstado.Visible = false;
+                DDEstado.Visible = false;
+
+                RequiredFieldValidator1.Enabled = true;
+                rfvDesc.Enabled = true;
+
+                BtnActualizar.Visible = false;
+                btnCrearOrden.Visible = true;
+
+            }
             if (e.CommandName == "MostrarComments")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
 
+                for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count ; i++)
+                {
+                    GridViewRow kk = TablaOrdenes.Rows[i];
+                    Button btnOcultarCommentsAbiertos = (Button)kk.FindControl("btnOcultarComments");
+                    Button btnMostrarCommentsAbiertos = (Button)kk.FindControl("btnMostrarComments");
+
+                    btnOcultarCommentsAbiertos.Visible = false;
+                    btnMostrarCommentsAbiertos.Visible = true;
+
+                }
+
+                GridViewRow row = TablaOrdenes.Rows[index];
+                Button btnMostrarComments = (Button)row.FindControl("btnMostrarComments");
+                Button btnOcultarComments = (Button)row.FindControl("btnOcultarComments");
+
                 btnAgregarComments.Visible = true;
                 ListComents.Visible = true;
-
+                btnCrearOrden.Visible = false;
+                BtnActualizar.Visible = false;
 
                 if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
                 {
@@ -261,12 +340,39 @@ namespace ObligatorioP2
                     RequiredFieldValidator1.Enabled = false;
                     rfvDesc.Enabled = false;
 
+                    BLComentarios.Visible = true;
                     BLComentarios.DataSource = orden.ListaComentarios;
                     BLComentarios.DataBind();
+
+                    btnMostrarComments.Visible = false;
+                    btnOcultarComments.Visible = true;
 
                     Session["OrdenIndex"] = index;
                 }
             }
+            if (e.CommandName == "OcultarComments")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                GridViewRow row = TablaOrdenes.Rows[index];
+
+                Button btnMostrarComments = (Button)row.FindControl("btnMostrarComments");
+                Button btnOcultarComments = (Button)row.FindControl("btnOcultarComments");
+
+
+                btnOcultarComments.Visible = false;
+                btnMostrarComments.Visible = true;
+
+
+                RequiredFieldValidator1.Enabled = true;
+                rfvDesc.Enabled = true;
+
+                ListComents.Visible= false;
+                BLComentarios.Visible = false;
+                btnAgregarComments.Visible = false;
+                btnCrearOrden.Visible = true;
+            }
+
         }
 
         protected void BtnActualizar_Click(object sender, EventArgs e)
@@ -285,9 +391,6 @@ namespace ObligatorioP2
                 orden.Estado = DDEstado.Text;
 
 
-                //    lblError.Visible = true;
-                //    lblError.Text = "Orden actualizada correctamente";
-
                 lblConfirmacion.Visible = true;
                 lblConfirmacion.Text = "Orden actualizada correctamente";
                 lblCreadoCorrectamente.Visible = false;
@@ -295,6 +398,8 @@ namespace ObligatorioP2
                 lblEstado.Visible = false;
                 DDEstado.Visible = false;
                 lblError.Visible = false;
+                BtnActualizar.Visible = false;
+                btnCrearOrden.Visible = true;
 
 
                 RequiredFieldValidator1.Enabled = true;
@@ -351,6 +456,8 @@ namespace ObligatorioP2
                 BLComentarios.DataBind();
             }
         }
+
+       
     }
 
 }

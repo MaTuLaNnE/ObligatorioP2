@@ -52,15 +52,13 @@
         </div>
 
 
-
-        <asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
-
-
         <div class="form-group">
             <asp:Button ID="btnCrearUsuario" runat="server" Text="Crear Usuario" CssClass="btn-primary" Width="151px" OnClick="CmdCrear" />
+            <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
         </div>
         <div class="form-group">
             <asp:Label ID="lblCreadoCorrectamente" runat="server" Visible="false" ForeColor="Green"></asp:Label>
+            <asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
         </div>
 
         <asp:GridView ID="TablaClientes1" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="TeBorroALaMierda" OnRowCommand="TablaClientes1_RowCommand">
@@ -74,17 +72,13 @@
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:Button ID="btnEditar" runat="server" CommandName="Editar" CommandArgument="<%# Container.DataItemIndex %>" Text="Editar" CausesValidation="false" CssClass="btn-secondary" />
+                        <asp:Button ID="btnCancel" runat="server" CommandName="CancelEdit" Visible="false" CommandArgument="<%# Container.DataItemIndex %>" Text="Cancelar" CausesValidation="false" CssClass="btn-danger" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:CommandField ButtonType="Button" ControlStyle-CssClass="btn-danger" ShowDeleteButton="true" DeleteText="Eliminar" />
             </Columns>
         </asp:GridView>
 
-
-
-        <div class="form-group">
-            <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
-        </div>
     </main>
 
     <style>

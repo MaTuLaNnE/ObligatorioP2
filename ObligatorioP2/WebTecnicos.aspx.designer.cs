@@ -132,6 +132,15 @@ namespace ObligatorioP2
         protected global::System.Web.UI.WebControls.Button btnCrearTecnico;
 
         /// <summary>
+        /// Control BtnActualizar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnActualizar;
+
+        /// <summary>
         /// Control lblError.
         /// </summary>
         /// <remarks>
@@ -148,14 +157,5 @@ namespace ObligatorioP2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView TablaTecnico1;
-
-        /// <summary>
-        /// Control BtnActualizar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnActualizar;
     }
 }

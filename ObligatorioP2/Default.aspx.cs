@@ -14,10 +14,10 @@ namespace ObligatorioP2
         {
             if (!IsPostBack)
             {
-                if (BaseDeDatos.ListaClientes.Count == 0) // Solo precarga si la lista está vacía
-                {
-                    BaseDeDatos.PrecargarBD();
-                }
+                //if (BaseDeDatos.ListaClientes.Count == 0 && BaseDeDatos.ListaTecnico.Count == 0 && BaseDeDatos.ListaOrdenes.Count == 0) // Solo precarga si la lista está vacía
+                //{
+                //    BaseDeDatos.PrecargarBD();
+                //}
             }
         }
     }

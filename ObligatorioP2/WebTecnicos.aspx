@@ -33,6 +33,7 @@
 
     <div class="form-group">
         <asp:Button ID="btnCrearTecnico" runat="server" Text="Crear Técnico" CssClass="btn-primary" OnClick="CmdCrear" />
+        <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
     </div>
 
     <div class="form-group">
@@ -48,15 +49,13 @@
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:Button ID="btnEditar" runat="server" CommandName="Editar" CommandArgument="<%# Container.DataItemIndex %>" Text="Editar" CausesValidation="false" CssClass="btn-secondary" />
+                    <asp:Button ID="btnCancel" runat="server" CommandName="CancelEdit" Visible="false" CommandArgument="<%# Container.DataItemIndex %>" Text="Cancelar" CausesValidation="false" CssClass="btn-danger" />
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:CommandField ButtonType="Button" ControlStyle-CssClass="btn-danger" ShowDeleteButton="true" DeleteText="Eliminar" />
         </Columns>
     </asp:GridView>
-    <div class="form-group">
-        <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
 
-    </div>
 
 
 
