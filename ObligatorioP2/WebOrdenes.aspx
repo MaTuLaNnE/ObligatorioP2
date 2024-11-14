@@ -31,12 +31,13 @@
             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="ddlTipoServicio" ForeColor="Red" Text="El tipo de servicio es requerido"></asp:RequiredFieldValidator>
         </div>
         <div class="form-group">
-            <asp:Label ID="lblDesc" runat="server" Text="Descripción del problema: " CssClass="label-custom"></asp:Label>
-        </div>
-        <div class="form-group">
-            <asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine" Columns="20" Rows="2" Width="300px" CssClass="input-custom"></asp:TextBox>
+            <asp:Label ID="lblDesc" runat="server" Text="Descripción: " CssClass="label-custom"></asp:Label>
+            <asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine" Columns="20" Rows="2" Width="200px" CssClass="textarea"></asp:TextBox>
             <asp:RequiredFieldValidator runat="server" ID="rfvDesc" ControlToValidate="txtDesc" ForeColor="Red" Text="La descripción es requerida"></asp:RequiredFieldValidator>
         </div>
+  <%--      <div class="form-group">
+
+        </div>--%>
 
         <div class="form-group">
             <asp:Label ID="lblEstado" runat="server" Text="Estado de la Orden: " CssClass="label-custom" Visible="false"></asp:Label>
@@ -122,6 +123,10 @@
             text-align: left;
             margin-right: 10px;
             font-weight: bold;
+        }
+
+        .textarea{
+            width:200px;
         }
 
         #MainContent_lblCIerror {

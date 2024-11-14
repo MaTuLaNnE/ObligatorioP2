@@ -11,6 +11,7 @@ namespace ObligatorioP2.Models
         public string Telefono { get; set; }
         public string Email { get; set; }
 
+
         public Cliente(string nombre, string apellido, string ci, string direccion, string telefono, string email) : base(nombre, apellido, ci)
         {
 
