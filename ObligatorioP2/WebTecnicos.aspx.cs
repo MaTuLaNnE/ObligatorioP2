@@ -27,6 +27,7 @@ namespace ObligatorioP2
             txtNombre.Text = "";
             txtApellido.Text = "";
             txtCI.Text = "";
+            txtClave.Text = "";
             ddlTipoServicio.ClearSelection();
             ddlTipoServicio.AutoPostBack = true;
         }
@@ -66,13 +67,16 @@ namespace ObligatorioP2
                 
                 var d = ddlTipoServicio.Text;
 
+                string ea = txtClave.Text;
 
-                Tecnico miTecnico = new Tecnico(a, b, c, d);
+
+                Tecnico miTecnico = new Tecnico(a, b, c, d, ea);
 
                 miTecnico.Nombre = a;
                 miTecnico.Apellido = b;
                 miTecnico.CI = c;
                 miTecnico.Especialidad = d;
+                miTecnico.Clave = ea;
                 lblError.Visible = true;
                 lblError.ForeColor = System.Drawing.Color.Green;
                 lblError.Text = "Tecnico creado correctamente";
@@ -164,11 +168,13 @@ namespace ObligatorioP2
                     txtApellido.Text = tecnico.Apellido;
                     txtCI.Text = tecnico.CI;
                     ddlTipoServicio.SelectedValue = tecnico.Especialidad;
+                    txtClave.Text = tecnico.Clave;
 
 
                     rfvNombre.Enabled = false;
                     rfvApellido.Enabled = false;
                     rfcCI.Enabled = false;
+                    rfcClave.Enabled = false;
 
                     // Guarda el índice del técnico en una variable de sesión para usarlo al actualizar
                     Session["TecnicoIndex"] = index;
@@ -192,6 +198,7 @@ namespace ObligatorioP2
                 rfvNombre.Enabled = true;
                 rfvApellido.Enabled = true;
                 rfcCI.Enabled = true;
+                rfcClave.Enabled = true;
 
                 BtnActualizar.Visible = false;
                 btnCrearTecnico.Visible = true;
@@ -222,6 +229,7 @@ namespace ObligatorioP2
                 tecnico.Apellido = txtApellido.Text;
                 tecnico.CI = txtCI.Text;
                 tecnico.Especialidad = ddlTipoServicio.SelectedValue;
+                tecnico.Clave = txtClave.Text;
 
                 LimpiarCampos();
                 lblError.Visible = true;

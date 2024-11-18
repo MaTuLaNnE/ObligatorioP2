@@ -1,60 +1,112 @@
-﻿<%@ Page Title="Iniciar sesión" Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ObligatorioP2.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ObligatorioP2.Login" %>
 
-<asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <h2><%: Title %>.</h2>
+<!DOCTYPE html>
 
-    <div class="row">
-        <div class="col-md-8">
-            <section id="loginForm">
-                <div class="form-horizontal">
-                    <h4>Utilice una cuenta local para iniciar sesión.</h4>
-                    <hr />
-                    <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
-                        <p class="text-danger">
-                            <asp:Literal runat="server" ID="FailureText" />
-                        </p>
-                    </asp:PlaceHolder>
-                    <div class="form-group">
-                        <asp:Label runat="server" CssClass="col-md-2 control-label">Nombre de usuario</asp:Label>
-                        <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="UserName" CssClass="form-control" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName"
-                                CssClass="text-danger" ErrorMessage="El campo de nombre de usuario es obligatorio." />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Contraseña</asp:Label>
-                        <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="El campo de contraseña es obligatorio." />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                <asp:CheckBox runat="server" ID="RememberMe" />
-                                <asp:Label runat="server">¿Recordar cuenta?</asp:Label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <asp:Button runat="server" Text="Iniciar sesión" CssClass="btn btn-default" />
-                        </div>
-                    </div>
-                </div>
-                <p>
-                    <asp:HyperLink runat="server" ID="RegisterHyperLink" ViewStateMode="Disabled">Registrarse</asp:HyperLink>
-                    si no tiene una cuenta local.
-                </p>
-            </section>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="form-group">
+            <h1 id="titulo" runat="server" class="titulo">inicio de sesion</h1>
+        </div>
+        <div class="form-group">
+            <asp:Label ID="lblCI" runat="server" Text="Cedula de Tecnico: " CssClass="label-custom"></asp:Label>
+            <asp:TextBox ID="txtCI" runat="server" CssClass="input-custom"></asp:TextBox>
+            <asp:RequiredFieldValidator runat="server" ID="rfvCI" ControlToValidate="txtCI" ForeColor="Red" Text="Ingrese su Documento"></asp:RequiredFieldValidator>
         </div>
 
-        <div class="col-md-4">
-            <section id="socialLoginForm">
-    <%--            <uc:openauthproviders runat="server" id="OpenAuthLogin" />--%>
-            </section>
+        <div class="form-group">
+            <asp:Label ID="lblClave" runat="server" Text="Clave de acceso: " CssClass="label-custom"></asp:Label>
+            <asp:TextBox ID="txtClave" runat="server" CssClass="input-custom"></asp:TextBox>
+            <asp:RequiredFieldValidator runat="server" ID="rfvClave" ControlToValidate="txtClave" ForeColor="Red" Text="Debe ingresar una clave para acceder"></asp:RequiredFieldValidator>
         </div>
-    </div>
-</asp:Content>
 
+        <div class="form-group">
+            <asp:Label ID="lblError" runat="server" Visible="false"></asp:Label>
+        </div>
+        <div class="form-group">
+            <asp:Button ID="btnLogIn" runat="server" Text="Iniciar Sesion" CssClass="btn-primary" Width="151px" OnClick="CmdLogIn" />
+
+        </div>
+    </form>
+</body>
+</html>
+<style>
+    .titulo {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    .label-custom {
+        width: 200px;
+        text-align: left;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    .textarea {
+        width: 200px;
+    }
+
+    #MainContent_lblCIerror {
+        justify-content: left;
+    }
+
+    .input-custom,
+    .dropdown-custom {
+        width: 200px;
+        padding: 5px;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-danger {
+        padding: 8px 15px;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+    }
+
+    .btn-secondary {
+        background-color: #007bff;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+    }
+
+    .table-custom {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        text-align: center;
+        border: solid black;
+    }
+
+        .table-custom th,
+        .table-custom td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table-custom th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+</style>

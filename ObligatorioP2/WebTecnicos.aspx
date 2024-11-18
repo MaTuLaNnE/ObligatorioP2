@@ -22,6 +22,12 @@
     </div>
 
     <div class="form-group">
+        <asp:Label ID="lblClave" runat="server" Text="Clave: " CssClass="label-custom"></asp:Label>
+        <asp:TextBox ID="txtClave" runat="server" CssClass="input-custom"></asp:TextBox>
+        <asp:RequiredFieldValidator runat="server" ID="rfcClave" ControlToValidate="txtClave" ForeColor="Red" Text="La Clave de acceso es requerida"></asp:RequiredFieldValidator>
+    </div>
+
+    <div class="form-group">
         <asp:Label ID="lblEspecialidad" runat="server" Text="Especialidad: " CssClass="label-custom"></asp:Label>
         <asp:DropDownList ID="ddlTipoServicio" runat="server" CssClass="dropdown-custom">
             <asp:ListItem runat="server" Enabled="true" Text="Seleccione un Servicio" Value=""></asp:ListItem>

@@ -4,7 +4,7 @@
 
 <html lang="es">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
@@ -13,7 +13,7 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -50,8 +50,11 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/WebInicio">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/WebOrdenes">Ordenes</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/WebClientes">Clientes</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/WebTecnicos">Tecnicos</a></li>
+                        <li class="nav-item"><a id="chau" visible="false" class="nav-link" runat="server" href="~/WebTecnicos">Tecnicos</a></li>
                     </ul>
+                </div>
+                <div class="LogOut">
+                    <asp:Button ID="btnLogOut" runat="server" Text="Cerrar Sesion" OnClick="LogOut" />
                 </div>
             </div>
         </nav>
@@ -69,3 +72,10 @@
     </asp:PlaceHolder>
 </body>
 </html>
+<style>
+    .LogOut {
+        display: flex;
+        align-items: end;
+        justify-content: right;
+    }
+</style>

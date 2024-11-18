@@ -15,8 +15,8 @@
             </asp:DropDownList>
         </div>
         <div class="form-group">
-            <asp:Label ID="lblNombreTecnico" runat="server" Text="Nombre del Tecnico: " CssClass="label-custom"></asp:Label>
-            <asp:DropDownList ID="DDTecnicos" runat="server" CssClass="dropdown-custom">
+            <asp:Label ID="lblNombreTecnico" runat="server" Visible="false" Text="Nombre del Tecnico: " CssClass="label-custom"></asp:Label>
+            <asp:DropDownList ID="DDTecnicos" runat="server" Visible="false" CssClass="dropdown-custom">
             </asp:DropDownList>
         </div>
         <div class="form-group">
@@ -35,9 +35,7 @@
             <asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine" Columns="20" Rows="2" Width="200px" CssClass="textarea"></asp:TextBox>
             <asp:RequiredFieldValidator runat="server" ID="rfvDesc" ControlToValidate="txtDesc" ForeColor="Red" Text="La descripción es requerida"></asp:RequiredFieldValidator>
         </div>
-  <%--      <div class="form-group">
 
-        </div>--%>
 
         <div class="form-group">
             <asp:Label ID="lblEstado" runat="server" Text="Estado de la Orden: " CssClass="label-custom" Visible="false"></asp:Label>

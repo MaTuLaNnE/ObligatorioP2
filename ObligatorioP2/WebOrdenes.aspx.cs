@@ -49,12 +49,33 @@ namespace ObligatorioP2
         public static List<int> HistorialOrdenes = new List<int>();
         public List<string> listaComents = new List<string>();
 
+
+        public  List<Orden> OrdenesxTecnico = new List<Orden>();
+
         private void CargarOrdenesEnTabla()
         {
-            // Asegúrate de que las columnas de la GridView están configuradas correctamente
-            TablaOrdenes.DataSource = BaseDeDatos.ListaOrdenes;
+
+
+            Tecnico tecnicoActual = BaseDeDatos.Token[0];
+
+
+            for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
+            {
+                Orden orden = BaseDeDatos.ListaOrdenes[i];
+
+
+                if (tecnicoActual.Nombre == orden.NombreTecnico)
+                {
+                    OrdenesxTecnico.Add(orden);
+                }
+            }
+
+
+            TablaOrdenes.DataSource = OrdenesxTecnico;
             TablaOrdenes.DataBind();
+
         }
+
 
         protected void CmdCrearOrden(object sender, EventArgs e)
         {
@@ -73,7 +94,10 @@ namespace ObligatorioP2
             {
                 var a = CrearNroOrden();
                 var b = DDClientes.SelectedValue;
-                var c = DDTecnicos.SelectedValue;
+
+                Tecnico tecnicoActual = BaseDeDatos.Token[0];
+                var c = tecnicoActual.Nombre;
+
                 var d = ddlTipoServicio.Text;
                 var ea = txtDesc.Text;
                 var f = DateTime.Now.Date;
@@ -92,7 +116,7 @@ namespace ObligatorioP2
                 miOrden.FechaCreacion = f;
                 miOrden.Estado = g;
                 miOrden.ListaComentarios = listaComents;
-             
+
                 lblCreadoCorrectamente.Visible = true;
                 lblCreadoCorrectamente.Text = "Orden creada correctamente";
 
@@ -103,53 +127,9 @@ namespace ObligatorioP2
                 CargarOrdenesEnTabla();
 
                 LimpiarCampos();
-                
+
             }
         }
-
-        //public int CrearNroOrden() // ??????????????????????????????????????????????????????????????????????????  funca eso?
-        //{
-        //    int NroOrden = 0;
-
-        //    for (int i = 0; i <= BaseDeDatos.ListaOrdenes.Count; i++)
-        //    {
-        //        if (!HistorialOrdenes.Contains(i))
-        //        {
-        //            HistorialOrdenes.Add(i);
-        //        }
-        //        if (BaseDeDatos.ListaOrdenes.Count < HistorialOrdenes.Count)
-        //        {
-        //            NroOrden = HistorialOrdenes.Count; // nuevo para probar || cuenta todas las ordenes y le suma una para q sea la ultima siempre
-        //        }
-        //    }
-
-
-        //    return NroOrden;
-        //}
-
-        //public int CrearNroOrden()
-        //{
-        //    int NroOrden = 0;
-
-        //    for (int i = 0; i <= BaseDeDatos.ListaOrdenes.Count; i++)
-        //    {
-
-        //        if (!HistorialOrdenes.Contains(i) && !BaseDeDatos.ListaOrdenes.Exists(Orden => Orden.NroOrden == i))
-        //        {
-        //            HistorialOrdenes.Add(NroOrden); //Se marca como usado
-        //            NroOrden = i;
-        //            break;
-        //        }
-        //    }
-        //    if (NroOrden == 0 && BaseDeDatos.ListaOrdenes.Count > 0)
-        //    {
-        //        NroOrden = BaseDeDatos.ListaOrdenes.Max(orden => orden.NroOrden) + 1;
-        //    }
-
-        //    HistorialOrdenes.Add(NroOrden); //Se marca como usado
-
-        //    return NroOrden;
-        //}
 
 
         public int CrearNroOrden()
@@ -221,7 +201,7 @@ namespace ObligatorioP2
 
             btnCrearOrden.Visible = true;
 
-            TablaOrdenes.EditIndex = -1;
+
             CargarOrdenesEnTabla();
 
         }
@@ -230,13 +210,13 @@ namespace ObligatorioP2
         {
             EsconderLabels();
 
-            
+
             if (e.CommandName == "Editar")
             {
 
                 int index = Convert.ToInt32(e.CommandArgument);
 
-                for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count ; i++)
+                for (int i = 0; i < OrdenesxTecnico.Count; i++)
                 {
                     GridViewRow ala = TablaOrdenes.Rows[i];
 
@@ -306,13 +286,14 @@ namespace ObligatorioP2
 
                 BtnActualizar.Visible = false;
                 btnCrearOrden.Visible = true;
+                LimpiarCampos();
 
             }
             if (e.CommandName == "MostrarComments")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
 
-                for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count ; i++)
+                for (int i = 0; i < OrdenesxTecnico.Count; i++)
                 {
                     GridViewRow kk = TablaOrdenes.Rows[i];
                     Button btnOcultarCommentsAbiertos = (Button)kk.FindControl("btnOcultarComments");
@@ -346,6 +327,7 @@ namespace ObligatorioP2
 
                     btnMostrarComments.Visible = false;
                     btnOcultarComments.Visible = true;
+                    LimpiarCampos();
 
                     Session["OrdenIndex"] = index;
                 }
@@ -367,7 +349,7 @@ namespace ObligatorioP2
                 RequiredFieldValidator1.Enabled = true;
                 rfvDesc.Enabled = true;
 
-                ListComents.Visible= false;
+                ListComents.Visible = false;
                 BLComentarios.Visible = false;
                 btnAgregarComments.Visible = false;
                 btnCrearOrden.Visible = true;
@@ -457,7 +439,7 @@ namespace ObligatorioP2
             }
         }
 
-       
+
     }
 
 }

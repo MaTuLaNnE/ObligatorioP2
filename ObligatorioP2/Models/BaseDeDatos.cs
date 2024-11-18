@@ -12,6 +12,8 @@ namespace ObligatorioP2.Models
         public static List<Tecnico> ListaTecnico = new List<Tecnico>();
         public static List<Orden> ListaOrdenes = new List<Orden>();
 
+        public static List<Tecnico> Token = new List<Tecnico>();
+
 
 
         public static void PrecargarBD()
@@ -24,12 +26,16 @@ namespace ObligatorioP2.Models
             ListaClientes.Add(Cli2);
             ListaClientes.Add(Cli3);
 
-            Tecnico Tec1 = new Tecnico("Juan", "Manuel", "34653871", "Reparacion");
-            Tecnico Tec2 = new Tecnico("Gabriel", "Medina", "48769321", "Montaje");
+            Tecnico Tec1 = new Tecnico("Juan", "Manuel", "34653871", "Reparacion","1234");
+            Tecnico Tec2 = new Tecnico("Gabriel", "Medina", "48769321", "Montaje", "5678");
+
+            Tecnico admin = new Tecnico("Admin", "Medina", "50140797", "ToLosPoderes", "1111");
 
 
             ListaTecnico.Add(Tec1);
             ListaTecnico.Add(Tec2);
+            ListaTecnico.Add(admin);
+            
 
 
             string kk = "jshdjshd";
