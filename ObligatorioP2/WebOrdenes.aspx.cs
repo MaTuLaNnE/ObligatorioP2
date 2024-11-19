@@ -175,8 +175,27 @@ namespace ObligatorioP2
 
             if (e.CommandName == "Editar")
             {
-
                 int index = Convert.ToInt32(e.CommandArgument);
+
+                //------------------------------------------------------------
+
+                for (int i = 0; i < OrdenesxTecnico.Count; i++)
+                {
+                    GridViewRow fila = TablaOrdenes.Rows[i];
+
+                    Button btnMostrarEditAbiertos = (Button)fila.FindControl("btnEditar");
+                    btnMostrarEditAbiertos.Visible = true;
+
+                    Button btnMostrarCancelAbiertos = (Button)fila.FindControl("btnCancel");
+                    btnMostrarCancelAbiertos.Visible=false;
+
+                    btnMostrarEditAbiertos.Visible = true;
+                    btnMostrarCancelAbiertos.Visible = false;
+
+                }
+
+                //------------------------------------------------------------
+
 
                 for (int i = 0; i < OrdenesxTecnico.Count; i++)
                 {
@@ -343,7 +362,6 @@ namespace ObligatorioP2
                 DDEstado.Visible = false;
                 lblError.Visible = false;
                 BtnActualizar.Visible = false;
-                btnCrearOrden.Visible = true;
 
 
                 RequiredFieldValidator1.Enabled = true;

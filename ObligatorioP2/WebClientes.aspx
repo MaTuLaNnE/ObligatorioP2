@@ -181,7 +181,7 @@
             }
 
             .table-custom th {
-                background-color: #878787;
+                background-color: #ddd;
                 font-weight: bold;
             }
 

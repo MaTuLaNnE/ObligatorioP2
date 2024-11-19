@@ -177,24 +177,6 @@ namespace ObligatorioP2
         protected global::System.Web.UI.WebControls.TextBox txtComentario;
 
         /// <summary>
-        /// Control lblError.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
-
-        /// <summary>
-        /// Control lblConfirmacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblConfirmacion;
-
-        /// <summary>
         /// Control btnCrearOrden.
         /// </summary>
         /// <remarks>
@@ -229,6 +211,24 @@ namespace ObligatorioP2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCreadoCorrectamente;
+
+        /// <summary>
+        /// Control lblError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
+
+        /// <summary>
+        /// Control lblConfirmacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblConfirmacion;
 
         /// <summary>
         /// Control TablaOrdenes.

@@ -52,9 +52,6 @@
                 <asp:TextBox ID="txtComentario" CssClass="input-custom" runat="server"></asp:TextBox>
             </div>
 
-            <!-- Mensajes de error y confirmación -->
-            <asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red" CssClass="message-error"></asp:Label>
-            <asp:Label ID="lblConfirmacion" runat="server" Visible="false" ForeColor="Green" CssClass="message-confirmation"></asp:Label>
 
             <div class="form-actions">
                 <asp:Button ID="btnCrearOrden" runat="server" Text="Crear Orden" CssClass="btn-primary" Width="151px" OnClick="CmdCrearOrden" />
@@ -63,11 +60,15 @@
             </div>
 
             <div class="form-group">
-                <asp:Label ID="lblCreadoCorrectamente" runat="server" Visible="false" ForeColor="Green"></asp:Label>
+
+                <asp:Label ID="lblCreadoCorrectamente" runat="server" Visible="false" ForeColor="Green" CssClass="message-confirmation"></asp:Label>
+                <asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red" CssClass="message-error"></asp:Label>
+                <asp:Label ID="lblConfirmacion" runat="server" Visible="false" ForeColor="Green" CssClass="message-confirmation"></asp:Label>
+
             </div>
+
         </div>
 
-        <!-- Tabla de órdenes -->
         <asp:GridView ID="TablaOrdenes" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="TeBorroALaMierda" OnRowCommand="TablaOrdenes_RowCommand">
             <Columns>
                 <asp:BoundField DataField="NroOrden" HeaderText="Número de Orden" SortExpression="NroOrden" />
@@ -92,7 +93,6 @@
             </Columns>
         </asp:GridView>
 
-        <!-- Comentarios -->
         <div class="form-group">
             <asp:Label ID="ListComents" CssClass="label-custom" Visible="false" runat="server">Lista de Comentarios</asp:Label>
         </div>
@@ -215,7 +215,7 @@
             }
 
             .table-custom th {
-                background-color: #f8f9fa;
+                background-color: #ddd;
                 font-weight: bold;
             }
 
