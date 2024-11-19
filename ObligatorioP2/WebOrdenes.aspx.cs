@@ -15,34 +15,32 @@ namespace ObligatorioP2
         protected void Page_Load(object sender, EventArgs e)
         {
 
-                if (!IsPostBack)
+            if (!IsPostBack)
+            {
+                // Corregir la condición de cargar datos
+                if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
                 {
-                    // Corregir la condición de cargar datos
-                    if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
-                    {
-                        BaseDeDatos.PrecargarBD();
+                    BaseDeDatos.PrecargarBD();
 
-                        //PRUEBAAAAAAAAA
-
-                    }
-
-                    // Enlazar los DropDownLists
-                    DDClientes.DataSource = BaseDeDatos.ListaClientes;
-                    DDClientes.DataTextField = "Nombre";
-                    DDClientes.DataValueField = "Nombre"; // Asumí que "Nombre" es la clave, puedes cambiarlo si es diferente
-                    DDClientes.DataBind();
-
-
-                    DDTecnicos.DataSource = BaseDeDatos.ListaTecnico;
-                    DDTecnicos.DataTextField = "Nombre";
-                    DDTecnicos.DataValueField = "Nombre"; // Similar al anterior
-                    DDTecnicos.DataBind();
-
-
-
-                    CargarOrdenesEnTabla();
                 }
- 
+
+                // Enlazar los DropDownLists
+                DDClientes.DataSource = BaseDeDatos.ListaClientes;
+                DDClientes.DataTextField = "Nombre";
+                DDClientes.DataValueField = "Nombre"; // Asumí que "Nombre" es la clave, puedes cambiarlo si es diferente
+                DDClientes.DataBind();
+
+
+                DDTecnicos.DataSource = BaseDeDatos.ListaTecnico;
+                DDTecnicos.DataTextField = "Nombre";
+                DDTecnicos.DataValueField = "Nombre"; // Similar al anterior
+                DDTecnicos.DataBind();
+
+
+
+                CargarOrdenesEnTabla();
+            }
+
 
 
         }
