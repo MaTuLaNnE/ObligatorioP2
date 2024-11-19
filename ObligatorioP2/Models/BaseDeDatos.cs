@@ -12,12 +12,13 @@ namespace ObligatorioP2.Models
         public static List<Tecnico> ListaTecnico = new List<Tecnico>();
         public static List<Orden> ListaOrdenes = new List<Orden>();
 
-        public static List<Tecnico> Token = new List<Tecnico>();
-
+        public static Tecnico Token;
+        public static int UltimoNumeroDeOrden;
 
 
         public static void PrecargarBD()
         {
+            UltimoNumeroDeOrden = 0;
             Cliente Cli1 = new Cliente("Jose", "Perez", "50237326", "Sarandi 234", "097342631", "jperez@gmail.com");
             Cliente Cli2 = new Cliente("Pepe", "Silva", "44094112", "Gorlero 890", "094621001", "elpepe777@gmail.com");
             Cliente Cli3 = new Cliente("Ricardo", "Gonzalez", "51017628", "25 de Mayo 1001", "098150787", "RicarditoDDL@gmail.com");
@@ -29,7 +30,7 @@ namespace ObligatorioP2.Models
             Tecnico Tec1 = new Tecnico("Juan", "Manuel", "34653871", "Reparacion","1234");
             Tecnico Tec2 = new Tecnico("Gabriel", "Medina", "48769321", "Montaje", "5678");
 
-            Tecnico admin = new Tecnico("Admin", "Medina", "50140797", "ToLosPoderes", "1111");
+            Tecnico admin = new Tecnico("Admin", "Medina", "50140797", "ToLosPoderes", "1111", true);
 
 
             ListaTecnico.Add(Tec1);
@@ -53,18 +54,15 @@ namespace ObligatorioP2.Models
             list2.Add(hghg);
 
 
-            Orden Orden1 = new Orden(1, Cli1.Nombre, Tec2.Nombre, "Sistemas","Este es el problema", DateTime.Now.Date, "EN PROGRESO", list1);
-            Orden Orden2 = new Orden(2, Cli1.Nombre, Tec1.Nombre, "Montaje", "Este es el problema nuevo", DateTime.Now.Date, "COMPLETADO", list2);
-
-            ListaOrdenes.Add(Orden1);
-            ListaOrdenes.Add(Orden2);
-
-            
-
-            
-
-
-
+            BaseDeDatos.crearOrden(Cli1.Nombre, Tec2.Nombre, "Sistemas","Este es el problema", DateTime.Now.Date, "EN PROGRESO", list1);
+            BaseDeDatos.crearOrden(Cli1.Nombre, Tec1.Nombre, "Montaje", "Este es el problema nuevo", DateTime.Now.Date, "COMPLETADO", list2);
+        }
+        public static Orden crearOrden(string cliente, string tecnico, string tipoDeServicio, string descripcionProblema, DateTime fechaCreacion, string estado, List<string> listacomentarios)
+        {
+            UltimoNumeroDeOrden++;
+            Orden OrdenCreada = new Orden(UltimoNumeroDeOrden, cliente, tecnico, tipoDeServicio, descripcionProblema, fechaCreacion, estado, listacomentarios);
+            ListaOrdenes.Add(OrdenCreada);
+            return OrdenCreada;
         }
     }
 }

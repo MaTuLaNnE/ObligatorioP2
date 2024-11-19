@@ -20,9 +20,10 @@
 
         <div class="form-group">
             <asp:Label ID="lblClave" runat="server" Text="Clave de acceso: " CssClass="label-custom"></asp:Label>
-            <asp:TextBox ID="txtClave" runat="server" CssClass="input-custom"></asp:TextBox>
+            <asp:TextBox ID="txtClave" runat="server" type="password" CssClass="input-custom"></asp:TextBox>
             <asp:RequiredFieldValidator runat="server" ID="rfvClave" ControlToValidate="txtClave" ForeColor="Red" Text="Debe ingresar una clave para acceder"></asp:RequiredFieldValidator>
         </div>
+     
 
         <div class="form-group">
             <asp:Label ID="lblError" runat="server" Visible="false"></asp:Label>

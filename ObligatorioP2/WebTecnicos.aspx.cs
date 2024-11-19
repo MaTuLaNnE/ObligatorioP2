@@ -12,13 +12,22 @@ namespace ObligatorioP2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+
+            if (BaseDeDatos.Token == null || !BaseDeDatos.Token.esAdmin)
             {
-                if (BaseDeDatos.ListaTecnico.Count == 0)
+                Response.Redirect("WebNoAdmin.aspx");
+            }
+            else
+            {
+                
+                if (!IsPostBack)
                 {
-                    BaseDeDatos.PrecargarBD();
+                    if (BaseDeDatos.ListaTecnico.Count == 0)
+                    {
+                        BaseDeDatos.PrecargarBD();
+                    }
+                    CargarClientesEnTabla();
                 }
-                CargarClientesEnTabla();
             }
         }
 
@@ -60,11 +69,11 @@ namespace ObligatorioP2
                 {
 
                     lblError.Text = "Debes agregar un documento valido";
-                    lblError.ForeColor= System.Drawing.Color.Red;
+                    lblError.ForeColor = System.Drawing.Color.Red;
                     lblError.Visible = true;
                     return;
                 }
-                
+
                 var d = ddlTipoServicio.Text;
 
                 string ea = txtClave.Text;
@@ -143,11 +152,11 @@ namespace ObligatorioP2
 
                 BtnActualizar.Visible = true;
                 btnCrearTecnico.Visible = false;
-                
+
 
                 lblError.Visible = true;
                 lblError.Text = "Editando...";
-                
+
 
 
                 GridViewRow row = TablaTecnico1.Rows[index];

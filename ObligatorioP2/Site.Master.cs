@@ -15,10 +15,10 @@ namespace ObligatorioP2
             if (!IsPostBack)
             {
 
-                for (int i = 0; i < BaseDeDatos.Token.Count; i++)
+                if(BaseDeDatos.Token != null)
                 {
 
-                    Tecnico tecnico = BaseDeDatos.Token[i];
+                    Tecnico tecnico = BaseDeDatos.Token;
 
 
                     if (tecnico.CI == "50140797" && tecnico.Clave == "1111")
@@ -38,7 +38,7 @@ namespace ObligatorioP2
 
         protected void LogOut(object sender, EventArgs e)
         {
-            BaseDeDatos.Token.RemoveAt(0);
+            BaseDeDatos.Token = null;
             Response.Redirect("Login.aspx");
 
         }

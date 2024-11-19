@@ -11,10 +11,13 @@ namespace ObligatorioP2.Models
 
         public string Clave { get; set; }
 
-        public Tecnico(string Nombre, string Apellido, string ci, string especialidad, string clave) : base(Nombre, Apellido, ci)
+        public bool esAdmin {  get; set; }
+
+        public Tecnico(string Nombre, string Apellido, string ci, string especialidad, string clave, bool esAdmin=false) : base(Nombre, Apellido, ci)
         {
             this.Especialidad = especialidad;
             Clave = clave;
+            this.esAdmin = esAdmin;
         }
 
         public string getEspecialidad()

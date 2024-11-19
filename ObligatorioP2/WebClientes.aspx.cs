@@ -20,9 +20,14 @@ namespace ObligatorioP2
                     BaseDeDatos.PrecargarBD();
                 }
 
+
                 CargarClientesEnTabla();
 
             }
+
+            rfvNombre.Enabled = false;
+            rfvApellido.Enabled = false;
+            rfcCI.Enabled = false;
         }
 
         private void CargarClientesEnTabla()
@@ -49,6 +54,9 @@ namespace ObligatorioP2
             }
             else
             {
+                rfvNombre.Enabled = true;
+                rfvApellido.Enabled = true;
+                rfcCI.Enabled = true;
                 var a = txtNombre.Text;
                 var b = txtApellido.Text;
                 var c = txtCI.Text;
@@ -73,6 +81,9 @@ namespace ObligatorioP2
                 miCliente.Email = f;
                 lblCreadoCorrectamente.Visible = true;
                 lblCreadoCorrectamente.Text = "Cliente creado correctamente";
+                rfvNombre.Enabled = false;
+                rfvApellido.Enabled = false;
+                rfcCI.Enabled = false;
 
                 BaseDeDatos.ListaClientes.Add(miCliente);
 

@@ -14,49 +14,50 @@ namespace ObligatorioP2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                // Corregir la condición de cargar datos
-                if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
+
+                if (!IsPostBack)
                 {
-                    BaseDeDatos.PrecargarBD();
-
-                    //PRUEBAAAAAAAAA
-                    for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++) //Cuenta cuantas ordnes creadas hay
+                    // Corregir la condición de cargar datos
+                    if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
                     {
-                        HistorialOrdenes.Add(HistorialOrdenes.Count + 1);
+                        BaseDeDatos.PrecargarBD();
+
+                        //PRUEBAAAAAAAAA
+
                     }
+
+                    // Enlazar los DropDownLists
+                    DDClientes.DataSource = BaseDeDatos.ListaClientes;
+                    DDClientes.DataTextField = "Nombre";
+                    DDClientes.DataValueField = "Nombre"; // Asumí que "Nombre" es la clave, puedes cambiarlo si es diferente
+                    DDClientes.DataBind();
+
+
+                    DDTecnicos.DataSource = BaseDeDatos.ListaTecnico;
+                    DDTecnicos.DataTextField = "Nombre";
+                    DDTecnicos.DataValueField = "Nombre"; // Similar al anterior
+                    DDTecnicos.DataBind();
+
+
+
+                    CargarOrdenesEnTabla();
                 }
-
-                // Enlazar los DropDownLists
-                DDClientes.DataSource = BaseDeDatos.ListaClientes;
-                DDClientes.DataTextField = "Nombre";
-                DDClientes.DataValueField = "Nombre"; // Asumí que "Nombre" es la clave, puedes cambiarlo si es diferente
-                DDClientes.DataBind();
+ 
 
 
-                DDTecnicos.DataSource = BaseDeDatos.ListaTecnico;
-                DDTecnicos.DataTextField = "Nombre";
-                DDTecnicos.DataValueField = "Nombre"; // Similar al anterior
-                DDTecnicos.DataBind();
-
-
-
-                CargarOrdenesEnTabla();
-            }
         }
 
-        public static List<int> HistorialOrdenes = new List<int>();
+
         public List<string> listaComents = new List<string>();
 
 
-        public  List<Orden> OrdenesxTecnico = new List<Orden>();
+        public List<Orden> OrdenesxTecnico = new List<Orden>();
 
         private void CargarOrdenesEnTabla()
         {
 
 
-            Tecnico tecnicoActual = BaseDeDatos.Token[0];
+            Tecnico tecnicoActual = BaseDeDatos.Token;
 
 
             for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
@@ -64,7 +65,7 @@ namespace ObligatorioP2
                 Orden orden = BaseDeDatos.ListaOrdenes[i];
 
 
-                if (tecnicoActual.Nombre == orden.NombreTecnico)
+                if (tecnicoActual.Nombre == orden.NombreTecnico || tecnicoActual.esAdmin)
                 {
                     OrdenesxTecnico.Add(orden);
                 }
@@ -92,35 +93,25 @@ namespace ObligatorioP2
             }
             else
             {
-                var a = CrearNroOrden();
-                var b = DDClientes.SelectedValue;
+                string cliente = DDClientes.SelectedValue;
 
-                Tecnico tecnicoActual = BaseDeDatos.Token[0];
-                var c = tecnicoActual.Nombre;
+                Tecnico tecnicoActual = BaseDeDatos.Token;
+                string tecnico = tecnicoActual.Nombre;
 
-                var d = ddlTipoServicio.Text;
-                var ea = txtDesc.Text;
-                var f = DateTime.Now.Date;
-                var g = DDEstado.SelectedValue = "PENDIENTE";
-                var comentario = txtComentario.Text;
+                string servicio = ddlTipoServicio.Text;
+                string desc = txtDesc.Text;
+                DateTime fecha = DateTime.Now.Date;
+                string estado = DDEstado.SelectedValue = "PENDIENTE";
+                string comentario = txtComentario.Text;
 
                 listaComents = GenerarLista(comentario);
 
-                Orden miOrden = new Orden(a, b, c, d, ea, f, g, listaComents);
+                Orden miOrden = BaseDeDatos.crearOrden(cliente, tecnico, servicio, desc, fecha, estado, listaComents);
 
-                miOrden.NroOrden = a;
-                miOrden.NombreCliente = b;
-                miOrden.NombreTecnico = c;
-                miOrden.TipoDeServicio = d;
-                miOrden.DescripcionProblema = ea;
-                miOrden.FechaCreacion = f;
-                miOrden.Estado = g;
-                miOrden.ListaComentarios = listaComents;
 
                 lblCreadoCorrectamente.Visible = true;
                 lblCreadoCorrectamente.Text = "Orden creada correctamente";
 
-                BaseDeDatos.ListaOrdenes.Add(miOrden);
 
 
 
@@ -132,32 +123,7 @@ namespace ObligatorioP2
         }
 
 
-        public int CrearNroOrden()
-        {
 
-            int NroOrden = 0;
-            int NumMaxOrden = HistorialOrdenes.LastOrDefault();
-
-            if (NumMaxOrden > HistorialOrdenes.Count)
-            {
-                NroOrden = NumMaxOrden;
-                NumMaxOrden += 1;
-                HistorialOrdenes.Add(NumMaxOrden);
-            }
-            else if (NumMaxOrden == HistorialOrdenes.Count)
-            {
-                NroOrden = NumMaxOrden + 1;
-                NumMaxOrden += 1;
-                HistorialOrdenes.Add(NroOrden);
-            }
-            else
-            {
-                NroOrden = HistorialOrdenes.Count;
-                NumMaxOrden = HistorialOrdenes.Count + 1;
-            }
-
-            return NroOrden;
-        }
 
 
 

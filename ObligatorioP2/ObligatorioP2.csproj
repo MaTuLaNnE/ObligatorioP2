@@ -149,6 +149,7 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="WebClientes.aspx" />
     <Content Include="WebInicio.aspx" />
+    <Content Include="WebNoAdmin.aspx" />
     <Content Include="WebOrdenes.aspx" />
     <Content Include="WebTecnicos.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
@@ -199,7 +200,6 @@
     </Compile>
     <Compile Include="Models\BaseDeDatos.cs" />
     <Compile Include="Models\Cliente.cs" />
-    <Compile Include="Models\Estado.cs" />
     <Compile Include="Models\Orden.cs" />
     <Compile Include="Models\Tecnico.cs" />
     <Compile Include="Models\Usuario.cs" />
@@ -238,6 +238,13 @@
     </Compile>
     <Compile Include="WebInicio.aspx.designer.cs">
       <DependentUpon>WebInicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebNoAdmin.aspx.cs">
+      <DependentUpon>WebNoAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebNoAdmin.aspx.designer.cs">
+      <DependentUpon>WebNoAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebOrdenes.aspx.cs">
       <DependentUpon>WebOrdenes.aspx</DependentUpon>
