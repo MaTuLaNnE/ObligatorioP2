@@ -57,28 +57,22 @@ namespace ObligatorioP2
                 rfvNombre.Enabled = true;
                 rfvApellido.Enabled = true;
                 rfcCI.Enabled = true;
-                var a = txtNombre.Text;
-                var b = txtApellido.Text;
-                var c = txtCI.Text;
-                if (!CorroborarCI(c))
+                string Nombre = txtNombre.Text;
+                string Apellido = txtApellido.Text;
+                string ci = txtCI.Text;
+                if (!CorroborarCI(ci))
                 {
 
                     lblError.Text = "Debes agregar un documento valido";
                     lblError.Visible = true;
                     return;
                 }
-                var d = txtDireccion.Text;
-                var ea = txtTelefono.Text;
-                var f = txtEmail.Text;
+                string direccion = txtDireccion.Text;
+                string Telefono = txtTelefono.Text;
+                string email = txtEmail.Text;
 
-                Cliente miCliente = new Cliente(a, b, c, d, ea, f);
+                Cliente miCliente = new Cliente(Nombre, Apellido, ci, direccion, Telefono, email);
 
-                miCliente.Nombre = a;
-                miCliente.Apellido = b;
-                miCliente.CI = c;
-                miCliente.Direccion = d;
-                miCliente.Telefono = ea;
-                miCliente.Email = f;
                 lblCreadoCorrectamente.Visible = true;
                 lblCreadoCorrectamente.Text = "Cliente creado correctamente";
                 rfvNombre.Enabled = false;
