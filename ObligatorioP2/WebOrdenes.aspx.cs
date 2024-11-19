@@ -56,9 +56,7 @@ namespace ObligatorioP2
         private void CargarOrdenesEnTabla()
         {
 
-
             Tecnico tecnicoActual = BaseDeDatos.Token;
-
 
             for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
             {
