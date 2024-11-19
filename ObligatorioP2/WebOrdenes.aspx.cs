@@ -15,34 +15,32 @@ namespace ObligatorioP2
         protected void Page_Load(object sender, EventArgs e)
         {
 
-                if (!IsPostBack)
+            if (!IsPostBack)
+            {
+                // Corregir la condición de cargar datos
+                if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
                 {
-                    // Corregir la condición de cargar datos
-                    if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
-                    {
-                        BaseDeDatos.PrecargarBD();
+                    BaseDeDatos.PrecargarBD();
 
-                        //PRUEBAAAAAAAAA
-
-                    }
-
-                    // Enlazar los DropDownLists
-                    DDClientes.DataSource = BaseDeDatos.ListaClientes;
-                    DDClientes.DataTextField = "Nombre";
-                    DDClientes.DataValueField = "Nombre"; // Asumí que "Nombre" es la clave, puedes cambiarlo si es diferente
-                    DDClientes.DataBind();
-
-
-                    DDTecnicos.DataSource = BaseDeDatos.ListaTecnico;
-                    DDTecnicos.DataTextField = "Nombre";
-                    DDTecnicos.DataValueField = "Nombre"; // Similar al anterior
-                    DDTecnicos.DataBind();
-
-
-
-                    CargarOrdenesEnTabla();
                 }
- 
+
+                // Enlazar los DropDownLists
+                DDClientes.DataSource = BaseDeDatos.ListaClientes;
+                DDClientes.DataTextField = "Nombre";
+                DDClientes.DataValueField = "Nombre"; // Asumí que "Nombre" es la clave, puedes cambiarlo si es diferente
+                DDClientes.DataBind();
+
+
+                DDTecnicos.DataSource = BaseDeDatos.ListaTecnico;
+                DDTecnicos.DataTextField = "Nombre";
+                DDTecnicos.DataValueField = "Nombre"; // Similar al anterior
+                DDTecnicos.DataBind();
+
+
+
+                CargarOrdenesEnTabla();
+            }
+
 
 
         }
@@ -56,9 +54,7 @@ namespace ObligatorioP2
         private void CargarOrdenesEnTabla()
         {
 
-
             Tecnico tecnicoActual = BaseDeDatos.Token;
-
 
             for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
             {
@@ -179,8 +175,27 @@ namespace ObligatorioP2
 
             if (e.CommandName == "Editar")
             {
-
                 int index = Convert.ToInt32(e.CommandArgument);
+
+                //------------------------------------------------------------
+
+                for (int i = 0; i < OrdenesxTecnico.Count; i++)
+                {
+                    GridViewRow fila = TablaOrdenes.Rows[i];
+
+                    Button btnMostrarEditAbiertos = (Button)fila.FindControl("btnEditar");
+                    btnMostrarEditAbiertos.Visible = true;
+
+                    Button btnMostrarCancelAbiertos = (Button)fila.FindControl("btnCancel");
+                    btnMostrarCancelAbiertos.Visible=false;
+
+                    btnMostrarEditAbiertos.Visible = true;
+                    btnMostrarCancelAbiertos.Visible = false;
+
+                }
+
+                //------------------------------------------------------------
+
 
                 for (int i = 0; i < OrdenesxTecnico.Count; i++)
                 {
@@ -347,7 +362,6 @@ namespace ObligatorioP2
                 DDEstado.Visible = false;
                 lblError.Visible = false;
                 BtnActualizar.Visible = false;
-                btnCrearOrden.Visible = true;
 
 
                 RequiredFieldValidator1.Enabled = true;

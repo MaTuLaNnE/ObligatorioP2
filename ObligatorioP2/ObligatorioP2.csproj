@@ -151,6 +151,7 @@
     <Content Include="WebInicio.aspx" />
     <Content Include="WebNoAdmin.aspx" />
     <Content Include="WebOrdenes.aspx" />
+    <Content Include="WebReportes.aspx" />
     <Content Include="WebTecnicos.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
@@ -252,6 +253,13 @@
     </Compile>
     <Compile Include="WebOrdenes.aspx.designer.cs">
       <DependentUpon>WebOrdenes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebReportes.aspx.cs">
+      <DependentUpon>WebReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebReportes.aspx.designer.cs">
+      <DependentUpon>WebReportes.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebTecnicos.aspx.cs">
       <DependentUpon>WebTecnicos.aspx</DependentUpon>

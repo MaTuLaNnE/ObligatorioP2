@@ -16,13 +16,15 @@
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
+    <!-- Agregando Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
-                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
-                <%--Framework Scripts--%>
                 <asp:ScriptReference Name="MsAjaxBundle" />
                 <asp:ScriptReference Name="jquery" />
                 <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
@@ -34,30 +36,45 @@
                 <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
-                <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <!-- Barra de navegación con mejoras visuales -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" runat="server" href="~/WebInicio">Gestor de Ordenes</a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/WebInicio">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/WebOrdenes">Ordenes</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/WebClientes">Clientes</a></li>
-                        <li class="nav-item"><a id="chau" visible="false" class="nav-link" runat="server" href="~/WebTecnicos">Tecnicos</a></li>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/WebInicio">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/WebOrdenes">Ordenes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/WebClientes">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="chau" visible="false" class="nav-link" runat="server" href="~/WebTecnicos">Tecnicos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/WebReportes">Reportes</a>
+                        </li>
                     </ul>
-                </div>
-                <div class="LogOut">
-                    <asp:Button ID="btnLogOut" runat="server" Text="Cerrar Sesion" OnClick="LogOut" />
+
+
+                    <div class="d-flex justify-content-end align-items-center">
+                        <a ID="btnLogOut" runat="server" Text="Cerrar Sesión" OnClick="LogOut" class="btn btn-outline-light ml-2" href="/Login">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </nav>
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
@@ -67,15 +84,45 @@
             </footer>
         </div>
     </form>
+
+    <!-- Agregando Bootstrap y JS de dependencias -->
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
     </asp:PlaceHolder>
+
+    <!-- JS de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
+
 <style>
+    /* Mejora la apariencia del log-out */
     .LogOut {
         display: flex;
-        align-items: end;
-        justify-content: right;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    /* Personalización de la barra de navegación */
+    .navbar {
+        font-size: 16px;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 10px 15px;
+    }
+
+    /* Efecto hover sobre los enlaces */
+    .navbar-nav .nav-link:hover {
+        background-color: #575757;
+        border-radius: 5px;
+    }
+
+    /* Botón de Cerrar sesión con icono */
+    .btn-outline-light {
+        border-radius: 20px;
     }
 </style>
