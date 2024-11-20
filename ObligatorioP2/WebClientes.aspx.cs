@@ -45,6 +45,18 @@ namespace ObligatorioP2
         protected void CmdCrear(object sender, EventArgs e)
         {
 
+            EsconderLabels();
+
+
+
+            rfvNombre.Visible = true;
+            rfvApellido.Visible = true;
+            rfcCI.Visible = true;
+
+            rfvNombre.Enabled = true;
+            rfvApellido.Enabled = true;
+            rfcCI.Enabled = true;
+
             if (string.IsNullOrEmpty(txtEmail.Text) && string.IsNullOrEmpty(txtTelefono.Text))
             {
 
@@ -54,9 +66,9 @@ namespace ObligatorioP2
             }
             else
             {
-                rfvNombre.Enabled = true;
-                rfvApellido.Enabled = true;
-                rfcCI.Enabled = true;
+
+
+
                 string Nombre = txtNombre.Text;
                 string Apellido = txtApellido.Text;
                 string ci = txtCI.Text;
@@ -218,38 +230,50 @@ namespace ObligatorioP2
             {
                 int index = (int)Session["ClienteIndex"];
 
-                if (!CorroborarCI(txtCI.Text))
-                {
-                    lblError.Text = "Debes agregar un documento valido";
-                    lblError.Visible = true;
-                    return;
-                }
-
-                Cliente cliente = BaseDeDatos.ListaClientes[index];
-
-                cliente.Nombre = txtNombre.Text;
-                cliente.Apellido = txtApellido.Text;
-                cliente.CI = txtCI.Text;
-                cliente.Direccion = txtDireccion.Text;
-                cliente.Telefono = txtTelefono.Text;
-                cliente.Email = txtEmail.Text;
-
-                LimpiarCampos();
-
-                lblCreadoCorrectamente.Visible = true;
-                lblCreadoCorrectamente.Text = "Cliente actualizado correctamente";
-                btnCrearUsuario.Visible = true;
-                lblError.Visible = false;
-
-
                 rfvNombre.Enabled = true;
                 rfvApellido.Enabled = true;
                 rfcCI.Enabled = true;
 
-                CargarClientesEnTabla();
+                rfvNombre.Visible = true;
+                rfvApellido.Visible = true;
+                rfcCI.Visible = true;
 
-                Session.Remove("ClienteIndex");
-                BtnActualizar.Visible = false;
+                if (string.IsNullOrEmpty(txtEmail.Text) && string.IsNullOrEmpty(txtTelefono.Text))
+                {
+
+                    lblError.Text = "Debes agregar un metodo de contacto";
+                    lblError.Visible = true;
+
+                }
+                else
+                {
+                    if (!CorroborarCI(txtCI.Text))
+                    {
+                        lblError.Text = "Debes agregar un documento valido";
+                        lblError.Visible = true;
+                        return;
+                    }
+
+                    Cliente cliente = BaseDeDatos.ListaClientes[index];
+                    cliente.Nombre = txtNombre.Text;
+                    cliente.Apellido = txtApellido.Text;
+                    cliente.CI = txtCI.Text;
+                    cliente.Direccion = txtDireccion.Text;
+                    cliente.Telefono = txtTelefono.Text;
+                    cliente.Email = txtEmail.Text;
+                    LimpiarCampos();
+                    lblCreadoCorrectamente.Visible = true;
+                    lblCreadoCorrectamente.Text = "Cliente actualizado correctamente";
+                    btnCrearUsuario.Visible = true;
+                    lblError.Visible = false;
+                    rfvNombre.Enabled = false;
+                    rfvApellido.Enabled = false;
+                    rfcCI.Enabled = false;
+                    CargarClientesEnTabla();
+                    Session.Remove("ClienteIndex");
+                    BtnActualizar.Visible = false;
+                }
+
             }
         }
         public bool CorroborarCI(string ci)
@@ -279,6 +303,6 @@ namespace ObligatorioP2
             return digitoVerificadorCalculado == digitoActual; // Comparar el dígito calculado con el ingresado
         }
 
-       
+
     }
 }

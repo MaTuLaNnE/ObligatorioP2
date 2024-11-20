@@ -62,10 +62,10 @@ namespace ObligatorioP2
             }
             else
             {
-                var a = txtNombre.Text;
-                var b = txtApellido.Text;
-                var c = txtCI.Text;
-                if (!CorroborarCI(c))
+                string nombre = txtNombre.Text;
+                string apellido = txtApellido.Text;
+                string ci = txtCI.Text;
+                if (!CorroborarCI(ci))
                 {
 
                     lblError.Text = "Debes agregar un documento valido";
@@ -74,18 +74,13 @@ namespace ObligatorioP2
                     return;
                 }
 
-                var d = ddlTipoServicio.Text;
+                string servicio = ddlTipoServicio.Text;
 
-                string ea = txtClave.Text;
+                string clave = txtClave.Text;
 
 
-                Tecnico miTecnico = new Tecnico(a, b, c, d, ea);
+                Tecnico miTecnico = new Tecnico(nombre, apellido, ci, servicio, clave);
 
-                miTecnico.Nombre = a;
-                miTecnico.Apellido = b;
-                miTecnico.CI = c;
-                miTecnico.Especialidad = d;
-                miTecnico.Clave = ea;
                 lblError.Visible = true;
                 lblError.ForeColor = System.Drawing.Color.Green;
                 lblError.Text = "Tecnico creado correctamente";
@@ -292,6 +287,8 @@ namespace ObligatorioP2
 
             return digitoVerificadorCalculado == digitoActual; // Comparar el dígito calculado con el ingresado
         }
+
+
 
     }
 }

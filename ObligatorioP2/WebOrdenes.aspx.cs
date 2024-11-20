@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
 
 namespace ObligatorioP2
 {
@@ -172,42 +173,32 @@ namespace ObligatorioP2
         {
             EsconderLabels();
 
+            int index = Convert.ToInt32(e.CommandArgument);
 
             if (e.CommandName == "Editar")
             {
-                int index = Convert.ToInt32(e.CommandArgument);
 
-                //------------------------------------------------------------
-
-                for (int i = 0; i < OrdenesxTecnico.Count; i++)
+                for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
                 {
+                    if (i >= TablaOrdenes.Rows.Count)
+                    {
+                        break; // Sal del bucle si el índice excede las filas disponibles.
+                    }
+
                     GridViewRow fila = TablaOrdenes.Rows[i];
 
+                    if (fila == null)
+                    {
+                        continue; // Pasa a la siguiente iteración si la fila es nula.
+                    }
+
                     Button btnMostrarEditAbiertos = (Button)fila.FindControl("btnEditar");
-                    btnMostrarEditAbiertos.Visible = true;
-
                     Button btnMostrarCancelAbiertos = (Button)fila.FindControl("btnCancel");
-                    btnMostrarCancelAbiertos.Visible=false;
 
                     btnMostrarEditAbiertos.Visible = true;
                     btnMostrarCancelAbiertos.Visible = false;
-
                 }
 
-                //------------------------------------------------------------
-
-
-                for (int i = 0; i < OrdenesxTecnico.Count; i++)
-                {
-                    GridViewRow ala = TablaOrdenes.Rows[i];
-
-                    Button btnMostrarEditAbiertos = (Button)ala.FindControl("btnEditar");
-                    Button btnMostrarCancelAbiertos = (Button)ala.FindControl("btnCancel");
-
-                    btnMostrarEditAbiertos.Visible = true;
-                    btnMostrarCancelAbiertos.Visible = false;
-
-                }
 
                 lblEstado.Visible = true;
                 DDEstado.Visible = true;
@@ -220,10 +211,13 @@ namespace ObligatorioP2
                 lblError.Visible = true;
                 lblError.Text = "Editando...";
 
+
+
                 GridViewRow row = TablaOrdenes.Rows[index];
 
                 Button btnMostrarEdit = (Button)row.FindControl("btnEditar");
                 Button btnMostrarCancel = (Button)row.FindControl("btnCancel");
+
 
                 if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
                 {
@@ -249,7 +243,7 @@ namespace ObligatorioP2
             }
             if (e.CommandName == "CancelEdit")
             {
-                int index = Convert.ToInt32(e.CommandArgument);
+                index = Convert.ToInt32(e.CommandArgument);
 
                 GridViewRow row = TablaOrdenes.Rows[index];
 
@@ -272,17 +266,27 @@ namespace ObligatorioP2
             }
             if (e.CommandName == "MostrarComments")
             {
-                int index = Convert.ToInt32(e.CommandArgument);
+                index = Convert.ToInt32(e.CommandArgument);
 
-                for (int i = 0; i < OrdenesxTecnico.Count; i++)
+                for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
                 {
-                    GridViewRow kk = TablaOrdenes.Rows[i];
-                    Button btnOcultarCommentsAbiertos = (Button)kk.FindControl("btnOcultarComments");
-                    Button btnMostrarCommentsAbiertos = (Button)kk.FindControl("btnMostrarComments");
+                    if (i >= TablaOrdenes.Rows.Count)
+                    {
+                        break; // Sal del bucle si el índice excede las filas disponibles.
+                    }
 
-                    btnOcultarCommentsAbiertos.Visible = false;
+                    GridViewRow fila = TablaOrdenes.Rows[i];
+
+                    if (fila == null)
+                    {
+                        continue; // Pasa a la siguiente iteración si la fila es nula.
+                    }
+
+                    Button btnMostrarCommentsAbiertos = (Button)fila.FindControl("btnMostrarComments");
+                    Button btnOcultarCommentsAbiertos = (Button)fila.FindControl("btnOcultarComments");
+
                     btnMostrarCommentsAbiertos.Visible = true;
-
+                    btnOcultarCommentsAbiertos.Visible = false;
                 }
 
                 GridViewRow row = TablaOrdenes.Rows[index];
@@ -315,7 +319,7 @@ namespace ObligatorioP2
             }
             if (e.CommandName == "OcultarComments")
             {
-                int index = Convert.ToInt32(e.CommandArgument);
+                index = Convert.ToInt32(e.CommandArgument);
 
                 GridViewRow row = TablaOrdenes.Rows[index];
 
