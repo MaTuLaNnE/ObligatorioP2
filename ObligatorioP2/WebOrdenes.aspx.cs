@@ -18,23 +18,23 @@ namespace ObligatorioP2
 
             if (!IsPostBack)
             {
-                // Corregir la condición de cargar datos
+                // Corregir al cargar datos
                 if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
                 {
                     BaseDeDatos.PrecargarBD();
 
                 }
 
-                // Enlazar los DropDownLists
+                // Enlazar los DDL
                 DDClientes.DataSource = BaseDeDatos.ListaClientes;
                 DDClientes.DataTextField = "Nombre";
-                DDClientes.DataValueField = "Nombre"; // Asumí que "Nombre" es la clave, puedes cambiarlo si es diferente
+                DDClientes.DataValueField = "Nombre";
                 DDClientes.DataBind();
 
 
                 DDTecnicos.DataSource = BaseDeDatos.ListaTecnico;
                 DDTecnicos.DataTextField = "Nombre";
-                DDTecnicos.DataValueField = "Nombre"; // Similar al anterior
+                DDTecnicos.DataValueField = "Nombre";
                 DDTecnicos.DataBind();
 
 
@@ -182,14 +182,14 @@ namespace ObligatorioP2
                 {
                     if (i >= TablaOrdenes.Rows.Count)
                     {
-                        break; // Sal del bucle si el índice excede las filas disponibles.
+                        break; // Sale si el indice excede las filas
                     }
 
                     GridViewRow fila = TablaOrdenes.Rows[i];
 
                     if (fila == null)
                     {
-                        continue; // Pasa a la siguiente iteración si la fila es nula.
+                        continue; // Pasa si la fila es null
                     }
 
                     Button btnMostrarEditAbiertos = (Button)fila.FindControl("btnEditar");
@@ -272,14 +272,14 @@ namespace ObligatorioP2
                 {
                     if (i >= TablaOrdenes.Rows.Count)
                     {
-                        break; // Sal del bucle si el índice excede las filas disponibles.
+                        break; // Sale si el indice excede el maximo
                     }
 
                     GridViewRow fila = TablaOrdenes.Rows[i];
 
                     if (fila == null)
                     {
-                        continue; // Pasa a la siguiente iteración si la fila es nula.
+                        continue; // Pasa si la fila es null
                     }
 
                     Button btnMostrarCommentsAbiertos = (Button)fila.FindControl("btnMostrarComments");
@@ -344,7 +344,7 @@ namespace ObligatorioP2
 
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
-            // Asegúrate de que existe un índice almacenado en sesión
+            // nos aseguramos de que existe un índice almacenado en sesión
             if (Session["OrdenIndex"] != null)
             {
                 int index = (int)Session["OrdenIndex"];

@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1 id="titulo" runat="server" class="titulo">Creación de Técnicos</h1>
 
-    <!-- Formulario para la creación o actualización de técnico -->
+    <!-- Creación o actualización de tecnico -->
     <div class="form-container">
         <div class="form-group">
             <asp:Label ID="lblNombre" runat="server" Text="Nombre: " CssClass="label-custom"></asp:Label>
@@ -43,14 +43,14 @@
             <asp:Button ID="btnCrearTecnico" runat="server" Text="Crear Técnico" CssClass="btn-primary" OnClick="CmdCrear" />
             <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
         </div>
-
-        <!-- Mensajes de error o confirmación -->
-        <div class="form-group">
-            <asp:Label ID="lblError" runat="server" Visible="false" CssClass="message-error"></asp:Label>
-        </div>
     </div>
 
-    <!-- Tabla de técnicos -->
+<%-- Msg de error/confirmacion --%>
+    <div class="form-group">
+        <asp:Label ID="lblError" runat="server" Visible="false" CssClass="message-error"></asp:Label>
+    </div>
+
+    <%-- La Tablita --%>
     <asp:GridView ID="TablaTecnico1" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="TeBorroALaMierda" OnRowCommand="TablaTecnico1_RowCommand">
         <Columns>
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
@@ -68,7 +68,6 @@
     </asp:GridView>
 
     <style>
-
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f9f9f9;
@@ -184,6 +183,7 @@
             text-align: center;
             font-weight: bold;
             color: red;
+            margin-top: 10px;
         }
     </style>
 </asp:Content>

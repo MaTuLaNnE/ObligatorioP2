@@ -4,7 +4,7 @@
     <h1 id="titulo" runat="server" class="titulo">Creación y Modificación de Órdenes</h1>
 
     <main>
-        <!-- Formulario de creación/modificación -->
+        <!-- Creación/modificación de ordenes-->
         <div class="form-container">
             <div class="form-group">
                 <asp:Label ID="lblNombreCliente" runat="server" Text="Nombre del Cliente: " CssClass="label-custom"></asp:Label>

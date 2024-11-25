@@ -47,8 +47,6 @@ namespace ObligatorioP2
 
             EsconderLabels();
 
-
-
             rfvNombre.Visible = true;
             rfvApellido.Visible = true;
             rfcCI.Visible = true;
@@ -56,6 +54,7 @@ namespace ObligatorioP2
             rfvNombre.Enabled = true;
             rfvApellido.Enabled = true;
             rfcCI.Enabled = true;
+
 
             if (string.IsNullOrEmpty(txtEmail.Text) && string.IsNullOrEmpty(txtTelefono.Text))
             {

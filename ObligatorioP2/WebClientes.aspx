@@ -11,19 +11,26 @@
             <div class="form-group">
                 <asp:Label ID="Label" runat="server" Text="Nombre: " CssClass="label-custom"></asp:Label>
                 <asp:TextBox ID="txtNombre" runat="server" CssClass="input-custom"></asp:TextBox>
-                <asp:RequiredFieldValidator runat="server" ID="rfvNombre" ControlToValidate="txtNombre" Visible="false" ForeColor="Red" Text="El nombre es requerido"></asp:RequiredFieldValidator>
+            </div>
+            <div class="lbl-form">
+                <asp:RequiredFieldValidator runat="server" ID="rfvNombre" ControlToValidate="txtNombre" ForeColor="Red" Text="El nombre es requerido"></asp:RequiredFieldValidator>
             </div>
 
             <div class="form-group">
                 <asp:Label ID="Label1" runat="server" Text="Apellido: " CssClass="label-custom"></asp:Label>
                 <asp:TextBox ID="txtApellido" runat="server" CssClass="input-custom"></asp:TextBox>
-                <asp:RequiredFieldValidator runat="server" ID="rfvApellido" ControlToValidate="txtApellido" Visible="false" ForeColor="Red" Text="El Apellido es requerido"></asp:RequiredFieldValidator>
+            </div>
+            <div class="lbl-form">
+                <asp:RequiredFieldValidator runat="server" ID="rfvApellido" ControlToValidate="txtApellido" ForeColor="Red" Text="El Apellido es requerido"></asp:RequiredFieldValidator>
             </div>
 
             <div class="form-group">
                 <asp:Label ID="Label3" runat="server" Text="CI:" CssClass="label-custom"></asp:Label>
                 <asp:TextBox ID="txtCI" runat="server" CssClass="input-custom"></asp:TextBox>
-                <asp:RequiredFieldValidator runat="server" ID="rfcCI" ControlToValidate="txtCI" Visible="false" ForeColor="Red" Text="La Cedula de Identidad es requerida"></asp:RequiredFieldValidator>
+
+            </div>
+            <div class="lbl-form">
+                <asp:RequiredFieldValidator runat="server" ID="rfcCI" ControlToValidate="txtCI" ForeColor="Red" Text="La Cedula de Identidad es requerida"></asp:RequiredFieldValidator>
             </div>
 
             <div class="form-group">
@@ -48,8 +55,8 @@
         </div>
 
         <div class="feedback">
-            <asp:Label ID="lblCreadoCorrectamente" runat="server" Visible="false" ForeColor="Green"></asp:Label>
-            <asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
+            <asp:Label ID="lblCreadoCorrectamente" runat="server" Visible="false" ForeColor="Green" CssClass="message-confirm"></asp:Label>
+            <asp:Label ID="lblError" runat="server" Visible="false" CssClass="message-error"></asp:Label>
         </div>
 
         <asp:GridView ID="TablaClientes1" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="TeBorroALaMierda" OnRowCommand="TablaClientes1_RowCommand">
@@ -101,6 +108,13 @@
             display: flex;
             align-items: center;
             margin-bottom: 20px;
+        }
+
+        .lbl-form {
+            display: flex;
+            align-items: initial;
+            justify-content: center;
+            margin-top: -20px;
         }
 
         .label-custom {
@@ -203,5 +217,17 @@
             .feedback .red {
                 color: red;
             }
+
+        .message-error {
+            text-align: center;
+            font-weight: bold;
+            color: red;
+        }
+
+        .message-confirm {
+            text-align: center;
+            font-weight: bold;
+            color: green;
+        }
     </style>
 </asp:Content>
