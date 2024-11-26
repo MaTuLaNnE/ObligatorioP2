@@ -300,8 +300,9 @@ namespace ObligatorioP2
 
                 if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
                 {
+                    CargarOrdenesEnTabla();
 
-                    Orden orden = BaseDeDatos.ListaOrdenes[index];
+                    Orden orden = OrdenesxTecnico[index]; 
 
                     RequiredFieldValidator1.Enabled = false;
                     rfvDesc.Enabled = false;
