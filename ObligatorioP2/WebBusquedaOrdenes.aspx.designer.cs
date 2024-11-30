@@ -42,6 +42,15 @@ namespace ObligatorioP2
         protected global::System.Web.UI.WebControls.TextBox txtOrden;
 
         /// <summary>
+        /// Control rfvNreo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNreo;
+
+        /// <summary>
         /// Control btnBuscar.
         /// </summary>
         /// <remarks>

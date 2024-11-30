@@ -8,6 +8,7 @@
         <div class="form-group">
             <asp:Label runat="server" ID="lblOrden" Text="Coloque el número de Orden: " CssClass="label-custom"></asp:Label>
             <asp:TextBox runat="server" ID="txtOrden" TextMode="Number" CssClass="input-custom"></asp:TextBox>
+            <asp:RequiredFieldValidator runat="server" ID="rfvNreo" ControlToValidate="txtOrden" ForeColor="Red" Text="Ingrese su documento"></asp:RequiredFieldValidator>
             <asp:Button runat="server" ID="btnBuscar" Text="Buscar Orden" OnClick="btnBuscar_Click" CssClass="btn-primary" />
         </div>
 
