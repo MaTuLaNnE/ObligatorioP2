@@ -8,25 +8,34 @@
         <div class="form-group">
             <asp:Label ID="lblNombre" runat="server" Text="Nombre: " CssClass="label-custom"></asp:Label>
             <asp:TextBox ID="txtNombre" runat="server" CssClass="input-custom"></asp:TextBox>
+        </div>
+        <div class="lbl-form">
             <asp:RequiredFieldValidator runat="server" ID="rfvNombre" ControlToValidate="txtNombre" ForeColor="Red" Text="El nombre es requerido"></asp:RequiredFieldValidator>
         </div>
 
         <div class="form-group">
             <asp:Label ID="lblApellido" runat="server" Text="Apellido: " CssClass="label-custom"></asp:Label>
             <asp:TextBox ID="txtApellido" runat="server" CssClass="input-custom"></asp:TextBox>
+        </div>
+        <div class="lbl-form">
             <asp:RequiredFieldValidator runat="server" ID="rfvApellido" ControlToValidate="txtApellido" ForeColor="Red" Text="El Apellido es requerido"></asp:RequiredFieldValidator>
         </div>
 
         <div class="form-group">
             <asp:Label ID="lblCI" runat="server" Text="CI: " CssClass="label-custom"></asp:Label>
             <asp:TextBox ID="txtCI" runat="server" CssClass="input-custom"></asp:TextBox>
+        </div>
+        <div class="lbl-form">
             <asp:RequiredFieldValidator runat="server" ID="rfcCI" ControlToValidate="txtCI" ForeColor="Red" Text="La Cedula de Identidad es requerida"></asp:RequiredFieldValidator>
         </div>
 
         <div class="form-group">
             <asp:Label ID="lblClave" runat="server" Text="Clave: " CssClass="label-custom"></asp:Label>
             <asp:TextBox ID="txtClave" runat="server" CssClass="input-custom" TextMode="Password"></asp:TextBox>
+        </div>
+        <div class="lbl-form">
             <asp:RequiredFieldValidator runat="server" ID="rfcClave" ControlToValidate="txtClave" ForeColor="Red" Text="La Clave de acceso es requerida"></asp:RequiredFieldValidator>
+
         </div>
 
         <div class="form-group">
@@ -45,7 +54,7 @@
         </div>
     </div>
 
-<%-- Msg de error/confirmacion --%>
+    <%-- Msg de error/confirmacion --%>
     <div class="form-group">
         <asp:Label ID="lblError" runat="server" Visible="false" CssClass="message-error"></asp:Label>
     </div>
@@ -78,8 +87,8 @@
             text-align: center;
             font-size: 28px;
             font-weight: bold;
-            margin-bottom: 25px;
             color: #007bff;
+            margin-bottom: 25px;
         }
 
         .form-container {
@@ -88,24 +97,41 @@
             margin: 0 auto;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            width: 60%;
+            width: 50%;
             margin-top: 30px;
         }
 
         .form-group {
             display: flex;
-            flex-direction: column;
+            align-items: center;
             margin-bottom: 20px;
         }
 
+        .lbl-form {
+            display: flex;
+            align-items: initial;
+            justify-content: center;
+            margin-top: -20px;
+        }
+
         .label-custom {
+            width: 120px;
             font-size: 16px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 5px;
         }
 
-        .input-custom,
+        .input-custom {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-left: 10px;
+            margin-right: 10px;
+            transition: border-color 0.3s;
+        }
+
         .dropdown-custom {
             padding: 10px;
             font-size: 16px;
@@ -123,6 +149,7 @@
 
         .form-actions {
             text-align: center;
+            margin-top: 20px;
         }
 
         .btn-primary,

@@ -21,8 +21,8 @@ namespace ObligatorioP2
                 // Corregir al cargar datos
                 if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
                 {
-                    BaseDeDatos.PrecargarBD();
 
+                    BaseDeDatos.PrecargarBD();
                 }
 
                 // Enlazar los DDL
@@ -38,7 +38,6 @@ namespace ObligatorioP2
                 DDTecnicos.DataBind();
 
 
-
                 CargarOrdenesEnTabla();
             }
 
@@ -49,11 +48,9 @@ namespace ObligatorioP2
 
         public List<string> listaComents = new List<string>();
 
-
-        public List<Orden> OrdenesxTecnico = new List<Orden>();
-
         private void CargarOrdenesEnTabla()
         {
+            BaseDeDatos.OrdenesxTecnico.Clear();
 
             Tecnico tecnicoActual = BaseDeDatos.Token;
 
@@ -64,12 +61,12 @@ namespace ObligatorioP2
 
                 if (tecnicoActual.Nombre == orden.NombreTecnico || tecnicoActual.esAdmin)
                 {
-                    OrdenesxTecnico.Add(orden);
+                    BaseDeDatos.OrdenesxTecnico.Add(orden);
                 }
             }
 
 
-            TablaOrdenes.DataSource = OrdenesxTecnico;
+            TablaOrdenes.DataSource = BaseDeDatos.OrdenesxTecnico;
             TablaOrdenes.DataBind();
 
         }
@@ -218,7 +215,6 @@ namespace ObligatorioP2
                 Button btnMostrarEdit = (Button)row.FindControl("btnEditar");
                 Button btnMostrarCancel = (Button)row.FindControl("btnCancel");
 
-
                 if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
                 {
 
@@ -300,8 +296,9 @@ namespace ObligatorioP2
 
                 if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
                 {
+                    CargarOrdenesEnTabla();
 
-                    Orden orden = BaseDeDatos.ListaOrdenes[index];
+                    Orden orden = BaseDeDatos.OrdenesxTecnico[index];
 
                     RequiredFieldValidator1.Enabled = false;
                     rfvDesc.Enabled = false;

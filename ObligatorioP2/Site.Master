@@ -55,6 +55,9 @@
                             <a class="nav-link" runat="server" href="~/WebOrdenes">Ordenes</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/WebBusquedaOrdenes">Buscar Orden</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" runat="server" href="~/WebClientes">Clientes</a>
                         </li>
                         <li class="nav-item">
@@ -67,9 +70,9 @@
 
 
                     <div class="d-flex justify-content-end align-items-center">
-                        <asp:button ID="btnLogOut" CausesValidation="false" runat="server" Text="Cerrar Sesión" OnClick="LogOut" class="btn btn-outline-light ml-2">
-                        
-                        </asp:button>
+                        <asp:Button ID="btnLogOut" CausesValidation="false" runat="server" Text="Cerrar Sesión" OnClick="LogOut" class="btn btn-outline-light ml-2">
+                            <%--   <i class="btn btn-outline-light ml-2"></i>--%>
+                        </asp:Button>
                     </div>
                 </div>
             </div>
@@ -110,16 +113,16 @@
     .navbar {
         font-size: 16px;
     }
-    
+
     .navbar-nav .nav-link {
         padding: 10px 15px;
     }
 
-    /* Efecto hover sobre los enlaces */
-    .navbar-nav .nav-link:hover {
-        background-color: #575757;
-        border-radius: 5px;
-    }
+        /* Efecto hover sobre los enlaces */
+        .navbar-nav .nav-link:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
 
     /* Botón de Cerrar sesión con icono */
     .btn-outline-light {
