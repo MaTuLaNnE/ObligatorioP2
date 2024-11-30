@@ -40,7 +40,7 @@ namespace ObligatorioP2
         {
             BaseDeDatos.Token = null;
             Response.Redirect("Login.aspx");
-
+            BaseDeDatos.OrdenesxTecnico.Clear();
         }
 
 

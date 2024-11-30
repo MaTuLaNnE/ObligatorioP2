@@ -11,6 +11,7 @@ namespace ObligatorioP2.Models
         public static List<Cliente> ListaClientes = new List<Cliente>();
         public static List<Tecnico> ListaTecnico = new List<Tecnico>();
         public static List<Orden> ListaOrdenes = new List<Orden>();
+        public static List<Orden> OrdenesxTecnico = new List<Orden>();
 
         public static Tecnico Token;
         public static int UltimoNumeroDeOrden;
@@ -18,6 +19,8 @@ namespace ObligatorioP2.Models
 
         public static void PrecargarBD()
         {
+
+
             UltimoNumeroDeOrden = 0;
             Cliente Cli1 = new Cliente("Jose", "Perez", "50237326", "Sarandi 234", "097342631", "jperez@gmail.com");
             Cliente Cli2 = new Cliente("Pepe", "Silva", "44094112", "Gorlero 890", "094621001", "elpepe777@gmail.com");
@@ -36,7 +39,6 @@ namespace ObligatorioP2.Models
             ListaTecnico.Add(Tec1);
             ListaTecnico.Add(Tec2);
             ListaTecnico.Add(admin);
-
 
 
             string kk = "jshdjshd";

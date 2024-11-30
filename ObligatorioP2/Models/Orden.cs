@@ -18,8 +18,6 @@ namespace ObligatorioP2.Models
 
         public List<string> ListaComentarios = new List<string>();
 
-        //public static List<int> HistorialOrdenes = new List<int>();
-
 
 
         public Orden(int nroOrden, string cliente, string tecnico,string tipoDeServicio, string descripcionProblema, DateTime fechaCreacion, string estado, List<string> listacomentarios) // OJO Q CAMBIE CLIENTE Y TECNICO POR STRING
