@@ -12,15 +12,42 @@ namespace ObligatorioP2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarReportesEnTabla();
-
-
+            CargarReportes();
 
         }
-        private void CargarReportesEnTabla()
+        private void CargarReportes()
         {
-            TablaReportes.DataSource = BaseDeDatos.OrdenesxTecnico;
-            TablaReportes.DataBind();
+            Tecnico tecnicoActual = BaseDeDatos.Token;
+
+            int numPendiente = 0;
+            int numEnProgreso = 0;
+            int numCompletado = 0;
+
+            for (int i = 0; i < BaseDeDatos.OrdenesxTecnico.Count; i++)
+            {
+                if ((tecnicoActual.Nombre == BaseDeDatos.OrdenesxTecnico[i].NombreTecnico || tecnicoActual.esAdmin) && BaseDeDatos.OrdenesxTecnico[i].Estado == "PENDIENTE")
+                {
+                    numPendiente++;
+                }
+                if ((tecnicoActual.Nombre == BaseDeDatos.OrdenesxTecnico[i].NombreTecnico || tecnicoActual.esAdmin) && BaseDeDatos.OrdenesxTecnico[i].Estado == "EN PROGRESO")
+                {
+                    numEnProgreso++;
+                }
+                if ((tecnicoActual.Nombre == BaseDeDatos.OrdenesxTecnico[i].NombreTecnico || tecnicoActual.esAdmin) && BaseDeDatos.OrdenesxTecnico[i].Estado == "COMPLETADO")
+                {
+                    numCompletado++;
+                }
+
+            } 
+
+
+
+
+
+            lblCuantasPendientes.Text = numPendiente.ToString();
+            lblCuantasEnProgreso.Text = numEnProgreso.ToString();
+            lblCuantasCompletadas.Text = numCompletado.ToString();
+
         }
     }
 }

@@ -33,8 +33,6 @@ namespace ObligatorioP2
             else
             {
 
-
-
                 lblInfoCliente.Text = orden.NombreCliente;
                 lblInfoTecnico.Text = orden.NombreTecnico;
 

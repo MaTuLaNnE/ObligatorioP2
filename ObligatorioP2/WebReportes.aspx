@@ -1,38 +1,83 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="WebReportes.aspx.cs" Inherits="ObligatorioP2.WebReportes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
     <main>
         <div>
-            <h1 class="titulo">Pagina de Reportes</h1>
+            <h1 class="titulo">Página de Reportes</h1>
         </div>
-        <%-- VA A AGARRAR LAS ORDENES DEL TECNICO Y VA A MOSTRAR CUANTAS TIENE EN COMPLETADO, EN PROGRESO Y PENDIENTE --%>
-
-        <asp:GridView ID="TablaReportes" runat="server" AutoGenerateColumns="False" CssClass="table-custom">
-            
-            <asp:BoundField DataField="Pendiente" HeaderText="Pendiente" SortExpression="Pendiente" />
-            <asp:BoundField DataField="EnProgreso" HeaderText="En Progreso" SortExpression="EnProgreso" />
-            <asp:BoundField DataField="Completado" HeaderText="Completado" SortExpression="Completado" />
-        </asp:GridView>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
+        <div class="form-container">
+            <div class="form-group">
+                <asp:Label runat="server" ID="lblPendientes" CssClass="label-custom">Ordenes Pendientes: </asp:Label>
+                <asp:Label runat="server" ID="lblCuantasPendientes" CssClass="value-custom"></asp:Label>
+            </div>
+            <div class="form-group">
+                <asp:Label runat="server" ID="lblEnProgreso" CssClass="label-custom">Ordenes En Progreso: </asp:Label>
+                <asp:Label runat="server" ID="lblCuantasEnProgreso" CssClass="value-custom"></asp:Label>
+            </div>
+            <div class="form-group">
+                <asp:Label runat="server" ID="lblCompletadas" CssClass="label-custom">Ordenes Completadas: </asp:Label>
+                <asp:Label runat="server" ID="lblCuantasCompletadas" CssClass="value-custom"></asp:Label>
+            </div>
+        </div>
     </main>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .titulo {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 25px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 25px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            margin-top: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items:center;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .label-custom {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .value-custom {
+            font-size: 16px;
+            color: #28a745;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        /* Responsive layout */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 90%;
+                padding: 15px;
+            }
+
+            .titulo {
+                font-size: 24px;
+            }
+        }
+    </style>
+
 </asp:Content>
