@@ -21,9 +21,11 @@ namespace ObligatorioP2
                 // Corregir al cargar datos
                 if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
                 {
-
                     BaseDeDatos.PrecargarBD();
+
                 }
+
+                CargarListaOrdenesXtecnico();
 
                 // Enlazar los DDL
                 DDClientes.DataSource = BaseDeDatos.ListaClientes;
@@ -50,25 +52,24 @@ namespace ObligatorioP2
 
         private void CargarOrdenesEnTabla()
         {
-            BaseDeDatos.OrdenesxTecnico.Clear();
-
-            Tecnico tecnicoActual = BaseDeDatos.Token;
-
-            for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
-            {
-                Orden orden = BaseDeDatos.ListaOrdenes[i];
-
-
-                if (tecnicoActual.Nombre == orden.NombreTecnico || tecnicoActual.esAdmin)
-                {
-                    BaseDeDatos.OrdenesxTecnico.Add(orden);
-                }
-            }
-
 
             TablaOrdenes.DataSource = BaseDeDatos.OrdenesxTecnico;
             TablaOrdenes.DataBind();
 
+        }
+
+        private void CargarListaOrdenesXtecnico()
+        {
+            BaseDeDatos.OrdenesxTecnico.Clear();
+
+            foreach (var orden in BaseDeDatos.ListaOrdenes)
+            {
+                // Si es admin, puede ver todas las órdenes
+                if (BaseDeDatos.Token.esAdmin || orden.NombreTecnico == BaseDeDatos.Token.Nombre)
+                {
+                    BaseDeDatos.OrdenesxTecnico.Add(orden);
+                }
+            }
         }
 
 
@@ -102,10 +103,10 @@ namespace ObligatorioP2
 
                 Orden miOrden = BaseDeDatos.crearOrden(cliente, tecnico, servicio, desc, fecha, estado, listaComents);
 
+                BaseDeDatos.OrdenesxTecnico.Add(miOrden);
 
                 lblCreadoCorrectamente.Visible = true;
                 lblCreadoCorrectamente.Text = "Orden creada correctamente";
-
 
 
 
@@ -145,13 +146,25 @@ namespace ObligatorioP2
 
             if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
             {
-                BaseDeDatos.ListaOrdenes.RemoveAt(index);
-                lblCreadoCorrectamente.Visible = true;
-                lblCreadoCorrectamente.Text = "Orden eliminada correctamente";
-                BtnActualizar.Visible = false;
-                lblEstado.Visible = false;
-                DDEstado.Visible = false;
-                LimpiarCampos();
+                Orden orden = BaseDeDatos.OrdenesxTecnico[index];
+
+                for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
+                {
+
+                    Orden ordenEncontrada = BaseDeDatos.ListaOrdenes[i];
+
+                    if (orden.NroOrden == orden.NroOrden)
+                    {
+                        BaseDeDatos.ListaOrdenes.RemoveAt(index);
+                        lblCreadoCorrectamente.Visible = true;
+                        lblCreadoCorrectamente.Text = "Orden eliminada correctamente";
+                        BtnActualizar.Visible = false;
+                        lblEstado.Visible = false;
+                        DDEstado.Visible = false;
+                        LimpiarCampos();
+                        break;
+                    }
+                }
             }
             else
             {
@@ -163,6 +176,22 @@ namespace ObligatorioP2
 
 
             CargarOrdenesEnTabla();
+
+            //if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
+            //{
+            //    BaseDeDatos.ListaOrdenes.RemoveAt(index);
+            //    lblCreadoCorrectamente.Visible = true;
+            //    lblCreadoCorrectamente.Text = "Orden eliminada correctamente";
+            //    BtnActualizar.Visible = false;
+            //    lblEstado.Visible = false;
+            //    DDEstado.Visible = false;
+            //    LimpiarCampos();
+            //}
+            //else
+            //{
+            //    lblError.Text = "OUT del rango.";
+            //    return;
+            //}
 
         }
 
@@ -215,27 +244,40 @@ namespace ObligatorioP2
                 Button btnMostrarEdit = (Button)row.FindControl("btnEditar");
                 Button btnMostrarCancel = (Button)row.FindControl("btnCancel");
 
-                if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
+
+                if (index >= 0 && index < BaseDeDatos.OrdenesxTecnico.Count)
                 {
+                    Orden orden = BaseDeDatos.OrdenesxTecnico[index];
 
-                    Orden orden = BaseDeDatos.ListaOrdenes[index];
+                    for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
+                    {
 
-                    btnMostrarEdit.Visible = false;
-                    btnMostrarCancel.Visible = true;
+                        Orden ordenEncontrada = BaseDeDatos.ListaOrdenes[i];
 
-                    DDClientes.Text = orden.NombreCliente;
-                    DDTecnicos.Text = orden.NombreTecnico;
-                    ddlTipoServicio.Text = orden.TipoDeServicio;
-                    DDEstado.SelectedValue = orden.Estado;
-                    txtDesc.Text = orden.DescripcionProblema;
+                        if (orden.NroOrden == orden.NroOrden)
+                        {
+                            btnMostrarEdit.Visible = false;
+                            btnMostrarCancel.Visible = true;
 
-                    RequiredFieldValidator1.Enabled = false;
-                    rfvDesc.Enabled = false;
+                            DDClientes.Text = orden.NombreCliente;
+                            DDTecnicos.Text = orden.NombreTecnico;
+                            ddlTipoServicio.Text = orden.TipoDeServicio;
+                            DDEstado.SelectedValue = orden.Estado;
+                            txtDesc.Text = orden.DescripcionProblema;
 
+                            RequiredFieldValidator1.Enabled = false;
+                            rfvDesc.Enabled = false;
 
-                    // Guarda el índice del técnico en una variable de sesión para usarlo al actualizar
-                    Session["OrdenIndex"] = index;
+                            int pepe = i;
+
+                            // Guarda el índice del técnico en una variable de sesión para usarlo al actualizar
+                            Session["OrdenIndex"] = pepe;
+                            break;
+                        }
+                    }
+
                 }
+
             }
             if (e.CommandName == "CancelEdit")
             {
