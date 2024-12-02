@@ -140,60 +140,33 @@ namespace ObligatorioP2
 
         protected void TeBorroALaMierda(object sender, GridViewDeleteEventArgs e)
         {
-            int index = e.RowIndex;
-
             EsconderLabels();
 
-            if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
+            int index = e.RowIndex;
+
+            if (index >= 0 && index < BaseDeDatos.OrdenesxTecnico.Count)
             {
-                Orden orden = BaseDeDatos.OrdenesxTecnico[index];
+                Orden ordenSeleccionada = BaseDeDatos.OrdenesxTecnico[index];
 
-                for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
-                {
+                // Buscar la orden en ListaOrdenes y eliminarla
+                Orden ordenEnLista = BaseDeDatos.ListaOrdenes.FirstOrDefault(orden => orden.NroOrden == ordenSeleccionada.NroOrden);
 
-                    Orden ordenEncontrada = BaseDeDatos.ListaOrdenes[i];
+                BaseDeDatos.ListaOrdenes.Remove(ordenEnLista);
+                BaseDeDatos.OrdenesxTecnico.RemoveAt(index);
 
-                    if (orden.NroOrden == orden.NroOrden)
-                    {
-                        BaseDeDatos.ListaOrdenes.RemoveAt(index);
-                        lblCreadoCorrectamente.Visible = true;
-                        lblCreadoCorrectamente.Text = "Orden eliminada correctamente";
-                        BtnActualizar.Visible = false;
-                        lblEstado.Visible = false;
-                        DDEstado.Visible = false;
-                        LimpiarCampos();
-                        break;
-                    }
-                }
+                lblCreadoCorrectamente.Visible = true;
+                lblCreadoCorrectamente.Text = "Orden eliminada correctamente";
+                LimpiarCampos();
             }
             else
             {
-                lblError.Text = "OUT del rango.";
-                return;
+                lblError.Visible = true;
+                lblError.Text = "Índice fuera de rango.";
             }
 
-            btnCrearOrden.Visible = true;
-
-
             CargarOrdenesEnTabla();
-
-            //if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
-            //{
-            //    BaseDeDatos.ListaOrdenes.RemoveAt(index);
-            //    lblCreadoCorrectamente.Visible = true;
-            //    lblCreadoCorrectamente.Text = "Orden eliminada correctamente";
-            //    BtnActualizar.Visible = false;
-            //    lblEstado.Visible = false;
-            //    DDEstado.Visible = false;
-            //    LimpiarCampos();
-            //}
-            //else
-            //{
-            //    lblError.Text = "OUT del rango.";
-            //    return;
-            //}
-
         }
+
 
         protected void TablaOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -208,14 +181,14 @@ namespace ObligatorioP2
                 {
                     if (i >= TablaOrdenes.Rows.Count)
                     {
-                        break; // Sale si el indice excede las filas
+                        break;
                     }
 
                     GridViewRow fila = TablaOrdenes.Rows[i];
 
                     if (fila == null)
                     {
-                        continue; // Pasa si la fila es null
+                        continue;
                     }
 
                     Button btnMostrarEditAbiertos = (Button)fila.FindControl("btnEditar");
@@ -254,7 +227,7 @@ namespace ObligatorioP2
 
                         Orden ordenEncontrada = BaseDeDatos.ListaOrdenes[i];
 
-                        if (orden.NroOrden == orden.NroOrden)
+                        if (orden.NroOrden == ordenEncontrada.NroOrden)
                         {
                             btnMostrarEdit.Visible = false;
                             btnMostrarCancel.Visible = true;
@@ -306,30 +279,20 @@ namespace ObligatorioP2
             {
                 index = Convert.ToInt32(e.CommandArgument);
 
-                for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
+
+
+                GridViewRow fila = TablaOrdenes.Rows[index];
+
+
+                Button btnMostrarComments = (Button)fila.FindControl("btnMostrarComments");
+                Button btnOcultarComments = (Button)fila.FindControl("btnOcultarComments");
+
+                if (btnMostrarComments != null && btnOcultarComments != null)
                 {
-                    if (i >= TablaOrdenes.Rows.Count)
-                    {
-                        break; // Sale si el indice excede el maximo
-                    }
-
-                    GridViewRow fila = TablaOrdenes.Rows[i];
-
-                    if (fila == null)
-                    {
-                        continue; // Pasa si la fila es null
-                    }
-
-                    Button btnMostrarCommentsAbiertos = (Button)fila.FindControl("btnMostrarComments");
-                    Button btnOcultarCommentsAbiertos = (Button)fila.FindControl("btnOcultarComments");
-
-                    btnMostrarCommentsAbiertos.Visible = true;
-                    btnOcultarCommentsAbiertos.Visible = false;
+                    btnMostrarComments.Visible = true;
+                    btnOcultarComments.Visible = false;
                 }
-
-                GridViewRow row = TablaOrdenes.Rows[index];
-                Button btnMostrarComments = (Button)row.FindControl("btnMostrarComments");
-                Button btnOcultarComments = (Button)row.FindControl("btnOcultarComments");
+       
 
                 btnAgregarComments.Visible = true;
                 ListComents.Visible = true;
@@ -388,7 +351,6 @@ namespace ObligatorioP2
             {
                 int index = (int)Session["OrdenIndex"];
 
-
                 Orden orden = BaseDeDatos.ListaOrdenes[index];
 
                 orden.NombreCliente = DDClientes.Text;
@@ -396,6 +358,15 @@ namespace ObligatorioP2
                 orden.TipoDeServicio = ddlTipoServicio.Text;
                 orden.Estado = DDEstado.Text;
 
+                Orden ordenEnTecnico = BaseDeDatos.OrdenesxTecnico.FirstOrDefault(o => o.NroOrden == orden.NroOrden);
+                if (ordenEnTecnico != null)
+                {
+                    ordenEnTecnico.NombreCliente = orden.NombreCliente;
+                    ordenEnTecnico.NombreTecnico = orden.NombreTecnico;
+                    ordenEnTecnico.TipoDeServicio = orden.TipoDeServicio;
+                    ordenEnTecnico.Estado = orden.Estado;
+                    ordenEnTecnico.DescripcionProblema = orden.DescripcionProblema;
+                }
 
                 lblConfirmacion.Visible = true;
                 lblConfirmacion.Text = "Orden actualizada correctamente";
@@ -415,6 +386,8 @@ namespace ObligatorioP2
             }
 
         }
+
+
 
 
         public List<string> GenerarLista(params string[] comentarios)

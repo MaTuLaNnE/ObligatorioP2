@@ -41,9 +41,9 @@ namespace ObligatorioP2.Models
             ListaTecnico.Add(admin);
 
 
-            string kk = "jshdjshd";
-            string aaa = "Hola";
-            string hghg = "me cao en toS";
+            string kk = "Nota1";
+            string aaa = "Nota2";
+            string hghg = "nota3";
 
 
             List<string> list1 = new List<string>();
