@@ -19,7 +19,8 @@ namespace ObligatorioP2
                 {
 
                     Tecnico tecnico = BaseDeDatos.Token;
-
+                    lblTecnicoActual.Text = "Hola, " + tecnico.Nombre;
+                    
 
                     if (tecnico.CI == "50140797" && tecnico.Clave == "1111")
                     {
@@ -42,7 +43,6 @@ namespace ObligatorioP2
             Response.Redirect("Login.aspx");
             BaseDeDatos.OrdenesxTecnico.Clear();
         }
-
 
     }
 }
