@@ -5,8 +5,15 @@
         <div>
             <h1 class="titulo">Página de Reportes</h1>
         </div>
-        
+
         <div class="form-container">
+            <div class="form-group">
+                <asp:Label ID="lblNombreTecnico" runat="server" Text="Nombre del Tecnico: " CssClass="label-custom"></asp:Label>
+                <asp:DropDownList ID="DDTecnicos" runat="server" CssClass="dropdown-custom" AutoPostBack="true">
+                    <asp:ListItem ID="ListItem1" runat="server" Enabled="true" Text="Seleccione un Tecnico" Value="-1"></asp:ListItem>
+                </asp:DropDownList>
+                <asp:Button runat="server" text="Mostrar Reportes" OnClick="Confirmar_Click"/>
+            </div>
             <div class="form-group">
                 <asp:Label runat="server" ID="lblPendientes" CssClass="label-custom">Ordenes Pendientes: </asp:Label>
                 <asp:Label runat="server" ID="lblCuantasPendientes" CssClass="value-custom"></asp:Label>
@@ -18,6 +25,10 @@
             <div class="form-group">
                 <asp:Label runat="server" ID="lblCompletadas" CssClass="label-custom">Ordenes Completadas: </asp:Label>
                 <asp:Label runat="server" ID="lblCuantasCompletadas" CssClass="value-custom"></asp:Label>
+            </div>
+            <div class="form-group">
+                <asp:Label runat="server" ID="lblTotal" CssClass="label-custom">Ordenes Totales: </asp:Label>
+                <asp:Label runat="server" ID="lblCuantasTotal" CssClass="value-custom"></asp:Label>
             </div>
         </div>
     </main>
@@ -49,7 +60,7 @@
 
         .form-group {
             display: flex;
-            align-items:center;
+            align-items: center;
             margin-bottom: 20px;
             justify-content: center;
         }
