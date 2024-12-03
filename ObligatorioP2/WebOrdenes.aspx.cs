@@ -148,7 +148,6 @@ namespace ObligatorioP2
             {
                 Orden ordenSeleccionada = BaseDeDatos.OrdenesxTecnico[index];
 
-                // Buscar la orden en ListaOrdenes y eliminarla
                 Orden ordenEnLista = BaseDeDatos.ListaOrdenes.FirstOrDefault(orden => orden.NroOrden == ordenSeleccionada.NroOrden);
 
                 BaseDeDatos.ListaOrdenes.Remove(ordenEnLista);
@@ -156,6 +155,10 @@ namespace ObligatorioP2
 
                 lblCreadoCorrectamente.Visible = true;
                 lblCreadoCorrectamente.Text = "Orden eliminada correctamente";
+
+                ListComents.Visible = false;
+                BLComentarios.Visible = false;
+
                 LimpiarCampos();
             }
             else
@@ -241,10 +244,10 @@ namespace ObligatorioP2
                             RequiredFieldValidator1.Enabled = false;
                             rfvDesc.Enabled = false;
 
-                            int pepe = i;
+                            int UBiLista = i;
 
                             // Guarda el índice del técnico en una variable de sesión para usarlo al actualizar
-                            Session["OrdenIndex"] = pepe;
+                            Session["OrdenIndex"] = UBiLista;
                             break;
                         }
                     }
@@ -280,19 +283,32 @@ namespace ObligatorioP2
                 index = Convert.ToInt32(e.CommandArgument);
 
 
-
-                GridViewRow fila = TablaOrdenes.Rows[index];
-
-
-                Button btnMostrarComments = (Button)fila.FindControl("btnMostrarComments");
-                Button btnOcultarComments = (Button)fila.FindControl("btnOcultarComments");
-
-                if (btnMostrarComments != null && btnOcultarComments != null)
+                for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
                 {
-                    btnMostrarComments.Visible = true;
-                    btnOcultarComments.Visible = false;
+                    if (i >= TablaOrdenes.Rows.Count)
+                    {
+                        break;
+                    }
+
+                    GridViewRow fila = TablaOrdenes.Rows[i];
+
+                    if (fila == null)
+                    {
+                        continue;
+                    }
+
+                    Button btnMostrarCommentsabier = (Button)fila.FindControl("btnMostrarComments");
+                    Button btnOcultarCommentscerr = (Button)fila.FindControl("btnOcultarComments");
+
+                    btnMostrarCommentsabier.Visible = true;
+                    btnOcultarCommentscerr.Visible = false;
                 }
-       
+
+                GridViewRow row = TablaOrdenes.Rows[index];
+
+                Button btnMostrarComments = (Button)row.FindControl("btnMostrarComments");
+                Button btnOcultarComments = (Button)row.FindControl("btnOcultarComments");
+
 
                 btnAgregarComments.Visible = true;
                 ListComents.Visible = true;
