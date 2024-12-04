@@ -86,7 +86,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-               <p>&copy; <%: DateTime.Now.Year %> - Pedazo de Pagina Web - Todos los Derechos Reservados
+               <p>&copy; <%: DateTime.Now.Year %> - Pedazo de Pagina Web - Todos los Derechos Reservados 
                 </p>
             </footer>
         </div>
@@ -131,7 +131,6 @@
 
         font-family: 'Arial', sans-serif;
         color: #f0f0f0;
-        font-weight: bold;
         align-items: center;
        
     }

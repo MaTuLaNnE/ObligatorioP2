@@ -12,42 +12,103 @@ namespace ObligatorioP2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarReportes();
-
-        }
-        private void CargarReportes()
-        {
-            Tecnico tecnicoActual = BaseDeDatos.Token;
-
-            int numPendiente = 0;
-            int numEnProgreso = 0;
-            int numCompletado = 0;
-
-            for (int i = 0; i < BaseDeDatos.OrdenesxTecnico.Count; i++)
+            if (!BaseDeDatos.Token.esAdmin)
             {
-                if ((tecnicoActual.Nombre == BaseDeDatos.OrdenesxTecnico[i].NombreTecnico || tecnicoActual.esAdmin) && BaseDeDatos.OrdenesxTecnico[i].Estado == "PENDIENTE")
-                {
-                    numPendiente++;
-                }
-                if ((tecnicoActual.Nombre == BaseDeDatos.OrdenesxTecnico[i].NombreTecnico || tecnicoActual.esAdmin) && BaseDeDatos.OrdenesxTecnico[i].Estado == "EN PROGRESO")
-                {
-                    numEnProgreso++;
-                }
-                if ((tecnicoActual.Nombre == BaseDeDatos.OrdenesxTecnico[i].NombreTecnico || tecnicoActual.esAdmin) && BaseDeDatos.OrdenesxTecnico[i].Estado == "COMPLETADO")
-                {
-                    numCompletado++;
-                }
+                DDTecnicos.Visible = false;
+            }
 
-            } 
+            if (!IsPostBack)
+            {
+                DDTecnicos.DataSource = BaseDeDatos.ListaTecnico;
+                DDTecnicos.DataTextField = "Nombre";
+                DDTecnicos.DataValueField = "Nombre";
+                DDTecnicos.DataBind();
+            }
 
-
-
-
-
-            lblCuantasPendientes.Text = numPendiente.ToString();
-            lblCuantasEnProgreso.Text = numEnProgreso.ToString();
-            lblCuantasCompletadas.Text = numCompletado.ToString();
 
         }
+        protected void Confirmar_Click(object sender, EventArgs e)
+        {
+            // Obtén el valor seleccionado, que es el "CI" del técnico
+            string tecnicoCI = DDTecnicos.SelectedValue;
+            int index = DDTecnicos.SelectedIndex;
+
+            if (tecnicoCI == "-1") // Si se seleccionó la opción "Seleccione un Tecnico"
+            {
+                // Si no se seleccionó un técnico, limpia los valores
+                LimpiarReportes();
+                return;
+            }
+
+            // Encuentra el técnico seleccionado en la lista
+            Tecnico tecnicoSeleccionado = BaseDeDatos.ListaTecnico[index];
+
+            if (tecnicoSeleccionado != null)
+            {
+                int numPendiente = 0;
+                int numEnProgreso = 0;
+                int numCompletado = 0;
+                int numTotales = 0;
+
+                // Si es admin, cuenta las órdenes de todos los técnicos
+                if (BaseDeDatos.Token.esAdmin)
+                {
+                    foreach (var orden in BaseDeDatos.ListaOrdenes)
+                    {
+                        numTotales++;
+
+                        if (orden.NombreTecnico == tecnicoSeleccionado.Nombre && orden.Estado == "PENDIENTE")
+                        {
+                            numPendiente++;
+                        }
+                        if (orden.NombreTecnico == tecnicoSeleccionado.Nombre && orden.Estado == "EN PROGRESO")
+                        {
+                            numEnProgreso++;
+                        }
+                        if (orden.NombreTecnico == tecnicoSeleccionado.Nombre && orden.Estado == "COMPLETADO")
+                        {
+                            numCompletado++;
+                        }
+                    }
+                }
+                else // Si no es admin, solo cuenta las órdenes del técnico actual
+                {
+                    foreach (var orden in BaseDeDatos.OrdenesxTecnico)
+                    {
+                        numTotales++;
+
+                        if (orden.NombreTecnico == tecnicoSeleccionado.Nombre && orden.Estado == "PENDIENTE")
+                        {
+                            numPendiente++;
+                        }
+                        if (orden.NombreTecnico == tecnicoSeleccionado.Nombre && orden.Estado == "EN PROGRESO")
+                        {
+                            numEnProgreso++;
+                        }
+                        if (orden.NombreTecnico == tecnicoSeleccionado.Nombre && orden.Estado == "COMPLETADO")
+                        {
+                            numCompletado++;
+                        }
+                    }
+                }
+
+                // Actualiza las etiquetas con los valores calculados
+                lblCuantasTotal.Text = numTotales.ToString();
+                lblCuantasPendientes.Text = numPendiente.ToString();
+                lblCuantasEnProgreso.Text = numEnProgreso.ToString();
+                lblCuantasCompletadas.Text = numCompletado.ToString();
+            }
+        }
+
+        // Método para limpiar los reportes
+        private void LimpiarReportes()
+        {
+            lblCuantasTotal.Text = "0";
+            lblCuantasPendientes.Text = "0";
+            lblCuantasEnProgreso.Text = "0";
+            lblCuantasCompletadas.Text = "0";
+        }
+
+        
     }
 }
