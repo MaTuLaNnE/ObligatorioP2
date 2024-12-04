@@ -14,6 +14,7 @@ namespace ObligatorioP2
         {
             if (!BaseDeDatos.Token.esAdmin)
             {
+                lblNombreTecnico.Visible = false;
                 DDTecnicos.Visible = false;
             }
 

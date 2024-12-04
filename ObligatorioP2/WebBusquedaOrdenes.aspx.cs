@@ -15,7 +15,17 @@ namespace ObligatorioP2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                lblCli.Visible = false;
+                lblTec.Visible = false;
+                lblEst.Visible = false;
+                lblComentarios.Visible = false;
+                lblInfoCliente.Visible = false;
+                lblInfoTecnico.Visible = false;
+                BLComentarios.Visible = false;
+                lblEstado.Visible = false;
+            }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
@@ -27,12 +37,29 @@ namespace ObligatorioP2
 
             if (NroOrden <= 0 || Convert.ToInt32(NroOrden) > BaseDeDatos.UltimoNumeroDeOrden || orden == null)
             {
-                lblEstado.Text = "kk con patas";
+                lblCli.Visible = false;
+                lblTec.Visible = false;
+                lblEst.Visible = false;
+                lblComentarios.Visible = false;
+                lblInfoCliente.Visible = false;
+                lblInfoTecnico.Visible = false;
+                BLComentarios.Visible = false;
+                lblEstado.Visible = false;
+                lblConfirmacion.Visible = true;
+                lblConfirmacion.Text = "No existe ninguna orden con el número de orden indicado";
                 return;
             }
             else
             {
-
+                lblCli.Visible = true;
+                lblTec.Visible = true;
+                lblEst.Visible = true;
+                lblComentarios.Visible = true;
+                lblInfoCliente.Visible = true;
+                lblInfoTecnico.Visible = true;
+                BLComentarios.Visible = true;
+                lblEstado.Visible = true;
+                lblConfirmacion.Visible = true;
                 lblInfoCliente.Text = orden.NombreCliente;
                 lblInfoTecnico.Text = orden.NombreTecnico;
 

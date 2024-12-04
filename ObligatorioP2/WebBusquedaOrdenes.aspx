@@ -33,6 +33,10 @@
             </asp:BulletedList>
             <asp:Label ID="Nocoments" CssClass="label-custom" Visible="false" runat="server">No se agregaron comentarios.</asp:Label>
         </div>
+
+        <div class="form-group">
+            <asp:Label ID="lblConfirmacion" runat="server" Visible="false" ForeColor="Green" CssClass="message-confirmation"></asp:Label>
+        </div>
     </div>
 
 

@@ -12,7 +12,10 @@
                 <asp:DropDownList ID="DDTecnicos" runat="server" CssClass="dropdown-custom" AutoPostBack="true">
                     <asp:ListItem ID="ListItem1" runat="server" Enabled="true" Text="Seleccione un Tecnico" Value="-1"></asp:ListItem>
                 </asp:DropDownList>
-                <asp:Button runat="server" text="Mostrar Reportes" OnClick="Confirmar_Click"/>
+            </div>
+
+            <div class="form-group">
+                <asp:Button runat="server" Text="Mostrar Reportes" CssClass="btn-primary" OnClick="Confirmar_Click" />
             </div>
             <div class="form-group">
                 <asp:Label runat="server" ID="lblPendientes" CssClass="label-custom">Ordenes Pendientes: </asp:Label>
@@ -56,6 +59,21 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             width: 50%;
             margin-top: 30px;
+        }
+
+        .btn-primary,
+        .btn-secondary,
+        .btn-danger {
+            padding: 10px 20px;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
         }
 
         .form-group {
