@@ -55,7 +55,6 @@
 
             <div class="form-actions">
                 <asp:Button ID="btnCrearOrden" runat="server" Text="Crear Orden" CssClass="btn-primary" Width="151px" OnClick="CmdCrearOrden" />
-                <asp:Button ID="btnAgregarComments" runat="server" Text="Agregar Comentario" CssClass="btn-secondary" Visible="false" OnClick="btnAgregarComments_Click" />
                 <asp:Button ID="BtnActualizar" runat="server" Text="Actualizar" Visible="false" OnClick="BtnActualizar_Click" CssClass="btn-secondary" />
             </div>
 
@@ -93,14 +92,6 @@
             </Columns>
         </asp:GridView>
 
-        <div class="form-group">
-            <asp:Label ID="ListComents" CssClass="label-custom" Visible="false" runat="server">Lista de Comentarios</asp:Label>
-        </div>
-        <div class="form-group">
-            <asp:BulletedList ID="BLComentarios" runat="server">
-            </asp:BulletedList>
-            <asp:Label ID="Nocoments" CssClass="label-custom" Visible="false" runat="server">No se agregaron comentarios.</asp:Label>
-        </div>
     </main>
 
     <style>
@@ -126,7 +117,7 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             width: 60%;
             margin-top: 30px;
-        }
+        }                               
 
         .form-group {
             display: flex;

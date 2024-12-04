@@ -186,15 +186,6 @@ namespace ObligatorioP2
         protected global::System.Web.UI.WebControls.Button btnCrearOrden;
 
         /// <summary>
-        /// Control btnAgregarComments.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarComments;
-
-        /// <summary>
         /// Control BtnActualizar.
         /// </summary>
         /// <remarks>
@@ -238,32 +229,5 @@ namespace ObligatorioP2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView TablaOrdenes;
-
-        /// <summary>
-        /// Control ListComents.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ListComents;
-
-        /// <summary>
-        /// Control BLComentarios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.BulletedList BLComentarios;
-
-        /// <summary>
-        /// Control Nocoments.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Nocoments;
     }
 }

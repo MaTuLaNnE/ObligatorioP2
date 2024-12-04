@@ -22,7 +22,7 @@ namespace ObligatorioP2
                     lblTecnicoActual.Text = "Hola, " + tecnico.Nombre;
                     
 
-                    if (tecnico.CI == "50140797" && tecnico.Clave == "1111")
+                    if (tecnico.esAdmin)
                     {
                         chau.Visible = true;
                         return;

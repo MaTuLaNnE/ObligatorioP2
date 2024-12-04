@@ -18,7 +18,7 @@ namespace ObligatorioP2
 
             if (!IsPostBack)
             {
-                // Corregir al cargar datos
+
                 if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
                 {
                     BaseDeDatos.PrecargarBD();
@@ -118,11 +118,6 @@ namespace ObligatorioP2
         }
 
 
-
-
-
-
-
         private void LimpiarCampos()
         {
             ddlTipoServicio.ClearSelection();
@@ -156,8 +151,6 @@ namespace ObligatorioP2
                 lblCreadoCorrectamente.Visible = true;
                 lblCreadoCorrectamente.Text = "Orden eliminada correctamente";
 
-                ListComents.Visible = false;
-                BLComentarios.Visible = false;
 
                 LimpiarCampos();
             }
@@ -207,7 +200,8 @@ namespace ObligatorioP2
                 BtnActualizar.Visible = true;
                 btnCrearOrden.Visible = false;
                 lblConfirmacion.Visible = false;
-                btnAgregarComments.Visible = false;
+                lblComentario.Visible = false;
+                txtComentario.Visible = false;
 
 
                 lblError.Visible = true;
@@ -266,6 +260,8 @@ namespace ObligatorioP2
 
                 btnMostrarEdit.Visible = true;
                 btnMostrarCancel.Visible = false;
+                lblComentario.Visible = true;
+                txtComentario.Visible = true;
 
                 lblEstado.Visible = false;
                 DDEstado.Visible = false;
@@ -280,89 +276,30 @@ namespace ObligatorioP2
             }
             if (e.CommandName == "MostrarComments")
             {
+
                 index = Convert.ToInt32(e.CommandArgument);
-
-
-                for (int i = 0; i < BaseDeDatos.ListaOrdenes.Count; i++)
-                {
-                    if (i >= TablaOrdenes.Rows.Count)
-                    {
-                        break;
-                    }
-
-                    GridViewRow fila = TablaOrdenes.Rows[i];
-
-                    if (fila == null)
-                    {
-                        continue;
-                    }
-
-                    Button btnMostrarCommentsabier = (Button)fila.FindControl("btnMostrarComments");
-                    Button btnOcultarCommentscerr = (Button)fila.FindControl("btnOcultarComments");
-
-                    btnMostrarCommentsabier.Visible = true;
-                    btnOcultarCommentscerr.Visible = false;
-                }
-
-                GridViewRow row = TablaOrdenes.Rows[index];
-
-                Button btnMostrarComments = (Button)row.FindControl("btnMostrarComments");
-                Button btnOcultarComments = (Button)row.FindControl("btnOcultarComments");
-
-
-                btnAgregarComments.Visible = true;
-                ListComents.Visible = true;
-                btnCrearOrden.Visible = false;
-                BtnActualizar.Visible = false;
 
                 if (index >= 0 && index < BaseDeDatos.ListaOrdenes.Count)
                 {
-                    CargarOrdenesEnTabla();
-
-                    Orden orden = BaseDeDatos.OrdenesxTecnico[index];
-
-                    RequiredFieldValidator1.Enabled = false;
-                    rfvDesc.Enabled = false;
-
-                    BLComentarios.Visible = true;
-                    BLComentarios.DataSource = orden.ListaComentarios;
-                    BLComentarios.DataBind();
-
-                    btnMostrarComments.Visible = false;
-                    btnOcultarComments.Visible = true;
-                    LimpiarCampos();
-
                     Session["OrdenIndex"] = index;
+                    Response.Redirect("WebComentarios.aspx");
                 }
+                else
+                {
+                    lblError.Visible = true;
+                    lblError.Text = "Índice inválido.";
+                }
+
+
+
             }
-            if (e.CommandName == "OcultarComments")
-            {
-                index = Convert.ToInt32(e.CommandArgument);
-
-                GridViewRow row = TablaOrdenes.Rows[index];
-
-                Button btnMostrarComments = (Button)row.FindControl("btnMostrarComments");
-                Button btnOcultarComments = (Button)row.FindControl("btnOcultarComments");
-
-
-                btnOcultarComments.Visible = false;
-                btnMostrarComments.Visible = true;
-
-
-                RequiredFieldValidator1.Enabled = true;
-                rfvDesc.Enabled = true;
-
-                ListComents.Visible = false;
-                BLComentarios.Visible = false;
-                btnAgregarComments.Visible = false;
-                btnCrearOrden.Visible = true;
-            }
+ 
 
         }
 
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
-            // nos aseguramos de que existe un índice almacenado en sesión
+
             if (Session["OrdenIndex"] != null)
             {
                 int index = (int)Session["OrdenIndex"];
@@ -425,30 +362,6 @@ namespace ObligatorioP2
 
             return lista;
 
-        }
-
-        protected void btnAgregarComments_Click(object sender, EventArgs e)
-        {
-
-            if (Session["OrdenIndex"] != null)
-            {
-                int index = (int)Session["OrdenIndex"];
-
-                Orden orden = BaseDeDatos.ListaOrdenes[index];
-
-                string comentario = txtComentario.Text;
-
-                orden.ListaComentarios.Add(comentario);
-
-                lblConfirmacion.Visible = true;
-                lblConfirmacion.Text = "Comentario agregado correctamente";
-
-                RequiredFieldValidator1.Enabled = false;
-                rfvDesc.Enabled = false;
-
-                BLComentarios.DataSource = orden.ListaComentarios;
-                BLComentarios.DataBind();
-            }
         }
 
 
