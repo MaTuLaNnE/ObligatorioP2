@@ -24,6 +24,15 @@ namespace ObligatorioP2
                 DDTecnicos.DataTextField = "Nombre";
                 DDTecnicos.DataValueField = "Nombre";
                 DDTecnicos.DataBind();
+
+                lblPendientes.Visible = false;
+                lblCuantasPendientes.Visible=false;
+                lblEnProgreso.Visible = false;
+                lblCuantasEnProgreso.Visible=false;
+                lblCompletadas.Visible = false;
+                lblCuantasCompletadas.Visible=false;
+                lblTotal.Visible = false;
+                lblCuantasTotal.Visible=false;
             }
 
 
@@ -50,6 +59,15 @@ namespace ObligatorioP2
                 int numEnProgreso = 0;
                 int numCompletado = 0;
                 int numTotales = 0;
+
+                lblPendientes.Visible = true;
+                lblCuantasPendientes.Visible = true;
+                lblEnProgreso.Visible = true;
+                lblCuantasEnProgreso.Visible = true;
+                lblCompletadas.Visible = true;
+                lblCuantasCompletadas.Visible = true;
+                lblTotal.Visible = true;
+                lblCuantasTotal.Visible = true;
 
                 // Si es admin, cuenta las órdenes de todos los técnicos
                 if (BaseDeDatos.Token.esAdmin)
