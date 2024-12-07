@@ -87,12 +87,22 @@ namespace ObligatorioP2
 
             EsconderLabels();
 
-            if (string.IsNullOrEmpty(DDClientes.Text) || string.IsNullOrEmpty(DDTecnicos.Text))
+            if (string.IsNullOrEmpty(DDClientes.Text) || string.IsNullOrEmpty(DDTecnicos.Text) || string.IsNullOrEmpty(ddlTipoServicio.Text))
             {
+                if (string.IsNullOrEmpty(ddlTipoServicio.Text))
+                {
+                    lblError.ForeColor = System.Drawing.Color.Red;
+                    lblError.Visible = true;
+                    lblError.Text = "Debe seleccionar un servicio";
+                    lblConfirmacion.Visible = false;
+                }
+                else
+                {
+                    lblError.Text = "Debes agregar un Cliente y/o Tecnico";
+                    lblError.Visible = true;
+                    lblConfirmacion.Visible = false;
+                }
 
-                lblError.Text = "Debes agregar un Cliente y/o Tecnico";
-                lblError.Visible = true;
-                lblConfirmacion.Visible = false;
 
             }
             else
@@ -319,7 +329,7 @@ namespace ObligatorioP2
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
 
-            if (Session["OrdenIndex"] != null)
+            if (Session["OrdenIndex"] != null && !string.IsNullOrEmpty(DDClientes.Text) && !string.IsNullOrEmpty(DDTecnicos.Text) && !string.IsNullOrEmpty(ddlTipoServicio.Text))
             {
                 int index = (int)Session["OrdenIndex"];
 
@@ -355,6 +365,22 @@ namespace ObligatorioP2
 
                 CargarOrdenesEnTabla();
 
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(ddlTipoServicio.Text))
+                {
+                    lblError.ForeColor = System.Drawing.Color.Red;
+                    lblError.Visible = true;
+                    lblError.Text = "Debe seleccionar un servicio";
+                    lblConfirmacion.Visible = false;
+                }
+                else
+                {
+                    lblError.Text = "Debes agregar un Cliente y/o Tecnico";
+                    lblError.Visible = true;
+                    lblConfirmacion.Visible = false;
+                }
             }
 
         }

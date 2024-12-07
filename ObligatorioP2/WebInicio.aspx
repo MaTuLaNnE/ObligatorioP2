@@ -13,6 +13,7 @@
         <div class="form-container">
 
             <div>
+                <asp:Label ID="lblVacio" Visible="false" runat="server" class="label-custom"></asp:Label>
                 <asp:Panel ID="ContenedorOrdenes" runat="server"></asp:Panel>
             </div>
         </div>
@@ -37,6 +38,13 @@
             margin-bottom: 25px;
             color: #007bff;
             align-content: center;
+        }
+
+        .label-custom {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
         }
 
         .form-group {

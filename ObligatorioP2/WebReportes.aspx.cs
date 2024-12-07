@@ -18,8 +18,6 @@ namespace ObligatorioP2
                 DDTecnicos.Visible = false;
                 btnMostrarReportes.Visible = false;
                 AutoCargar();
-                FiltrarOrdenesUltimoMes();
-                MostrarOrdenesDelMes();
             }
 
             if (!IsPostBack)
