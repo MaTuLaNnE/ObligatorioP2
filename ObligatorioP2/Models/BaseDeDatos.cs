@@ -12,6 +12,7 @@ namespace ObligatorioP2.Models
         public static List<Tecnico> ListaTecnico = new List<Tecnico>();
         public static List<Orden> ListaOrdenes = new List<Orden>();
         public static List<Orden> OrdenesxTecnico = new List<Orden>();
+        public static List<Orden> ListaMes = new List<Orden>();
 
         public static Tecnico Token;
         public static int UltimoNumeroDeOrden;

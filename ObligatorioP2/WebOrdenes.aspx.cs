@@ -74,6 +74,7 @@ namespace ObligatorioP2
                 // Si es admin, puede ver todas las órdenes
                 if (BaseDeDatos.Token.esAdmin || orden.NombreTecnico == BaseDeDatos.Token.Nombre)
                 {
+
                     BaseDeDatos.OrdenesxTecnico.Add(orden);
 
                 }

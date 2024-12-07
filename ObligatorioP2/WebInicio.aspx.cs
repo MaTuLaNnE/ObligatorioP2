@@ -39,8 +39,8 @@ namespace ObligatorioP2
 
             foreach (var orden in BaseDeDatos.ListaOrdenes)
             {
-                // Si es admin, puede ver todas las órdenes
-                if (BaseDeDatos.Token.esAdmin || orden.NombreTecnico == BaseDeDatos.Token.Nombre)
+            
+                if (BaseDeDatos.Token.esAdmin || (orden.NombreTecnico == BaseDeDatos.Token.Nombre && orden.Estado == "EN PROGRESO"))
                 {
                     BaseDeDatos.OrdenesxTecnico.Add(orden);
 

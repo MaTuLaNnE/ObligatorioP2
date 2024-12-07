@@ -33,6 +33,20 @@
                 <asp:Label runat="server" ID="lblTotal" CssClass="label-custom">Ordenes Totales: </asp:Label>
                 <asp:Label runat="server" ID="lblCuantasTotal" CssClass="value-custom"></asp:Label>
             </div>
+
+            <div style="margin-top:15px" class="form-group">
+                <asp:Label runat="server"  ID="OredenesCompletadas" CssClass="label-custom">Ordenes Completadas El Ultimo Mes: </asp:Label>
+            </div>
+
+            <asp:GridView ID="TablaOrdenes30" runat="server" AutoGenerateColumns="False" CssClass="table-custom">
+                <Columns>
+                    <asp:BoundField DataField="NroOrden" HeaderText="Número de Orden" SortExpression="NroOrden" />
+                    <asp:BoundField DataField="NombreCliente" HeaderText="Cliente" SortExpression="NombreCliente" />
+                    <asp:BoundField DataField="NombreTecnico" HeaderText="Técnico" SortExpression="NombreTecnico" />
+                    <asp:BoundField DataField="TipoDeServicio" HeaderText="Tipo de Servicio" SortExpression="Direccion" />
+                    <asp:BoundField DataField="FechaCreacion" HeaderText="Fecha de la Orden" SortExpression="FechaCreacion" />
+                </Columns>
+            </asp:GridView>
         </div>
     </main>
 
@@ -60,6 +74,25 @@
             width: 50%;
             margin-top: 30px;
         }
+
+        .table-custom {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+            .table-custom th,
+            .table-custom td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .table-custom th {
+                background-color: #ddd;
+                font-weight: bold;
+            }
 
         .btn-primary,
         .btn-secondary,
