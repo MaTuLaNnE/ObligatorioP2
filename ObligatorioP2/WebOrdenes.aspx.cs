@@ -25,6 +25,13 @@ namespace ObligatorioP2
 
                 }
 
+
+                if (BaseDeDatos.Token.esAdmin)
+                {
+                    lblNombreTecnico.Visible = true;
+                    DDTecnicos.Visible = true;
+                }
+
                 CargarListaOrdenesXtecnico();
 
                 // Enlazar los DDL
@@ -68,6 +75,7 @@ namespace ObligatorioP2
                 if (BaseDeDatos.Token.esAdmin || orden.NombreTecnico == BaseDeDatos.Token.Nombre)
                 {
                     BaseDeDatos.OrdenesxTecnico.Add(orden);
+
                 }
             }
         }
@@ -89,9 +97,19 @@ namespace ObligatorioP2
             else
             {
                 string cliente = DDClientes.SelectedValue;
+                string tecnico;
 
-                Tecnico tecnicoActual = BaseDeDatos.Token;
-                string tecnico = tecnicoActual.Nombre;
+                if (BaseDeDatos.Token.esAdmin)
+                {
+                    tecnico = DDTecnicos.SelectedValue;
+                }
+                else
+                {
+                    Tecnico tecnicoActual = BaseDeDatos.Token;
+                    tecnico = tecnicoActual.Nombre;
+                }
+
+
 
                 string servicio = ddlTipoServicio.Text;
                 string desc = txtDesc.Text;
