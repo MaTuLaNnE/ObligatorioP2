@@ -15,7 +15,7 @@
             </div>
 
             <div class="form-group">
-                <asp:Button runat="server" Text="Mostrar Reportes" CssClass="btn-primary" OnClick="Confirmar_Click" />
+                <asp:Button ID="btnMostrarReportes" runat="server" Text="Mostrar Reportes" CssClass="btn-primary" OnClick="Confirmar_Click" />
             </div>
             <div class="form-group">
                 <asp:Label runat="server" ID="lblPendientes" CssClass="label-custom">Ordenes Pendientes: </asp:Label>
