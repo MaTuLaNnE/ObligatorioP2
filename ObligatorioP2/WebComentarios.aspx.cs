@@ -74,6 +74,12 @@ namespace ObligatorioP2
             }
         }
 
+        protected void BtnVolver_Click(object sender, EventArgs e)
+        {
+            rfvComentario.Enabled = false;
+            Response.Redirect("WebOrdenes.aspx");
+        }
+
 
 
     }

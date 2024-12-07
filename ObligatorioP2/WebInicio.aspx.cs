@@ -12,11 +12,40 @@ namespace ObligatorioP2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            GenerarPanelesOrdenes();
+            if (!IsPostBack)
+            {
+                if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
+                {
+                    BaseDeDatos.PrecargarBD();
+
+                }
+                CargarListaOrdenesXtecnico();
+                GenerarPanelesOrdenes();
 
 
-            Tecnico tecnico = BaseDeDatos.Token;
-            titulo.Text = "Bienvenido Tecnico " + tecnico.Nombre;
+
+                Tecnico tecnico = BaseDeDatos.Token;
+                titulo.Text = "Bienvenido Tecnico " + tecnico.Nombre;
+            }
+
+
+
+
+        }
+
+        private void CargarListaOrdenesXtecnico()
+        {
+            BaseDeDatos.OrdenesxTecnico.Clear();
+
+            foreach (var orden in BaseDeDatos.ListaOrdenes)
+            {
+                // Si es admin, puede ver todas las órdenes
+                if (BaseDeDatos.Token.esAdmin || orden.NombreTecnico == BaseDeDatos.Token.Nombre)
+                {
+                    BaseDeDatos.OrdenesxTecnico.Add(orden);
+
+                }
+            }
         }
 
         private void GenerarPanelesOrdenes()
@@ -47,7 +76,6 @@ namespace ObligatorioP2
                     </div>"
                 });
 
-                // Agregar el panel al contenedor principal
                 ContenedorOrdenes.Controls.Add(panelOrden);
             }
         }

@@ -117,12 +117,21 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             width: 60%;
             margin-top: 30px;
-        }                               
+        }
 
         .form-group {
             display: flex;
-            flex-direction: column;
+            align-items: center;
             margin-bottom: 20px;
+        }
+
+        .dropdown-custom {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            transition: border-color 0.3s;
         }
 
         .label-custom {
@@ -130,6 +139,17 @@
             font-weight: bold;
             color: #333;
             margin-bottom: 5px;
+        }
+
+        .input-custom {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-left: 10px;
+            margin-right: 10px;
+            transition: border-color 0.3s;
         }
 
         .input-custom,

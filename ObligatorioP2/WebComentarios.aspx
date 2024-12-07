@@ -4,6 +4,11 @@
 
     <main>
         <div class="form-container">
+            <div class="form-actions-left">
+                <asp:Button ID="BtnVolver" CausesValidation="false" runat="server"
+                    Text="Volver"
+                    CssClass="btn-back" Visible="true" OnClick="BtnVolver_Click" />
+            </div>
             <div class="form-group">
 
                 <asp:Label ID="lblComentario" runat="server" CssClass="label-custom" Text="Agregar Comentario:"></asp:Label>
@@ -40,7 +45,6 @@
     </main>
 
     <style>
-
         .form-container {
             background-color: #fff;
             padding: 25px;
@@ -109,11 +113,37 @@
             background-color: #28a745;
         }
 
+
+
         .message-confirmation {
             text-align: center;
             font-weight: bold;
             color: green;
         }
+
+        .form-actions-left {
+            text-align: left; /* Alinea los botones a la izquierda */
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 15px; /* Botón más pequeño */
+            background-color: #dc3545; /* Color de fondo (rojo) */
+            color: #fff; /* Texto blanco */
+            border: none;
+            border-radius: 20px; /* Bordes redondeados */
+            cursor: pointer;
+            font-size: 14px; /* Tamaño más pequeño */
+            width: auto; /* Solo lo necesario para el contenido */
+            text-align: center;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom:20px;
+        }
+
+            .btn-back:hover {
+                background-color: #c82333; /* Cambio de color al pasar el mouse */
+            }
     </style>
 
 </asp:Content>
