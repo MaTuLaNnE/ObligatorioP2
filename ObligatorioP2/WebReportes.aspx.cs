@@ -44,7 +44,6 @@ namespace ObligatorioP2
             int numCompletado = 0;
             int numTotales = 0;
 
-            // Mostrar los elementos relacionados con el reporte
             lblPendientes.Visible = true;
             lblCuantasPendientes.Visible = true;
             lblEnProgreso.Visible = true;
@@ -54,7 +53,7 @@ namespace ObligatorioP2
             lblTotal.Visible = true;
             lblCuantasTotal.Visible = true;
 
-            // Verificar si el usuario es admin
+            // Verificar si es admin
             if (BaseDeDatos.Token.esAdmin)
             {
                 // Si es admin, mostrar todas las órdenes y permitir selección de técnico
@@ -63,7 +62,7 @@ namespace ObligatorioP2
 
                 if (tecnicoCI == "-1")
                 {
-                    // Si no hay técnico seleccionado, limpiar reportes
+                    //limpiar reportes Si no hay técnico seleccionado
                     LimpiarReportes();
                     return;
                 }
