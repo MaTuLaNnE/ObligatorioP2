@@ -135,10 +135,10 @@ namespace ObligatorioP2
 
                 for (int i = 0; i < BaseDeDatos.ListaTecnico.Count; i++)
                 {
-                    GridViewRow ala = TablaTecnico1.Rows[i];
+                    GridViewRow filaApagar = TablaTecnico1.Rows[i];
 
-                    Button btnMostrarEditAbiertos = (Button)ala.FindControl("btnEditar");
-                    Button btnMostrarCancelAbiertos = (Button)ala.FindControl("btnCancel");
+                    Button btnMostrarEditAbiertos = (Button)filaApagar.FindControl("btnEditar");
+                    Button btnMostrarCancelAbiertos = (Button)filaApagar.FindControl("btnCancel");
 
                     btnMostrarEditAbiertos.Visible = true;
                     btnMostrarCancelAbiertos.Visible = false;
@@ -154,10 +154,10 @@ namespace ObligatorioP2
 
 
 
-                GridViewRow row = TablaTecnico1.Rows[index];
+                GridViewRow fila = TablaTecnico1.Rows[index];
 
-                Button btnMostrarEdit = (Button)row.FindControl("btnEditar");
-                Button btnMostrarCancel = (Button)row.FindControl("btnCancel");
+                Button btnMostrarEdit = (Button)fila.FindControl("btnEditar");
+                Button btnMostrarCancel = (Button)fila.FindControl("btnCancel");
 
                 if (index >= 0 && index < BaseDeDatos.ListaTecnico.Count)
                 {
@@ -267,6 +267,18 @@ namespace ObligatorioP2
             if (string.IsNullOrEmpty(ci) || ci.Length != 8 || !ci.All(char.IsDigit))
             {
                 return false;
+            }
+
+
+            for (int i = 0; i < BaseDeDatos.ListaTecnico.Count; i++)
+            {
+                Tecnico tecnico = BaseDeDatos.ListaTecnico[i];
+
+                if (ci == tecnico.CI)
+                {
+                    return false;
+                }
+
             }
 
             // Valores para la validación

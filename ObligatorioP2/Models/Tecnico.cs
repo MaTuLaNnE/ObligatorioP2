@@ -16,7 +16,7 @@ namespace ObligatorioP2.Models
         public Tecnico(string Nombre, string Apellido, string ci, string especialidad, string clave, bool esAdmin=false) : base(Nombre, Apellido, ci)
         {
             this.Especialidad = especialidad;
-            Clave = clave;
+            this.Clave = clave;
             this.esAdmin = esAdmin;
         }
 

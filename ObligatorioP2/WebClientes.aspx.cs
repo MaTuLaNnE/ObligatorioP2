@@ -3,6 +3,7 @@ using ObligatorioP2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -66,11 +67,11 @@ namespace ObligatorioP2
             else
             {
 
-
-
                 string Nombre = txtNombre.Text;
                 string Apellido = txtApellido.Text;
                 string ci = txtCI.Text;
+
+
                 if (!CorroborarCI(ci))
                 {
 
@@ -281,6 +282,17 @@ namespace ObligatorioP2
             if (string.IsNullOrEmpty(ci) || ci.Length != 8 || !ci.All(char.IsDigit))
             {
                 return false;
+            }
+
+            for (int i = 0; i < BaseDeDatos.ListaClientes.Count; i++)
+            {
+                Cliente cliente = BaseDeDatos.ListaClientes[i];
+
+                if (ci == cliente.CI)
+                {
+                    return false;
+                }
+
             }
 
             // Valores para la validación
