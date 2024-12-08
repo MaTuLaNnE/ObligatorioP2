@@ -6,22 +6,52 @@
     <html>
 
     <body>
-
-        <asp:Label ID="titulo" runat="server" class="titulo"></asp:Label>
-        <div>
-            <asp:Panel ID="ContenedorOrdenes" runat="server"></asp:Panel>
+        <div class="titulo">
+            <asp:Label ID="titulo" runat="server"></asp:Label>
         </div>
 
+        <div class="form-container">
+
+            <div>
+                <asp:Label ID="lblVacio" Visible="false" runat="server" class="label-custom"></asp:Label>
+                <asp:Panel ID="ContenedorOrdenes" runat="server"></asp:Panel>
+            </div>
+        </div>
     </body>
     </html>
 
     <style>
+        .form-container {
+            background-color: #fff;
+            padding: 25px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            margin-top: 30px;
+        }
+
         .titulo {
             text-align: center;
             font-size: 28px;
             font-weight: bold;
+            margin-top: 25px;
             margin-bottom: 25px;
             color: #007bff;
+            align-content: center;
+        }
+
+        .label-custom {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
         .panel-orden {

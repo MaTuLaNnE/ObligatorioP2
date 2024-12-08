@@ -37,7 +37,7 @@ namespace ObligatorioP2
                 if (tecnico.CI == a && tecnico.Clave == b)
                 {
                     BaseDeDatos.Token = tecnico;
-                    Response.Redirect("WebOrdenes.aspx");
+                    Response.Redirect("WebInicio.aspx");
                     return; 
                 }
 

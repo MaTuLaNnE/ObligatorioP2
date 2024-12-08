@@ -139,6 +139,7 @@
             border-radius: 5px;
             width: 100%;
             transition: border-color 0.3s;
+            margin-left:10px;
         }
 
             .input-custom:focus,

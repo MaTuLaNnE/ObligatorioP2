@@ -5,7 +5,7 @@
     <h1 id="titulo" runat="server" class="titulo">Búsqueda de Ordenes</h1>
 
     <div class="form-container">
-        <div class="form-group">
+        <div class="form-group" style="text-align: center">
             <asp:Label runat="server" ID="lblOrden" Text="Coloque el número de Orden: " CssClass="label-custom"></asp:Label>
             <asp:TextBox runat="server" ID="txtOrden" TextMode="Number" CssClass="input-custom"></asp:TextBox>
             <asp:RequiredFieldValidator runat="server" ID="rfvNreo" ControlToValidate="txtOrden" ForeColor="Red" Text="Ingrese su documento"></asp:RequiredFieldValidator>
@@ -63,12 +63,14 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             width: 60%;
             margin-top: 30px;
+            text-align: center;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         .label-custom {

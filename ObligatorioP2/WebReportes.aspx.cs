@@ -18,7 +18,6 @@ namespace ObligatorioP2
                 DDTecnicos.Visible = false;
                 btnMostrarReportes.Visible = false;
                 AutoCargar();
-
             }
 
             if (!IsPostBack)
@@ -27,11 +26,44 @@ namespace ObligatorioP2
                 DDTecnicos.DataTextField = "Nombre";
                 DDTecnicos.DataValueField = "Nombre";
                 DDTecnicos.DataBind();
-
+                FiltrarOrdenesUltimoMes();
+                MostrarOrdenesDelMes();
             }
-
+            FiltrarOrdenesUltimoMes();
+            MostrarOrdenesDelMes();
 
         }
+
+        public static void FiltrarOrdenesUltimoMes()
+        {
+
+            BaseDeDatos.ListaMes.Clear();
+
+            DateTime haceUnMes = DateTime.Now.AddDays(-30);
+
+            foreach (var orden in BaseDeDatos.OrdenesxTecnico)
+            {
+
+                if (orden.Estado == "COMPLETADO" && orden.FechaCreacion >= haceUnMes)
+                {
+                    BaseDeDatos.ListaMes.Add(orden);
+                }
+
+         
+            }
+        }
+
+        protected void MostrarOrdenesDelMes()
+        {
+            TablaOrdenes30.DataSource = BaseDeDatos.ListaMes;
+            TablaOrdenes30.DataBind();
+
+            if (BaseDeDatos.ListaMes.Count == 0)
+            {
+                TablaOrdenes30.EmptyDataText = "No hay órdenes completadas en los últimos 30 días.";
+            }
+        }
+
         protected void Confirmar_Click(object sender, EventArgs e)
         {
             AutoCargar();

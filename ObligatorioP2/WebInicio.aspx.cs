@@ -12,29 +12,73 @@ namespace ObligatorioP2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            GenerarPanelesOrdenes();
+            if (!IsPostBack)
+            {
+                if (BaseDeDatos.ListaTecnico.Count == 0 || BaseDeDatos.ListaClientes.Count == 0)
+                {
+                    BaseDeDatos.PrecargarBD();
+
+                }
+                CargarListaOrdenesXtecnico();
+                GenerarPanelesOrdenes();
 
 
-            Tecnico tecnico = BaseDeDatos.Token;
-            titulo.Text = "Bienvenido Tecnico " + tecnico.Nombre;
+
+                Tecnico tecnico = BaseDeDatos.Token;
+                if (!tecnico.esAdmin)
+                {
+                    titulo.Text = "Bienvenido Tecnico " + tecnico.Nombre;
+                }
+                else
+                {
+                    titulo.Text = "Resumen de las Ordenes";
+                }
+
+            }
+
+
+
+
+        }
+
+        private void CargarListaOrdenesXtecnico()
+        {
+            BaseDeDatos.OrdenesxTecnico.Clear();
+
+            foreach (var orden in BaseDeDatos.ListaOrdenes)
+            {
+
+                if (BaseDeDatos.Token.esAdmin || (orden.NombreTecnico == BaseDeDatos.Token.Nombre && orden.Estado == "EN PROGRESO"))
+                {
+                    BaseDeDatos.OrdenesxTecnico.Add(orden);
+
+                }
+            }
         }
 
         private void GenerarPanelesOrdenes()
         {
-
-            foreach (var orden in BaseDeDatos.OrdenesxTecnico)
+            if (BaseDeDatos.OrdenesxTecnico.Count == 0)
             {
-                // Crear un panel para cada orden UTLIZAMOS ESTE METODO PARA CREAR DIVS/PANELES POR CADA ORDEN DE CADA TECNICO
-                Panel panelOrden = new Panel
-                {
-                    CssClass = "panel-orden",
-                    ID = $"panelOrden_{orden.NroOrden}"
-                };
+                lblVacio.Visible = true;
+                lblVacio.Text = "Actualmente no tiene ordenes En progreso";
+            }
+            else
+            {
 
-                // Agregar etiquetas con información de la orden
-                panelOrden.Controls.Add(new Literal
+                foreach (var orden in BaseDeDatos.OrdenesxTecnico)
                 {
-                    Text = $@"
+                    // Crear un panel para cada orden UTLIZAMOS ESTE METODO PARA CREAR DIVS/PANELES POR CADA ORDEN DE CADA TECNICO
+                    Panel panelOrden = new Panel
+                    {
+                        CssClass = "panel-orden",
+                        ID = $"panelOrden_{orden.NroOrden}"
+                    };
+
+                    // Agregar etiquetas con información de la orden
+                    panelOrden.Controls.Add(new Literal
+                    {
+                        Text = $@"
                     <div class='orden-info'>
                         <h3>Orden #{orden.NroOrden}</h3>
                         <p><strong>Cliente:</strong> {orden.NombreCliente}</p>
@@ -45,14 +89,13 @@ namespace ObligatorioP2
                         <p><strong>Estado:</strong> {orden.Estado}</p>
                         <p><strong>Comentarios:</strong> {string.Join(" | ", orden.ListaComentarios)}</p>
                     </div>"
-                });
+                    });
 
-                // Agregar el panel al contenedor principal
-                ContenedorOrdenes.Controls.Add(panelOrden);
+                    ContenedorOrdenes.Controls.Add(panelOrden);
+                }
             }
+
         }
-
-
 
 
     }

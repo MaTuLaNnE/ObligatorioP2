@@ -57,9 +57,9 @@ namespace ObligatorioP2
                 lblComentarios.Visible = true;
                 lblInfoCliente.Visible = true;
                 lblInfoTecnico.Visible = true;
-                BLComentarios.Visible = true;
+                BLComentarios.Visible = true; 
                 lblEstado.Visible = true;
-                lblConfirmacion.Visible = true;
+                lblConfirmacion.Visible = false;
                 lblInfoCliente.Text = orden.NombreCliente;
                 lblInfoTecnico.Text = orden.NombreTecnico;
 

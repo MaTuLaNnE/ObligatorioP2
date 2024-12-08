@@ -7,15 +7,15 @@
         <!-- Creación/modificación de órdenes -->
         <div class="form-container">
             <div class="form-row">
+                <asp:Label ID="lblNombreTecnico" runat="server" Visible="false" Text="Nombre del Técnico:" CssClass="label-custom"></asp:Label>
+                <asp:DropDownList ID="DDTecnicos" runat="server" Visible="false" CssClass="input-custom"></asp:DropDownList>
+            </div>
+
+            <div class="form-row">
                 <asp:Label ID="lblNombreCliente" runat="server" Text="Nombre del Cliente:" CssClass="label-custom"></asp:Label>
                 <asp:DropDownList ID="DDClientes" runat="server" CssClass="input-custom">
                     <asp:ListItem ID="ListItem1" runat="server" Enabled="true" Text="Seleccione un Cliente" Value="-1"></asp:ListItem>
                 </asp:DropDownList>
-            </div>
-
-            <div class="form-row">
-                <asp:Label ID="lblNombreTecnico" runat="server" Visible="false" Text="Nombre del Técnico:" CssClass="label-custom"></asp:Label>
-                <asp:DropDownList ID="DDTecnicos" runat="server" Visible="false" CssClass="input-custom"></asp:DropDownList>
             </div>
 
             <div class="form-row">
@@ -27,13 +27,17 @@
                     <asp:ListItem Value="Sistemas">Sistemas</asp:ListItem>
                     <asp:ListItem Value="Reparación">Reparación</asp:ListItem>
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="ddlTipoServicio" ForeColor="Red" Text="El tipo de servicio es requerido"></asp:RequiredFieldValidator>
+
             </div>
 
             <div class="form-row">
                 <asp:Label ID="lblDesc" runat="server" Text="Descripción:" CssClass="label-custom"></asp:Label>
                 <asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine" CssClass="textarea"></asp:TextBox>
-                <asp:RequiredFieldValidator runat="server" ID="rfvDesc" ControlToValidate="txtDesc" ForeColor="Red" Text="La descripción es requerida"></asp:RequiredFieldValidator>
+            </div>
+
+            <div class="form-row">
+                <asp:Label ID="lblComentario" runat="server" Text="Agregar Comentario:" CssClass="label-custom"></asp:Label>
+                <asp:TextBox ID="txtComentario" CssClass="input-custom" runat="server"></asp:TextBox>
             </div>
 
             <div class="form-row">
@@ -45,15 +49,12 @@
                 </asp:DropDownList>
             </div>
 
-            <div class="form-row">
-                <asp:Label ID="lblComentario" runat="server" Text="Agregar Comentario:" CssClass="label-custom"></asp:Label>
-                <asp:TextBox ID="txtComentario" CssClass="input-custom" runat="server"></asp:TextBox>
-            </div>
-
-            <div class="form-row">
+            <div class="form-row" style="margin-bottom: 0">
                 <asp:Label ID="lblCreadoCorrectamente" runat="server" Visible="false" ForeColor="Green" CssClass="message-confirmation"></asp:Label>
                 <asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red" CssClass="message-error"></asp:Label>
                 <asp:Label ID="lblConfirmacion" runat="server" Visible="false" ForeColor="Green" CssClass="message-confirmation"></asp:Label>
+                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="ddlTipoServicio" ForeColor="Red" Text="El tipo de servicio es requerido" CssClass="message-error-rfv"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator runat="server" ID="rfvDesc" ControlToValidate="txtDesc" ForeColor="Red" Text="La descripción es requerida" CssClass="message-error-rfv"></asp:RequiredFieldValidator>
             </div>
 
             <div class="form-actions">
@@ -114,6 +115,15 @@
             margin-bottom: 20px;
         }
 
+        .dropdown-custom {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            transition: border-color 0.3s;
+        }
+
         .label-custom {
             width: 120px;
             font-size: 16px;
@@ -122,16 +132,28 @@
         }
 
         .input-custom {
-            flex: 1;
+            width: 100%;
             padding: 10px;
-            font-size: 14px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-left: 10px;
+            margin-right: 10px;
+            transition: border-color 0.3s;
+        }
+
+        .input-custom,
+        .dropdown-custom {
+            padding: 10px;
+            font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
 
         .textarea {
+            margin-left: 10px;
             width: 280px;
-            font-size: 14px;
+            font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
@@ -197,12 +219,21 @@
             }
 
         .message-error {
-            font-size: 12px;
+            font-size: 16px;
+            font-weight:bold;
             color: red;
         }
 
+        .message-error-rfv {
+            display:block;
+            font-size: 16px;
+            font-weight:bold;
+            color: red;
+}
+
         .message-confirmation {
-            font-size: 12px;
+            font-size: 16px;
+            font-weight:bold;
             color: green;
         }
     </style>
