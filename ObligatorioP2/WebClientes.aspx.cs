@@ -115,7 +115,7 @@ namespace ObligatorioP2
             txtEmail.Text = "";
         }
 
-        protected void TeBorroALaMierda(object sender, GridViewDeleteEventArgs e)
+        protected void EliminarCliente(object sender, GridViewDeleteEventArgs e)
         {
             int index = e.RowIndex;
 

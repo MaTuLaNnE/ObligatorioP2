@@ -45,6 +45,7 @@
                 <asp:ListItem Value="Montaje">Montaje</asp:ListItem>
                 <asp:ListItem Value="Sistemas">Sistemas</asp:ListItem>
                 <asp:ListItem Value="Reparacion">Reparación</asp:ListItem>
+                <asp:ListItem Value="Instalacion">Instalacion</asp:ListItem>
             </asp:DropDownList>
         </div>
 
@@ -60,7 +61,7 @@
     </div>
 
     <%-- La Tablita --%>
-    <asp:GridView ID="TablaTecnico1" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="TeBorroALaMierda" OnRowCommand="TablaTecnico1_RowCommand">
+    <asp:GridView ID="TablaTecnico1" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="EliminarTecnico" OnRowCommand="TablaTecnico1_RowCommand">
         <Columns>
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
             <asp:BoundField DataField="Apellido" HeaderText="Apellido" SortExpression="Apellido" />

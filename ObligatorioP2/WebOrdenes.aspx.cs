@@ -57,6 +57,8 @@ namespace ObligatorioP2
 
         public List<string> listaComents = new List<string>();
 
+
+
         private void CargarOrdenesEnTabla()
         {
 
@@ -162,7 +164,7 @@ namespace ObligatorioP2
             lblError.Visible = false;
         }
 
-        protected void TeBorroALaMierda(object sender, GridViewDeleteEventArgs e)
+        protected void EliminarOrden(object sender, GridViewDeleteEventArgs e)
         {
             EsconderLabels();
 

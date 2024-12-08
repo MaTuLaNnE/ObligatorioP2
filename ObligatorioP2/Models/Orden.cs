@@ -12,15 +12,14 @@ namespace ObligatorioP2.Models
         public string NombreTecnico { get; set; }
         public string DescripcionProblema { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public string Estado { get; set; } //Podemos intentar sacar al estado de ser un ENUM para no complicarla tanto
+        public string Estado { get; set; } 
         public string TipoDeServicio { get; set; }
-        public string ComentariosTecnico { get; set; }
 
         public List<string> ListaComentarios = new List<string>();
 
 
 
-        public Orden(int nroOrden, string cliente, string tecnico,string tipoDeServicio, string descripcionProblema, DateTime fechaCreacion, string estado, List<string> listacomentarios) // OJO Q CAMBIE CLIENTE Y TECNICO POR STRING
+        public Orden(int nroOrden, string cliente, string tecnico,string tipoDeServicio, string descripcionProblema, DateTime fechaCreacion, string estado, List<string> listacomentarios) 
         {
             this.NroOrden = nroOrden;
             this.NombreCliente = cliente;
@@ -29,21 +28,12 @@ namespace ObligatorioP2.Models
             this.DescripcionProblema = descripcionProblema;
             this.FechaCreacion = fechaCreacion;
             this.Estado = estado;
-            //this.ComentariosTecnico = comentariosTecnico;
+  
             this.ListaComentarios = listacomentarios;
 
         }
 
-        //public Orden(int nroOrden, string cliente , string tecnico, string tipoDeServicio, DateTime fecha, string estadoEnString) //Usado en la tabla ordenes
-        //{
-            
-        //    NroOrden = nroOrden;
-        //    NombreCliente = cliente;
-        //    NombreTecnico = tecnico;
-        //    TipoDeServicio = tipoDeServicio;
-        //    Fecha = fecha;
-        //    EstadoEnString = estadoEnString;
-        //}
+
 
  
 
@@ -118,18 +108,5 @@ namespace ObligatorioP2.Models
             this.TipoDeServicio = tipoDeServicio;
         }
 
-        public string getComentariosTecnico()
-        {
-            return ComentariosTecnico;
-        }
-
-        public void setComentariosTecnico(string comentariosTecnico)
-        {
-            this.ComentariosTecnico = comentariosTecnico;
-        }
-
-        public void ColocarComentarioEnLista(string comentario) // EDITANDO |||| NO TERMINADO
-        {
-            ListaComentarios.Add(comentario);        }
     }
 }

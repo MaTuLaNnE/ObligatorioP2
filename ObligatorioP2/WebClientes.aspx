@@ -59,7 +59,7 @@
             <asp:Label ID="lblError" runat="server" Visible="false" CssClass="message-error"></asp:Label>
         </div>
 
-        <asp:GridView ID="TablaClientes1" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="TeBorroALaMierda" OnRowCommand="TablaClientes1_RowCommand">
+        <asp:GridView ID="TablaClientes1" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="EliminarCliente" OnRowCommand="TablaClientes1_RowCommand">
             <Columns>
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
                 <asp:BoundField DataField="Apellido" HeaderText="Apellido" SortExpression="Apellido" />

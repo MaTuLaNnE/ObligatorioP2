@@ -98,7 +98,7 @@ namespace ObligatorioP2
 
 
 
-        protected void TeBorroALaMierda(object sender, GridViewDeleteEventArgs e)
+        protected void EliminarTecnico(object sender, GridViewDeleteEventArgs e)
         {
             int index = e.RowIndex;
 

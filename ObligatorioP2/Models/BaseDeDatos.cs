@@ -47,14 +47,14 @@ namespace ObligatorioP2.Models
 
             Tecnico Tec1 = new Tecnico("Juan", "Manuel", "34653871", "Reparacion", "1234");
             Tecnico Tec2 = new Tecnico("Gabriel", "Medina", "48769321", "Montaje", "5678");
-            Tecnico Tec3 = new Tecnico("Lucia", "Fernandez", "39827165", "Instalación", "9876");
-            Tecnico Tec4 = new Tecnico("Carlos", "Lopez", "40293847", "Diagnóstico", "4321");
-            Tecnico admin = new Tecnico("Admin", "Medina", "50140797", "ToLosPoderes", "1111", true);
-            Tecnico Tec6 = new Tecnico("Emilia", "Garcia", "48273910", "Soporte Técnico", "6543");
-            Tecnico Tec7 = new Tecnico("Miguel", "Suarez", "47983921", "Mantenimiento", "8901");
-            Tecnico Tec8 = new Tecnico("Paula", "Sosa", "45983210", "Programación", "2345");
-            Tecnico Tec9 = new Tecnico("Andrés", "Rivas", "46128794", "Capacitación", "6789");
-            Tecnico Tec10 = new Tecnico("Roberto", "Martinez", "48019273", "Redes", "1010");
+            Tecnico Tec3 = new Tecnico("Lucia", "Fernandez", "39827165", "Instalacion", "9876");
+            Tecnico Tec4 = new Tecnico("Carlos", "Lopez", "40293847", "Reparacion", "4321");
+            Tecnico admin = new Tecnico("Admin", "Matias", "50140797", "Admin", "1111", true);
+            Tecnico Tec6 = new Tecnico("Emilia", "Garcia", "48273910", "Montaje", "6543");
+            Tecnico Tec7 = new Tecnico("Miguel", "Suarez", "47983921", "Sistemas", "8901");
+            Tecnico Tec8 = new Tecnico("Paula", "Sosa", "45983210", "Instalacion", "2345");
+            Tecnico Tec9 = new Tecnico("Andrés", "Rivas", "46128794", "Reparacion", "6789");
+            Tecnico Tec10 = new Tecnico("Roberto", "Martinez", "48019273", "Instalacion", "1010");
 
 
             ListaTecnico.Add(Tec1);

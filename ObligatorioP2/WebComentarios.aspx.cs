@@ -64,8 +64,11 @@ namespace ObligatorioP2
 
                 ordenSeleccionada.ListaComentarios.Add(comentario);
 
-                ordenSeleccionada.ListaComentarios.RemoveAt(0);
-
+                if (ordenSeleccionada.ListaComentarios[0] == "No hay comentarios que mostrar")
+                {
+                    ordenSeleccionada.ListaComentarios.RemoveAt(0);
+                }
+                
                 lblConfirmacion.Visible = true;
                 lblConfirmacion.Text = "Comentario agregado correctamente";
 
