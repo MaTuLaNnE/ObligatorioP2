@@ -271,7 +271,7 @@ namespace ObligatorioP2
 
                             int UBiLista = i;
 
-                            // Guarda el índice del técnico en una variable de sesión para usarlo al actualizar
+                            
                             Session["OrdenIndex"] = UBiLista;
                             break;
                         }

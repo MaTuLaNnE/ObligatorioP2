@@ -68,7 +68,7 @@ namespace ObligatorioP2
 
                 foreach (var orden in BaseDeDatos.OrdenesxTecnico)
                 {
-                    // Crear un panel para cada orden UTLIZAMOS ESTE METODO PARA CREAR DIVS/PANELES POR CADA ORDEN DE CADA TECNICO
+                    // UTLIZAMOS ESTE METODO PARA CREAR DIVS/PANELES POR CADA ORDEN DE CADA TECNICO
                     Panel panelOrden = new Panel
                     {
                         CssClass = "panel-orden",

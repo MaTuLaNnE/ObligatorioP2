@@ -88,18 +88,18 @@ namespace ObligatorioP2
             // Verificar si es admin
             if (BaseDeDatos.Token.esAdmin)
             {
-                // Si es admin, mostrar todas las órdenes y permitir selección de técnico
+                
                 string tecnicoCI = DDTecnicos.SelectedValue;
                 int index = DDTecnicos.SelectedIndex;
 
                 if (tecnicoCI == "-1")
                 {
-                    //limpiar reportes Si no hay técnico seleccionado
+                    
                     LimpiarReportes();
                     return;
                 }
 
-                // Filtrar órdenes por el técnico seleccionado
+                
                 Tecnico tecnicoSeleccionado = BaseDeDatos.ListaTecnico[index];
 
                 if (tecnicoSeleccionado != null)
@@ -118,8 +118,8 @@ namespace ObligatorioP2
             }
             else
             {
-                // Si no es admin, filtrar solo las órdenes del técnico actual
-                string tecnicoActual = BaseDeDatos.Token.Nombre; // Asume que el token contiene el nombre del técnico logueado
+                
+                string tecnicoActual = BaseDeDatos.Token.Nombre;
 
                 foreach (var orden in BaseDeDatos.ListaOrdenes)
                 {
@@ -133,14 +133,14 @@ namespace ObligatorioP2
                 }
             }
 
-            // Actualizar etiquetas con los valores calculados
+            
             lblCuantasTotal.Text = numTotales.ToString();
             lblCuantasPendientes.Text = numPendiente.ToString();
             lblCuantasEnProgreso.Text = numEnProgreso.ToString();
             lblCuantasCompletadas.Text = numCompletado.ToString();
         }
 
-        // Método para limpiar los reportes
+        
         private void LimpiarReportes()
         {
             lblCuantasTotal.Text = "0";

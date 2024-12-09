@@ -4,7 +4,7 @@
     <h1 id="titulo" runat="server" class="titulo">Creación y Modificación de Órdenes</h1>
 
     <main>
-        <!-- Creación/modificación de órdenes -->
+        
         <div class="form-container">
             <div class="form-row">
                 <asp:Label ID="lblNombreTecnico" runat="server" Visible="false" Text="Nombre del Técnico:" CssClass="label-custom"></asp:Label>
@@ -89,7 +89,7 @@
     </main>
 
     <style>
-        /* Estilos originales */
+        
 
         .titulo {
             text-align: center;

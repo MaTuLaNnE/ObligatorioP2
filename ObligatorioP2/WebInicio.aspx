@@ -2,23 +2,17 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <!DOCTYPE html>
-    <html>
+    <div class="titulo">
+        <asp:Label ID="titulo" runat="server"></asp:Label>
+    </div>
 
-    <body>
-        <div class="titulo">
-            <asp:Label ID="titulo" runat="server"></asp:Label>
+    <div class="form-container">
+
+        <div>
+            <asp:Label ID="lblVacio" Visible="false" runat="server" class="label-custom"></asp:Label>
+            <asp:Panel ID="ContenedorOrdenes" runat="server"></asp:Panel>
         </div>
-
-        <div class="form-container">
-
-            <div>
-                <asp:Label ID="lblVacio" Visible="false" runat="server" class="label-custom"></asp:Label>
-                <asp:Panel ID="ContenedorOrdenes" runat="server"></asp:Panel>
-            </div>
-        </div>
-    </body>
-    </html>
+    </div>
 
     <style>
         .form-container {

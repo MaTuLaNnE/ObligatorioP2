@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1 id="titulo" runat="server" class="titulo">Creación de Técnicos</h1>
 
-    <!-- Creación o actualización de tecnico -->
+    
     <div class="form-container">
         <div class="form-group">
             <asp:Label ID="lblNombre" runat="server" Text="Nombre: " CssClass="label-custom"></asp:Label>
@@ -55,12 +55,12 @@
         </div>
     </div>
 
-    <%-- Msg de error/confirmacion --%>
+    
     <div class="form-group">
         <asp:Label ID="lblError" runat="server" Visible="false" CssClass="message-error"></asp:Label>
     </div>
 
-    <%-- La Tablita --%>
+    
     <asp:GridView ID="TablaTecnico1" runat="server" AutoGenerateColumns="False" CssClass="table-custom" OnRowDeleting="EliminarTecnico" OnRowCommand="TablaTecnico1_RowCommand">
         <Columns>
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />

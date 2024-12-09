@@ -129,7 +129,7 @@
             margin-left: 10px;
         }
 
-        /* Responsive layout */
+        
         @media (max-width: 768px) {
             .form-container {
                 width: 90%;

@@ -225,7 +225,6 @@ namespace ObligatorioP2
 
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
-            // Asegúrate de que existe un índice almacenado en sesión
             if (Session["ClienteIndex"] != null)
             {
                 int index = (int)Session["ClienteIndex"];
@@ -278,7 +277,7 @@ namespace ObligatorioP2
         }
         public bool CorroborarCI(string ci)
         {
-            // Verificar que la cédula tenga exactamente 8 caracteres y que todos sean dígitos
+            
             if (string.IsNullOrEmpty(ci) || ci.Length != 8 || !ci.All(char.IsDigit))
             {
                 return false;
@@ -295,23 +294,20 @@ namespace ObligatorioP2
 
             }
 
-            // Valores para la validación
             int[] valores = { 2, 9, 8, 7, 6, 3, 4 };
             int suma = 0;
 
-            // Sumar el resultado de multiplicar los 8 primeros dígitos por los valores correspondientes
             for (int i = 0; i < valores.Length; i++)
             {
                 int valor = int.Parse(ci[i].ToString());
                 suma += valor * valores[i];
             }
 
-            // Calcular el dígito verificador
             int residuo = suma % 10;
             int digitoVerificadorCalculado = (residuo == 0) ? 0 : 10 - residuo;
             int digitoActual = int.Parse(ci[7].ToString());
 
-            return digitoVerificadorCalculado == digitoActual; // Comparar el dígito calculado con el ingresado
+            return digitoVerificadorCalculado == digitoActual;
         }
 
 

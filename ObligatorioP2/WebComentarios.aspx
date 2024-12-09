@@ -122,27 +122,27 @@
         }
 
         .form-actions-left {
-            text-align: left; /* Alinea los botones a la izquierda */
+            text-align: left; 
         }
 
         .btn-back {
             display: inline-flex;
             align-items: center;
-            padding: 5px 15px; /* Botón más pequeño */
-            background-color: #dc3545; /* Color de fondo (rojo) */
-            color: #fff; /* Texto blanco */
+            padding: 5px 15px;
+            background-color: #dc3545; 
+            color: #fff; 
             border: none;
-            border-radius: 20px; /* Bordes redondeados */
+            border-radius: 20px; 
             cursor: pointer;
-            font-size: 14px; /* Tamaño más pequeño */
-            width: auto; /* Solo lo necesario para el contenido */
+            font-size: 14px; 
+            width: auto; 
             text-align: center;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
             margin-bottom:20px;
         }
 
             .btn-back:hover {
-                background-color: #c82333; /* Cambio de color al pasar el mouse */
+                background-color: #c82333;
             }
     </style>
 
